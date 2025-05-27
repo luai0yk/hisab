@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
+import 'package:hisab/core/constants/theme/light_theme.dart';
 import 'package:hisab/core/route/app_pages.dart';
+import 'package:hisab/core/route/app_routes.dart';
 
 import 'core/localization/app_translation.dart';
 
@@ -16,6 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: LightTheme.light,
       translations: AppTranslations(),
       locale: const Locale('en'),
       supportedLocales: const [
@@ -27,6 +30,7 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
+      initialRoute: AppRoutes.signup,
       getPages: AppPages.routes,
     );
   }
