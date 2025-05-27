@@ -4,6 +4,7 @@ import 'package:hisab/core/constants/constants.dart';
 import 'package:hisab/shared/widgets/button/custom_button.dart';
 import 'package:hisab/shared/widgets/input/custom_text_form_field.dart';
 
+import '../../core/constants/theme/custom_theme/custom_text_theme.dart';
 import '../../core/localization/translation_key.dart';
 
 class SignUp extends StatelessWidget {
@@ -26,7 +27,9 @@ class SignUp extends StatelessWidget {
                 children: [
                   Text(
                     TranslationKey.signup.tr,
-                    style: textStyle,
+                    style: CustomTextTheme.textStyle.copyWith(
+                      fontSize: Constants.size40,
+                    ),
                   ),
                   const SizedBox(height: Constants.x8Space),
                   CustomTextFormField(
@@ -43,11 +46,28 @@ class SignUp extends StatelessWidget {
                     text: TranslationKey.signup.tr,
                     onPressed: () {},
                   ),
-                  const InkWell(
-                    child: Text(
-                      'I have an account, login',
+                  const SizedBox(height: Constants.x2Space),
+                  RichText(
+                    text: TextSpan(
+                      style: CustomTextTheme.textStyle,
+                      children: [
+                        TextSpan(
+                          text: '    ${TranslationKey.haveAccount.tr}, ',
+                        ),
+                        WidgetSpan(
+                          child: InkWell(
+                            onTap: () {},
+                            child: Text(
+                              TranslationKey.login.tr,
+                              style: TextStyle(
+                                color: Get.theme.colorScheme.primary,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -56,11 +76,4 @@ class SignUp extends StatelessWidget {
       ),
     );
   }
-}
-
-TextStyle get textStyle {
-  return const TextStyle(
-    fontSize: Constants.x6Size,
-    fontWeight: FontWeight.w600,
-  );
 }

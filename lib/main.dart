@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
+import 'package:hisab/core/constants/theme/dark_theme.dart';
 import 'package:hisab/core/constants/theme/light_theme.dart';
 import 'package:hisab/core/route/app_pages.dart';
 import 'package:hisab/core/route/app_routes.dart';
@@ -19,6 +20,8 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: LightTheme.light,
+      darkTheme: DarkTheme.dark,
+      themeMode: ThemeMode.light,
       translations: AppTranslations(),
       locale: const Locale('en'),
       supportedLocales: const [

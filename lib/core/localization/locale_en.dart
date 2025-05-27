@@ -9,5 +9,6 @@ class LocaleEn {
     TranslationKey.phone: 'phone',
     TranslationKey.password: 'password',
     TranslationKey.confirmPassword: 'confirm password',
+    TranslationKey.haveAccount: "I've an account",
   };
 }

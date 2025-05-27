@@ -6,4 +6,5 @@ abstract class TranslationKey {
   static const phone = 'phone';
   static const password = 'password';
   static const confirmPassword = 'confirm_password';
+  static const haveAccount = "have_account";
 }

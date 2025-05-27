@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'color_extension.dart';
 import 'custom_theme/custom_elevated_button_theme.dart';
 
-class LightTheme {
-  static final light = ThemeData.light().copyWith(
+class DarkTheme {
+  static final dark = ThemeData.light().copyWith(
     extensions: <ThemeExtension<dynamic>>[
       const ColorExtension(
         primaryAccent: Colors.blueAccent,
@@ -13,12 +13,13 @@ class LightTheme {
     ],
     elevatedButtonTheme: CustomElevatedButtonTheme.buttonTheme,
     colorScheme: ColorScheme.fromSwatch(
-      brightness: Brightness.light,
+      brightness: Brightness.dark,
       primarySwatch: Colors.blue,
     ).copyWith(
-      onSurface: CupertinoColors.lightBackgroundGray,
-      surface: CupertinoColors.white,
+      onSurface: CupertinoColors.darkBackgroundGray,
+      surface: CupertinoColors.black,
+      primary: Colors.blueAccent,
     ),
-    scaffoldBackgroundColor: CupertinoColors.white,
+    scaffoldBackgroundColor: CupertinoColors.black,
   );
 }

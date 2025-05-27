@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../constants.dart';
+import '../../constants.dart';
 
 abstract class CustomElevatedButtonTheme {
-  static ElevatedButtonThemeData get theme {
+  static ElevatedButtonThemeData get buttonTheme {
     return ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.blueAccent,

@@ -10,10 +10,7 @@ class Constants {
   static const double x7Space = 18;
   static const double x8Space = 20;
 
-  static const double x1Size = 12;
-  static const double x2Size = 14;
-  static const double x3Size = 16;
-  static const double x4Size = 18;
-  static const double x5Size = 20;
-  static const double x6Size = 30;
+  static const double size14 = 14;
+  static const double size20 = 20;
+  static const double size40 = 40;
 }
