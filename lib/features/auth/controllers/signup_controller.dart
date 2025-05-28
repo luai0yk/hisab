@@ -11,7 +11,6 @@ class SignupController extends GetxController {
   TextEditingController fullNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  final GlobalKey<FormState> formState = GlobalKey<FormState>();
 
   bool _isLoading = false;
 
@@ -26,34 +25,32 @@ class SignupController extends GetxController {
   }
 
   Future<void> signUp() async {
-    if (formState.currentState!.validate()) {
-      _isLoading = true;
-      update(['signup_button']);
+    _isLoading = true;
+    update(['signup_button']);
 
-      Map userData = UserModel(
-        fullName: fullNameController.text,
-        email: emailController.text,
-        password: passwordController.text,
-      ).toJson();
+    Map userData = UserModel(
+      fullName: fullNameController.text,
+      email: emailController.text,
+      password: passwordController.text,
+    ).toJson();
 
-      final response = await ApiServices.postRequest(
-        url: ApiLinks.signUpLink,
-        data: userData,
-      );
+    final response = await ApiServices.postRequest(
+      url: ApiLinks.signUpLink,
+      data: userData,
+    );
 
-      _isLoading = false;
-      update(['signup_button']);
+    _isLoading = false;
+    update(['signup_button']);
 
-      final status = response['status'];
-      final message = response['message'];
+    final status = response['status'];
+    final message = response['message'];
 
-      if (status == Constants.statusSuccess) {
-        Get.offAllNamed(AppRoutes.loginPage);
-      } else if (status == Constants.statusError) {
-        Get.snackbar(status, message, snackPosition: SnackPosition.BOTTOM);
-      } else {
-        Get.snackbar(status, status, snackPosition: SnackPosition.BOTTOM);
-      }
+    if (status == Constants.statusSuccess) {
+      Get.offAllNamed(AppRoutes.loginPage);
+    } else if (status == Constants.statusError) {
+      Get.snackbar(status, message, snackPosition: SnackPosition.BOTTOM);
+    } else {
+      Get.snackbar(status, status, snackPosition: SnackPosition.BOTTOM);
     }
   }
 }

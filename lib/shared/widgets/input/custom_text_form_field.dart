@@ -11,11 +11,11 @@ class CustomTextFormField extends StatelessWidget {
   final FormFieldValidator<String>? validator;
   final int? maxLength;
   final bool obscureText;
-  final TextEditingController controller;
+  final TextEditingController? controller;
   const CustomTextFormField({
     super.key,
     required this.hint,
-    required this.controller,
+    this.controller,
     this.icon,
     this.maxLength,
     this.validator,
@@ -26,37 +26,34 @@ class CustomTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     final customColors = Get.theme.extension<ColorExtension>()!;
 
-    return Container(
-      margin: const EdgeInsets.only(bottom: Constants.x6Space),
-      child: TextFormField(
-        style: CustomTextTheme.textStyle,
-        textInputAction: TextInputAction.next,
-        cursorColor: Constants.primaryColor.withOpacity(.5),
-        cursorWidth: 5,
-        maxLength: maxLength,
-        obscureText: obscureText,
-        buildCounter: (context,
-            {required currentLength, required isFocused, required maxLength}) {
-          return const SizedBox();
-        },
-        controller: controller,
-        cursorRadius: const Radius.circular(Constants.radius),
-        decoration: InputDecoration(
-          prefixIcon: Icon(icon, color: customColors.foregroundGray),
-          filled: true,
-          fillColor: customColors.backgroundGray,
-          border: border(borderColor: Colors.red, isBordered: true),
-          enabledBorder: border(),
-          focusedBorder: border(
-            borderColor: Constants.primaryColor,
-            isBordered: true,
-          ),
-          errorBorder: border(borderColor: Colors.red, isBordered: true),
-          hintText: hint.toUpperCase(),
-          hintStyle: CustomHintStyle.hintStyle,
+    return TextFormField(
+      style: CustomTextTheme.textStyle,
+      textInputAction: TextInputAction.next,
+      cursorColor: Constants.primaryColor.withOpacity(.5),
+      cursorWidth: 5,
+      maxLength: maxLength,
+      obscureText: obscureText,
+      buildCounter: (context,
+          {required currentLength, required isFocused, required maxLength}) {
+        return const SizedBox();
+      },
+      controller: controller,
+      cursorRadius: const Radius.circular(Constants.radius),
+      decoration: InputDecoration(
+        prefixIcon: Icon(icon, color: customColors.foregroundGray),
+        filled: true,
+        fillColor: customColors.backgroundGray,
+        border: border(borderColor: Colors.red, isBordered: true),
+        enabledBorder: border(),
+        focusedBorder: border(
+          borderColor: Constants.primaryColor,
+          isBordered: true,
         ),
-        validator: validator,
+        errorBorder: border(borderColor: Colors.red, isBordered: true),
+        hintText: hint.toUpperCase(),
+        hintStyle: CustomHintStyle.hintStyle,
       ),
+      validator: validator,
     );
   }
 }

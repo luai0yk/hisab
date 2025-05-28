@@ -1,16 +1,30 @@
-import 'translation_key.dart';
+import 'locale_key.dart';
 
 class LocaleEn {
   static const Map<String, String> en = {
-    TranslationKey.name: 'name',
-    TranslationKey.signup: 'Sign Up',
-    TranslationKey.login: 'Login',
-    TranslationKey.email: 'email',
-    TranslationKey.phone: 'phone',
-    TranslationKey.password: 'password',
-    TranslationKey.confirmPassword: 'confirm password',
-    TranslationKey.haveAccount: "I've an account",
-    TranslationKey.createAccount: "Create account",
-    TranslationKey.fullName: 'full name',
+    LocaleKey.name: 'Name',
+    LocaleKey.signup: 'Sign Up',
+    LocaleKey.login: 'Login',
+    LocaleKey.email: 'Email',
+    LocaleKey.phone: 'Phone',
+    LocaleKey.password: 'Password',
+    LocaleKey.confirmPassword: 'Confirm password',
+    LocaleKey.haveAccount: "Have an account?",
+    LocaleKey.createAccount: "Create a new account?",
+    LocaleKey.fullName: 'Full name',
+    LocaleKey.isRequired: 'is required.',
+    LocaleKey.enterValidEmail: 'Enter a valid email',
+    LocaleKey.mustBeAtLeast: 'must be at least',
+    LocaleKey.mustBeMoreThan: 'must be more than',
+    LocaleKey.chars: 'chars',
+    LocaleKey.search: 'Search',
+    LocaleKey.customer: 'Customer',
+    LocaleKey.customers: 'Customers',
+    LocaleKey.addCustomer: 'Add Customer',
+    LocaleKey.add: 'Add',
+    LocaleKey.editCustomer: 'Edit Customer',
+    LocaleKey.deleteCustomer: 'Delete Customer',
+    LocaleKey.got: 'Got',
+    LocaleKey.gave: 'Gave',
   };
 }

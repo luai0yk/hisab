@@ -30,6 +30,11 @@ environment:
 dependencies:
   get: ^4.7.2
   http: ^1.4.0
+  shared_preferences: ^2.3.3
+  iconsax_flutter: ^1.0.0
+  heroicons: ^0.11.0
+  hugeicons: ^0.0.11
+
   flutter:
     sdk: flutter
   flutter_localizations:

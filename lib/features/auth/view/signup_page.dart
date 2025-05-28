@@ -8,10 +8,12 @@ import 'package:hisab/shared/widgets/button/custom_button.dart';
 import 'package:hisab/shared/widgets/input/custom_text_form_field.dart';
 
 import '../../../core/constants/theme/custom_theme/custom_text_theme.dart';
-import '../../../core/localization/translation_key.dart';
+import '../../../core/localization/locale_key.dart';
 
 class SignupPage extends GetView<SignupController> {
-  const SignupPage({super.key});
+  SignupPage({super.key});
+
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -19,94 +21,97 @@ class SignupPage extends GetView<SignupController> {
       resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: ListView(
+          padding: const EdgeInsets.all(Constants.spaceWith20x),
           children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height / 8,
-            ),
+            SizedBox(height: MediaQuery.of(context).size.height / 8),
             Form(
-              key: controller.formState,
-              child: Container(
-                padding: const EdgeInsets.all(Constants.x8Space),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Text(
-                      TranslationKey.signup.tr,
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Center(
+                    child: Text(
+                      LocaleKey.signup.tr,
                       style: CustomTextTheme.textStyle.copyWith(
                         fontSize: Constants.size40,
                       ),
                     ),
-                    const SizedBox(height: Constants.x8Space),
-                    CustomTextFormField(
-                      controller: controller.fullNameController,
-                      hint: TranslationKey.fullName.tr,
-                      icon: Icons.person_outline,
-                      maxLength: 25,
-                      validator: (value) => InputValidator.validateInput(
-                        min: 6,
-                        value: value!,
-                        fieldName: TranslationKey.fullName.tr,
-                      ),
+                  ),
+                  const SizedBox(height: Constants.spaceWith20x),
+                  CustomTextFormField(
+                    controller: controller.fullNameController,
+                    hint: LocaleKey.fullName.tr,
+                    icon: Icons.person_outline,
+                    maxLength: 25,
+                    validator: (value) => InputValidator.validateInput(
+                      min: 6,
+                      value: value!,
+                      fieldName: LocaleKey.fullName.tr,
                     ),
-                    CustomTextFormField(
-                      controller: controller.emailController,
-                      hint: TranslationKey.email.tr,
-                      icon: Icons.email_outlined,
-                      maxLength: 25,
-                      validator: (value) => InputValidator.validateInput(
-                        value: value!,
-                        validateEmail: true,
-                        fieldName: 'Email',
-                      ),
+                  ),
+                  const SizedBox(height: Constants.spaceWith10x),
+                  CustomTextFormField(
+                    controller: controller.emailController,
+                    hint: LocaleKey.email.tr,
+                    icon: Icons.email_outlined,
+                    maxLength: 25,
+                    validator: (value) => InputValidator.validateInput(
+                      value: value!,
+                      validateEmail: true,
+                      fieldName: LocaleKey.email.tr,
                     ),
-                    CustomTextFormField(
-                      controller: controller.passwordController,
-                      hint: TranslationKey.password.tr,
-                      icon: Icons.password_outlined,
-                      maxLength: 15,
-                      obscureText: true,
-                      validator: (value) => InputValidator.validateInput(
-                        min: 6,
-                        value: value!,
-                        fieldName: TranslationKey.password.tr,
-                      ),
+                  ),
+                  const SizedBox(height: Constants.spaceWith10x),
+                  CustomTextFormField(
+                    controller: controller.passwordController,
+                    hint: LocaleKey.password.tr,
+                    icon: Icons.password_outlined,
+                    maxLength: 15,
+                    obscureText: true,
+                    validator: (value) => InputValidator.validateInput(
+                      min: 6,
+                      value: value!,
+                      fieldName: LocaleKey.password.tr,
                     ),
-                    const SizedBox(height: Constants.x6Space),
-                    GetBuilder<SignupController>(
-                      id: 'signup_button',
-                      builder: (controller) {
-                        return CustomButton(
-                          text: controller.isLoading
-                              ? '...'
-                              : TranslationKey.signup.tr,
-                          onPressed: () async => await controller.signUp(),
-                        );
-                      },
-                    ),
-                    const SizedBox(height: Constants.x2Space),
-                    RichText(
-                      text: TextSpan(
-                        style: CustomTextTheme.textStyle,
-                        children: [
-                          TextSpan(
-                            text: '    ${TranslationKey.haveAccount.tr}, ',
-                          ),
-                          WidgetSpan(
-                            child: InkWell(
-                              onTap: () => Get.toNamed(AppRoutes.loginPage),
-                              child: Text(
-                                TranslationKey.login.tr,
-                                style: TextStyle(
-                                  color: Constants.primaryColor,
-                                ),
+                  ),
+                  const SizedBox(height: Constants.spaceWith20x),
+                  GetBuilder<SignupController>(
+                    id: 'signup_button',
+                    builder: (controller) {
+                      return CustomButton(
+                        text:
+                            controller.isLoading ? '...' : LocaleKey.signup.tr,
+                        onPressed: () async {
+                          if (_formKey.currentState!.validate()) {
+                            await controller.signUp();
+                          }
+                        },
+                      );
+                    },
+                  ),
+                  const SizedBox(height: Constants.spaceWith4x),
+                  RichText(
+                    text: TextSpan(
+                      style: CustomTextTheme.textStyle,
+                      children: [
+                        TextSpan(
+                          text: '    ${LocaleKey.haveAccount.tr} ',
+                        ),
+                        WidgetSpan(
+                          child: InkWell(
+                            onTap: () => Get.offAllNamed(AppRoutes.loginPage),
+                            child: Text(
+                              LocaleKey.login.tr,
+                              style: TextStyle(
+                                color: Constants.primaryColor,
                               ),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ],

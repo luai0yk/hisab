@@ -1,3 +1,5 @@
+import 'package:get/get.dart';
+import 'package:hisab/core/localization/locale_key.dart';
 import 'package:hisab/core/validator/email_validator.dart';
 
 abstract class InputValidator {
@@ -12,21 +14,21 @@ abstract class InputValidator {
     int length = val.length;
 
     if (val.isEmpty) {
-      return '$fieldName is required.';
+      return '$fieldName ${LocaleKey.isRequired.tr}';
     }
 
     if (validateEmail) {
       if (!EmailValidator.validateEmail(email: val)) {
-        return 'Enter a valid email.';
+        return LocaleKey.enterValidEmail.tr;
       }
     }
 
     if (min != null && length < min) {
-      return '$fieldName must be at least $min chars.';
+      return '$fieldName ${LocaleKey.mustBeAtLeast.tr} $min ${LocaleKey.chars.tr}.';
     }
 
     if (max != null && length > max) {
-      return '$fieldName must be less than $min.';
+      return '$fieldName ${LocaleKey.mustBeMoreThan.tr} $min ${LocaleKey.chars.tr}.';
     }
   }
 }

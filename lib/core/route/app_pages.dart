@@ -1,8 +1,9 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:hisab/features/auth/view/signup_page.dart';
-import 'package:hisab/features/customers/view/customer_page.dart';
+import 'package:hisab/features/hisab/home.dart';
 
 import '../../features/auth/view/login_page.dart';
+import '../midleware/auth_middleware.dart';
 import 'app_routes.dart';
 
 abstract class AppPages {
@@ -13,11 +14,14 @@ abstract class AppPages {
     ),
     GetPage(
       name: AppRoutes.loginPage,
-      page: () => const LoginPage(),
+      page: () => LoginPage(),
+      middlewares: [
+        AuthMiddleware(),
+      ],
     ),
     GetPage(
-      name: AppRoutes.customerPage,
-      page: () => const CustomerPage(),
+      name: AppRoutes.homePage,
+      page: () => const Home(),
     ),
   ];
 }

@@ -2,15 +2,13 @@ import 'package:flutter/cupertino.dart';
 
 class Constants {
   static const double radius = 15;
+
   static const double borderWidth = 2;
-  static const double x1Space = 4;
-  static const double x2Space = 6;
-  static const double x3Space = 8;
-  static const double x4Space = 10;
-  static const double x5Space = 12;
-  static const double x6Space = 14;
-  static const double x7Space = 18;
-  static const double x8Space = 20;
+
+  static const double spaceWith4x = 4;
+  static const double spaceWith10x = 10;
+  static const double spaceWith15x = 15;
+  static const double spaceWith20x = 20;
 
   static const double size14 = 14;
   static const double size20 = 20;
@@ -20,4 +18,8 @@ class Constants {
 
   static const String statusSuccess = 'success';
   static const String statusError = 'error';
+
+  static const String isLoggedIn = 'is_logged_in';
+  static const String fullName = 'full_name';
+  static const String email = 'email';
 }
