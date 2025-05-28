@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+
 class Constants {
   static const double radius = 15;
   static const double borderWidth = 2;
@@ -13,4 +15,6 @@ class Constants {
   static const double size14 = 14;
   static const double size20 = 20;
   static const double size40 = 40;
+
+  static Color primaryColor = CupertinoColors.systemBlue;
 }

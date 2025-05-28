@@ -6,7 +6,7 @@ abstract class CustomElevatedButtonTheme {
   static ElevatedButtonThemeData get buttonTheme {
     return ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: Constants.primaryColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(
             Constants.radius,

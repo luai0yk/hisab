@@ -7,7 +7,11 @@ abstract class AppPages {
   static final routes = [
     GetPage(
       name: AppRoutes.signup,
-      page: () => const SignUp(),
+      page: () => SignUp(),
     ),
+    // GetPage(
+    //   name: AppRoutes.login,
+    //   page: () => Login(),
+    // ),
   ];
 }

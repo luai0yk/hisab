@@ -9,6 +9,8 @@ class DarkTheme {
     extensions: <ThemeExtension<dynamic>>[
       const ColorExtension(
         primaryAccent: Colors.blueAccent,
+        foregroundGray: CupertinoColors.systemGrey,
+        backgroundGray: CupertinoColors.darkBackgroundGray,
       ),
     ],
     elevatedButtonTheme: CustomElevatedButtonTheme.buttonTheme,

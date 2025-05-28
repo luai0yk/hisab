@@ -7,8 +7,11 @@ import 'package:hisab/core/route/app_pages.dart';
 import 'package:hisab/core/route/app_routes.dart';
 
 import 'core/localization/app_translation.dart';
+import 'features/auth/controllers/signup_controller.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  Get.put(SignupController());
   runApp(const MyApp());
 }
 
@@ -21,7 +24,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: LightTheme.light,
       darkTheme: DarkTheme.dark,
-      themeMode: ThemeMode.light,
+      themeMode: ThemeMode.dark,
       translations: AppTranslations(),
       locale: const Locale('en'),
       supportedLocales: const [
