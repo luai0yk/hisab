@@ -8,8 +8,8 @@ import 'custom_theme/custom_elevated_button_theme.dart';
 class LightTheme {
   static final light = ThemeData.light().copyWith(
     extensions: <ThemeExtension<dynamic>>[
-      const ColorExtension(
-        primaryAccent: Colors.blueAccent,
+      ColorExtension(
+        primaryAccent: Constants.primaryColor,
         foregroundGray: CupertinoColors.secondaryLabel,
         backgroundGray: CupertinoColors.lightBackgroundGray,
       ),
@@ -17,10 +17,6 @@ class LightTheme {
     colorScheme: ColorScheme.fromSwatch(
       brightness: Brightness.light,
       primarySwatch: Colors.blue,
-    ).copyWith(
-      onSurface: CupertinoColors.lightBackgroundGray,
-      surface: CupertinoColors.white,
-      primary: Constants.primaryColor,
     ),
     textSelectionTheme: TextSelectionThemeData(
       selectionColor: Constants.primaryColor,

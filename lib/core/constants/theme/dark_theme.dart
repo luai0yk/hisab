@@ -1,27 +1,28 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../constants.dart';
 import 'color_extension.dart';
 import 'custom_theme/custom_elevated_button_theme.dart';
 
 class DarkTheme {
   static final dark = ThemeData.light().copyWith(
     extensions: <ThemeExtension<dynamic>>[
-      const ColorExtension(
-        primaryAccent: Colors.blueAccent,
+      ColorExtension(
+        primaryAccent: Constants.primaryColor,
         foregroundGray: CupertinoColors.systemGrey,
         backgroundGray: CupertinoColors.darkBackgroundGray,
       ),
     ],
-    elevatedButtonTheme: CustomElevatedButtonTheme.buttonTheme,
     colorScheme: ColorScheme.fromSwatch(
       brightness: Brightness.dark,
       primarySwatch: Colors.blue,
-    ).copyWith(
-      onSurface: CupertinoColors.darkBackgroundGray,
-      surface: CupertinoColors.black,
-      primary: Colors.blueAccent,
+    ),
+    textSelectionTheme: TextSelectionThemeData(
+      selectionColor: Constants.primaryColor,
+      selectionHandleColor: Constants.primaryColor,
     ),
     scaffoldBackgroundColor: CupertinoColors.black,
+    elevatedButtonTheme: CustomElevatedButtonTheme.buttonTheme,
   );
 }

@@ -17,4 +17,7 @@ class Constants {
   static const double size40 = 40;
 
   static Color primaryColor = CupertinoColors.systemBlue;
+
+  static const String statusSuccess = 'success';
+  static const String statusError = 'error';
 }

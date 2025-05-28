@@ -1,14 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:hisab/core/services/api_services.dart';
-import 'package:hisab/features/auth/model/user_model.dart';
+import 'package:hisab/core/route/app_routes.dart';
 
 import '../../../core/constants/api_links.dart';
 import '../../../core/constants/constants.dart';
-import '../../../core/route/app_routes.dart';
+import '../../../core/services/api_services.dart';
+import '../model/user_model.dart';
 
-class SignupController extends GetxController {
-  TextEditingController fullNameController = TextEditingController();
+class LoginController extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormState> formState = GlobalKey<FormState>();
@@ -19,36 +18,35 @@ class SignupController extends GetxController {
 
   @override
   void onClose() {
-    fullNameController.dispose();
     emailController.dispose();
     passwordController.dispose();
     super.onClose();
   }
 
-  Future<void> signUp() async {
+  Future<void> login() async {
     if (formState.currentState!.validate()) {
       _isLoading = true;
-      update(['signup_button']);
+      update(['login_button']);
 
-      Map userData = UserModel(
-        fullName: fullNameController.text,
+      Map userInput = UserModel(
         email: emailController.text,
         password: passwordController.text,
       ).toJson();
 
       final response = await ApiServices.postRequest(
-        url: ApiLinks.signUpLink,
-        data: userData,
+        url: ApiLinks.loginLink,
+        data: userInput,
       );
 
       _isLoading = false;
-      update(['signup_button']);
+      update(['login_button']);
 
       final status = response['status'];
       final message = response['message'];
 
       if (status == Constants.statusSuccess) {
-        Get.offAllNamed(AppRoutes.loginPage);
+        final UserModel userData = UserModel.fromJson(response['data']);
+        Get.offAllNamed(AppRoutes.customerPage);
       } else if (status == Constants.statusError) {
         Get.snackbar(status, message, snackPosition: SnackPosition.BOTTOM);
       } else {
