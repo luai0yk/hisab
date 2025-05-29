@@ -12,6 +12,10 @@ class CustomTextFormField extends StatelessWidget {
   final int? maxLength;
   final bool obscureText;
   final TextEditingController? controller;
+  final TextInputType? textInputType;
+  final Function()? onTap;
+  final bool readOnly;
+  final bool canRequestFocus;
   const CustomTextFormField({
     super.key,
     required this.hint,
@@ -20,6 +24,10 @@ class CustomTextFormField extends StatelessWidget {
     this.maxLength,
     this.validator,
     this.obscureText = false,
+    this.textInputType,
+    this.onTap,
+    this.readOnly = false,
+    this.canRequestFocus = true,
   });
 
   @override
@@ -27,6 +35,9 @@ class CustomTextFormField extends StatelessWidget {
     final customColors = Get.theme.extension<ColorExtension>()!;
 
     return TextFormField(
+      onTap: onTap,
+      readOnly: readOnly,
+      canRequestFocus: canRequestFocus,
       style: CustomTextTheme.textStyle,
       textInputAction: TextInputAction.next,
       cursorColor: Constants.primaryColor.withOpacity(.5),
@@ -37,6 +48,7 @@ class CustomTextFormField extends StatelessWidget {
           {required currentLength, required isFocused, required maxLength}) {
         return const SizedBox();
       },
+      keyboardType: textInputType ?? TextInputType.text,
       controller: controller,
       cursorRadius: const Radius.circular(Constants.radius),
       decoration: InputDecoration(

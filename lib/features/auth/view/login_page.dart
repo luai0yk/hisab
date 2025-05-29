@@ -6,6 +6,7 @@ import 'package:hisab/core/validator/input_validator.dart';
 import 'package:hisab/features/auth/controllers/login_controller.dart';
 import 'package:hisab/shared/widgets/button/custom_button.dart';
 import 'package:hisab/shared/widgets/input/custom_text_form_field.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 import '../../../core/constants/theme/custom_theme/custom_text_theme.dart';
 import '../../../core/localization/locale_key.dart';
@@ -40,7 +41,7 @@ class LoginPage extends GetView<LoginController> {
                   const SizedBox(height: Constants.spaceWith20x),
                   CustomTextFormField(
                     hint: LocaleKey.email.tr,
-                    icon: Icons.email_outlined,
+                    icon: HugeIcons.strokeRoundedMail01,
                     maxLength: 25,
                     validator: (value) => InputValidator.validateInput(
                       value: value!,
@@ -52,7 +53,7 @@ class LoginPage extends GetView<LoginController> {
                   const SizedBox(height: Constants.spaceWith10x),
                   CustomTextFormField(
                     hint: LocaleKey.password.tr,
-                    icon: Icons.password_outlined,
+                    icon: HugeIcons.strokeRoundedSquareLockPassword,
                     maxLength: 15,
                     obscureText: true,
                     validator: (value) => InputValidator.validateInput(

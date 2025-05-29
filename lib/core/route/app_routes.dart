@@ -3,4 +3,5 @@ abstract class AppRoutes {
   static const String loginPage = '/';
   static const String customerPage = '/customer';
   static const String homePage = '/home';
+  static const String addCustomerPage = '/add_customer_page';
 }

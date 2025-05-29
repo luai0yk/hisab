@@ -15,7 +15,7 @@ class CustomButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       child: Text(
-        text,
+        text.toUpperCase(),
         style: const TextStyle(
           fontWeight: FontWeight.w500,
           fontSize: Constants.size20,

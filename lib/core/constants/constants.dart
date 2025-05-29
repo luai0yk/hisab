@@ -6,6 +6,7 @@ class Constants {
   static const double borderWidth = 2;
 
   static const double spaceWith4x = 4;
+  static const double spaceWith8x = 8;
   static const double spaceWith10x = 10;
   static const double spaceWith15x = 15;
   static const double spaceWith20x = 20;

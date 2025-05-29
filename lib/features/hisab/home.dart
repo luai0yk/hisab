@@ -7,8 +7,8 @@ import 'package:hisab/core/localization/locale_key.dart';
 import 'package:hisab/features/hisab/home_controller.dart';
 import 'package:hugeicons/hugeicons.dart';
 
-class Home extends GetView<HomeController> {
-  const Home({super.key});
+class HomePage extends GetView<HomeController> {
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {

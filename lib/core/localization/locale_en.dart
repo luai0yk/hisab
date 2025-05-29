@@ -26,5 +26,13 @@ class LocaleEn {
     LocaleKey.deleteCustomer: 'Delete Customer',
     LocaleKey.got: 'Got',
     LocaleKey.gave: 'Gave',
+    LocaleKey.settings: 'Settings',
+    LocaleKey.newCustomer: 'New Customer',
+    LocaleKey.close: 'Close',
+    LocaleKey.customerName: 'Customer Name',
+    LocaleKey.phoneNumber: 'Phone Number',
+    LocaleKey.address: 'Address',
+    LocaleKey.noCurrencyFound: 'No currency found!',
+    LocaleKey.chooseCurrency: 'Choose Currency',
   };
 }

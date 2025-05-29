@@ -24,4 +24,12 @@ abstract class LocaleKey {
   static const deleteCustomer = "delete_customer";
   static const got = "got";
   static const gave = "gave";
+  static const settings = "settings";
+  static const newCustomer = "new_customer";
+  static const close = "close";
+  static const customerName = "customer_name";
+  static const phoneNumber = "phone_number";
+  static const address = "address";
+  static const chooseCurrency = "choose_currency";
+  static const noCurrencyFound = "bo_currency_found";
 }
