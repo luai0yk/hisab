@@ -1,8 +1,9 @@
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hisab/core/constants/theme/custom_theme/custom_input_border.dart';
 import 'package:hisab/core/localization/locale_key.dart';
-import 'package:hisab/features/hisab/customers/add_customer_controller.dart';
+import 'package:hisab/features/hisab/customers/controllers/add_customer_controller.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 import '../../../../core/constants/constants.dart';
@@ -54,17 +55,19 @@ class CustomDropDownMenu extends GetView<AddCustomerController> {
             icon: HugeIcons.strokeRoundedSearch01,
           ),
           suffixIcon: (onClear) {
-            return const CustomHugeIcon(
-                icon: HugeIcons.strokeRoundedMultiplicationSign);
+            return IconButton(
+              icon: const CustomHugeIcon(
+                icon: HugeIcons.strokeRoundedMultiplicationSign,
+              ),
+              tooltip: LocaleKey.clear.tr,
+              onPressed: onClear,
+            );
           },
-          border: border(
+          border: CustomInputBorder.borderTheme(
             isBordered: true,
             borderColor: customColors.foregroundGray,
           ),
-          focusedBorder: border(
-            isBordered: true,
-            borderColor: Constants.primaryColor,
-          ),
+          focusedBorder: CustomInputBorder.borderTheme(isBordered: true),
         ),
       ),
       searchHintText: LocaleKey.search.tr.toUpperCase(),
@@ -73,18 +76,6 @@ class CustomDropDownMenu extends GetView<AddCustomerController> {
       onChanged: (value) {},
     );
   }
-}
-
-OutlineInputBorder border({Color? borderColor, bool isBordered = false}) {
-  return OutlineInputBorder(
-    borderRadius: BorderRadius.circular(Constants.radius),
-    borderSide: isBordered
-        ? BorderSide(
-            color: borderColor!,
-            width: Constants.borderWidth,
-          )
-        : BorderSide.none,
-  );
 }
 
 final List<String> arabCurrencies = [

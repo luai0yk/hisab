@@ -2,8 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hisab/core/constants/constants.dart';
+import 'package:hisab/core/constants/theme/custom_theme/custom_hint_style.dart';
 import 'package:hisab/core/localization/locale_key.dart';
 import 'package:hisab/core/route/app_routes.dart';
+import 'package:hisab/features/hisab/customers/controllers/view_customer_controller.dart';
+import 'package:hisab/features/hisab/customers/model/customer_model.dart';
 import 'package:hisab/features/hisab/customers/widget/customer_item.dart';
 import 'package:hisab/shared/widgets/button/custom_icon_button.dart';
 import 'package:hisab/shared/widgets/custom_appbar.dart';
@@ -11,8 +14,8 @@ import 'package:hisab/shared/widgets/icon/custom_huge_icon.dart';
 import 'package:hisab/shared/widgets/input/custom_text_form_field.dart';
 import 'package:hugeicons/hugeicons.dart';
 
-class CustomerPage extends StatelessWidget {
-  const CustomerPage({
+class ViewCustomerPage extends GetView<ViewCustomerController> {
+  const ViewCustomerPage({
     super.key,
   });
 
@@ -24,28 +27,6 @@ class CustomerPage extends StatelessWidget {
           padding: const EdgeInsets.all(Constants.spaceWith15x),
           child: Column(
             children: [
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.center,
-              //   crossAxisAlignment: CrossAxisAlignment.center,
-              //   children: [
-              //     Text(
-              //       LocaleKey.customers.tr,
-              //       style: CustomTextTheme.textStyle.copyWith(
-              //         fontSize: 22,
-              //       ),
-              //     ),
-              //     const Spacer(),
-              //     IconButton(
-              //       onPressed: () {},
-              //       tooltip: LocaleKey.search,
-              //       icon: const HugeIcon(
-              //         icon: HugeIcons.strokeRoundedSettings01,
-              //         color: CupertinoColors.systemGrey,
-              //       ),
-              //     )
-              //   ],
-              // ),
-
               CustomAppbar(
                 title: LocaleKey.customers.tr,
                 actions: [
@@ -63,19 +44,42 @@ class CustomerPage extends StatelessWidget {
                 ).icon,
               ),
               Expanded(
-                child: ListView(
-                  padding: const EdgeInsets.only(top: Constants.spaceWith15x),
-                  children: List.generate(
-                    20,
-                    (index) => const CustomerItem(),
-                  ),
+                child: GetBuilder<ViewCustomerController>(
+                  id: 'customer_list',
+                  initState: (state) async {
+                    await controller.viewCustomers();
+                  },
+                  builder: (controller) {
+                    if (controller.customerList == null) {
+                      return Center(
+                        child: Text(
+                          'Loading..',
+                          style: CustomHintStyle.hintStyle,
+                        ),
+                      );
+                    }
+                    return ListView.builder(
+                      padding:
+                          const EdgeInsets.only(top: Constants.spaceWith15x),
+                      itemCount: controller.customerList!.length,
+                      itemBuilder: (context, index) {
+                        CustomerModel customer =
+                            controller.customerList![index];
+                        return CustomerItem(customer: customer);
+                      },
+                    );
+                  },
                 ),
               )
             ],
           ),
         ),
         floatingActionButton: FloatingActionButton.extended(
-          onPressed: () => Get.toNamed(AppRoutes.addCustomerPage),
+          onPressed: () => Get.toNamed(AppRoutes.addCustomerPage)!.then(
+            (value) async {
+              await controller.viewCustomers();
+            },
+          ),
           label: Text(
             LocaleKey.add.tr,
           ),

@@ -5,6 +5,8 @@ import 'package:hisab/core/constants/theme/color_extension.dart';
 import 'package:hisab/core/constants/theme/custom_theme/custom_hint_style.dart';
 import 'package:hisab/core/constants/theme/custom_theme/custom_text_theme.dart';
 
+import '../../../core/constants/theme/custom_theme/custom_input_border.dart';
+
 class CustomTextFormField extends StatelessWidget {
   final String hint;
   final IconData? icon;
@@ -55,29 +57,18 @@ class CustomTextFormField extends StatelessWidget {
         prefixIcon: Icon(icon, color: customColors.foregroundGray),
         filled: true,
         fillColor: customColors.backgroundGray,
-        border: border(borderColor: Colors.red, isBordered: true),
-        enabledBorder: border(),
-        focusedBorder: border(
-          borderColor: Constants.primaryColor,
+        border: CustomInputBorder.borderTheme(
+            borderColor: Colors.red, isBordered: true),
+        enabledBorder: CustomInputBorder.borderTheme(),
+        focusedBorder: CustomInputBorder.borderTheme(isBordered: true),
+        errorBorder: CustomInputBorder.borderTheme(
           isBordered: true,
+          borderColor: Colors.red,
         ),
-        errorBorder: border(borderColor: Colors.red, isBordered: true),
         hintText: hint.toUpperCase(),
         hintStyle: CustomHintStyle.hintStyle,
       ),
       validator: validator,
     );
   }
-}
-
-OutlineInputBorder border({Color? borderColor, bool isBordered = false}) {
-  return OutlineInputBorder(
-    borderRadius: BorderRadius.circular(Constants.radius),
-    borderSide: isBordered
-        ? BorderSide(
-            color: borderColor!,
-            width: Constants.borderWidth,
-          )
-        : BorderSide.none,
-  );
 }

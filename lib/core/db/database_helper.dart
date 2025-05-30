@@ -1,0 +1,37 @@
+import 'package:sqflite/sqflite.dart';
+
+class DatabaseHelper {
+  final String dbName = 'hisab.db';
+  final String customerTableName = 'customers';
+  final String transactionTableName = 'transactions';
+
+  Database? _database;
+  Future<Database?> get database async {
+    if (_database != null) return _database;
+    _database = await _initDatabase();
+    return _database;
+  }
+
+  _initDatabase() {
+    return openDatabase(
+      dbName,
+      version: 1,
+      onCreate: onCreate,
+    );
+  }
+
+  onCreate(Database db, int version) async {
+    await db.execute('''
+      CREATE TABLE $customerTableName (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        phone TEXT NOT NULL UNIQUE,
+        is_sync INTEGER NOT NULL DEFAULT 0,
+        currency TEXT,
+        address TEXT,
+        added_at TEXT NOT NULL DEFAULT (CURRENT_TIMESTAMP),
+        updated_at TEXT NOT NULL DEFAULT (CURRENT_TIMESTAMP)
+      )
+    ''');
+  }
+}

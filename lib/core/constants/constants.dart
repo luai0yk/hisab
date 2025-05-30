@@ -15,6 +15,11 @@ class Constants {
   static const double size20 = 20;
   static const double size40 = 40;
 
+  static const int maxLengthName = 25;
+  static const int minLengthName = 6;
+  static const int minLengthPhone = 9;
+  static const int maxLengthPhone = 15;
+
   static Color primaryColor = CupertinoColors.systemBlue;
 
   static const String statusSuccess = 'success';

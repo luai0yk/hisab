@@ -7,10 +7,12 @@ import '../../../core/constants/theme/color_extension.dart';
 class CustomHugeIcon extends StatelessWidget {
   final IconData icon;
   final Color? color;
+  final double? size;
   const CustomHugeIcon({
     super.key,
     required this.icon,
     this.color,
+    this.size,
   });
 
   @override
@@ -19,6 +21,7 @@ class CustomHugeIcon extends StatelessWidget {
 
     return HugeIcon(
       icon: icon,
+      size: size ?? 24.0,
       color: color ?? customColors.foregroundGray,
     );
   }

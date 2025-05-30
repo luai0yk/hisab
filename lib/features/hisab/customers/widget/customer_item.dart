@@ -4,9 +4,11 @@ import 'package:hisab/core/constants/constants.dart';
 import 'package:hisab/core/constants/theme/custom_theme/custom_hint_style.dart';
 import 'package:hisab/core/constants/theme/custom_theme/custom_text_theme.dart';
 import 'package:hisab/core/localization/locale_key.dart';
+import 'package:hisab/features/hisab/customers/model/customer_model.dart';
 
 class CustomerItem extends StatelessWidget {
-  const CustomerItem({super.key});
+  final CustomerModel customer;
+  const CustomerItem({super.key, required this.customer});
 
   @override
   Widget build(BuildContext context) {
@@ -14,32 +16,48 @@ class CustomerItem extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: Constants.spaceWith15x),
       child: Row(
         children: [
-          Container(
-            width: 60,
-            height: 60,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: Constants.primaryColor.withOpacity(.12),
-              shape: BoxShape.circle,
-            ),
-            child: Text(
-              'A',
-              style: TextStyle(
-                color: Constants.primaryColor,
-                fontSize: 25,
-                fontWeight: FontWeight.w900,
+          Stack(
+            alignment: Alignment.bottomRight,
+            children: [
+              Container(
+                width: 60,
+                height: 60,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: Constants.primaryColor.withOpacity(.12),
+                  shape: BoxShape.circle,
+                ),
+                child: Text(
+                  customer.name!.substring(0, 1).toUpperCase(),
+                  style: TextStyle(
+                    color: Constants.primaryColor,
+                    fontSize: 25,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
               ),
-            ),
+              if (!customer.isSynced!) ...[
+                Container(
+                  width: 5,
+                  height: 5,
+                  decoration: BoxDecoration(
+                    color: CupertinoColors.systemRed.withOpacity(.7),
+                    shape: BoxShape.circle,
+                  ),
+                )
+              ]
+            ],
           ),
-          const SizedBox(width: Constants.spaceWith10x),
+          const SizedBox(width: Constants.spaceWith15x),
           Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Title',
+                customer.name!,
                 style: CustomTextTheme.textStyle.copyWith(fontSize: 22),
               ),
               Text(
-                'subtitle',
+                customer.addedAt!,
                 style: CustomHintStyle.hintStyle,
               ),
             ],

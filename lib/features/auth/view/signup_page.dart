@@ -43,9 +43,9 @@ class SignupPage extends GetView<SignupController> {
                     controller: controller.fullNameController,
                     hint: LocaleKey.fullName.tr,
                     icon: HugeIcons.strokeRoundedUser,
-                    maxLength: 25,
+                    maxLength: Constants.maxLengthName,
                     validator: (value) => InputValidator.validateInput(
-                      min: 6,
+                      min: Constants.minLengthName,
                       value: value!,
                       fieldName: LocaleKey.fullName.tr,
                     ),
