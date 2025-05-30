@@ -16,37 +16,22 @@ class CustomerItem extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: Constants.spaceWith15x),
       child: Row(
         children: [
-          Stack(
-            alignment: Alignment.bottomRight,
-            children: [
-              Container(
-                width: 60,
-                height: 60,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: Constants.primaryColor.withOpacity(.12),
-                  shape: BoxShape.circle,
-                ),
-                child: Text(
-                  customer.name!.substring(0, 1).toUpperCase(),
-                  style: TextStyle(
-                    color: Constants.primaryColor,
-                    fontSize: 25,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
+          Container(
+            width: 60,
+            height: 60,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: Constants.primaryColor.withOpacity(.12),
+              shape: BoxShape.circle,
+            ),
+            child: Text(
+              customer.name!.substring(0, 1).toUpperCase(),
+              style: TextStyle(
+                color: Constants.primaryColor,
+                fontSize: 25,
+                fontWeight: FontWeight.w900,
               ),
-              if (!customer.isSynced!) ...[
-                Container(
-                  width: 5,
-                  height: 5,
-                  decoration: BoxDecoration(
-                    color: CupertinoColors.systemRed.withOpacity(.7),
-                    shape: BoxShape.circle,
-                  ),
-                )
-              ]
-            ],
+            ),
           ),
           const SizedBox(width: Constants.spaceWith15x),
           Column(
@@ -63,6 +48,16 @@ class CustomerItem extends StatelessWidget {
             ],
           ),
           const Spacer(),
+          Center(
+            child: Container(
+              padding: const EdgeInsets.all(Constants.spaceWith4x),
+              decoration: BoxDecoration(
+                color: CupertinoColors.systemRed.withOpacity(.3),
+                shape: BoxShape.circle,
+              ),
+            ),
+          ),
+          const SizedBox(width: Constants.spaceWith20x),
           Column(
             children: [
               Text(

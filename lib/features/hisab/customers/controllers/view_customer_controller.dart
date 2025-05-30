@@ -1,13 +1,33 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:hisab/core/db/view_customer_db.dart';
 import 'package:hisab/features/hisab/customers/model/customer_model.dart';
 
 class ViewCustomerController extends GetxController {
-  List<CustomerModel>? customerList;
+  List<CustomerModel>? _originList, _filteredList;
+
+  TextEditingController searchController = TextEditingController();
 
   Future<void> viewCustomers() async {
     ViewCustomerDB customer = ViewCustomerDB.instance;
-    customerList = await customer.viewCustomers();
+    _originList = await customer.viewCustomers();
+    _filteredList = _originList;
+    update(['customer_list']);
+  }
+
+  List<CustomerModel>? get customerList => _filteredList;
+
+  void searchCustomer({required String query}) {
+    if (query.isEmpty) {
+      _filteredList = _originList;
+    } else {
+      _filteredList = _originList!.where(
+        (element) {
+          return element.name!.contains(query.toLowerCase());
+        },
+      ).toList();
+    }
+
     update(['customer_list']);
   }
 }

@@ -35,5 +35,7 @@ class LocaleEn {
     LocaleKey.noCurrencyFound: 'No currency found!',
     LocaleKey.chooseCurrency: 'Choose Currency',
     LocaleKey.clear: 'Clear',
+    LocaleKey.loading: 'Loading..',
+    LocaleKey.noCustomerFound: 'No customer found!',
   };
 }

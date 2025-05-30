@@ -1,7 +1,7 @@
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hisab/core/constants/theme/custom_theme/custom_input_border.dart';
+import 'package:hisab/core/constants/theme/custom_theme/custom_input_border_theme.dart';
 import 'package:hisab/core/localization/locale_key.dart';
 import 'package:hisab/features/hisab/customers/controllers/add_customer_controller.dart';
 import 'package:hugeicons/hugeicons.dart';
@@ -63,11 +63,11 @@ class CustomDropDownMenu extends GetView<AddCustomerController> {
               onPressed: onClear,
             );
           },
-          border: CustomInputBorder.borderTheme(
+          border: CustomInputBorderTheme.borderTheme(
             isBordered: true,
             borderColor: customColors.foregroundGray,
           ),
-          focusedBorder: CustomInputBorder.borderTheme(isBordered: true),
+          focusedBorder: CustomInputBorderTheme.borderTheme(isBordered: true),
         ),
       ),
       searchHintText: LocaleKey.search.tr.toUpperCase(),

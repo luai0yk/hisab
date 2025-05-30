@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../constants.dart';
 
-abstract class CustomInputBorder {
+abstract class CustomInputBorderTheme {
   static OutlineInputBorder borderTheme(
       {Color? borderColor, bool isBordered = false}) {
     return OutlineInputBorder(

@@ -39,6 +39,8 @@ class ViewCustomerPage extends GetView<ViewCustomerController> {
               ),
               CustomTextFormField(
                 hint: LocaleKey.search.tr,
+                onChanged: (text) => controller.searchCustomer(query: text),
+                controller: controller.searchController,
                 icon: const CustomHugeIcon(
                   icon: HugeIcons.strokeRoundedSearch01,
                 ).icon,
@@ -53,7 +55,14 @@ class ViewCustomerPage extends GetView<ViewCustomerController> {
                     if (controller.customerList == null) {
                       return Center(
                         child: Text(
-                          'Loading..',
+                          LocaleKey.loading.tr,
+                          style: CustomHintStyle.hintStyle,
+                        ),
+                      );
+                    } else if (controller.customerList!.isEmpty) {
+                      return Center(
+                        child: Text(
+                          LocaleKey.noCustomerFound.tr,
                           style: CustomHintStyle.hintStyle,
                         ),
                       );

@@ -5,7 +5,7 @@ import 'package:hisab/core/constants/theme/color_extension.dart';
 import 'package:hisab/core/constants/theme/custom_theme/custom_hint_style.dart';
 import 'package:hisab/core/constants/theme/custom_theme/custom_text_theme.dart';
 
-import '../../../core/constants/theme/custom_theme/custom_input_border.dart';
+import '../../../core/constants/theme/custom_theme/custom_input_border_theme.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final String hint;
@@ -16,6 +16,7 @@ class CustomTextFormField extends StatelessWidget {
   final TextEditingController? controller;
   final TextInputType? textInputType;
   final Function()? onTap;
+  final Function(String text)? onChanged;
   final bool readOnly;
   final bool canRequestFocus;
   const CustomTextFormField({
@@ -28,6 +29,7 @@ class CustomTextFormField extends StatelessWidget {
     this.obscureText = false,
     this.textInputType,
     this.onTap,
+    this.onChanged,
     this.readOnly = false,
     this.canRequestFocus = true,
   });
@@ -38,6 +40,7 @@ class CustomTextFormField extends StatelessWidget {
 
     return TextFormField(
       onTap: onTap,
+      onChanged: onChanged,
       readOnly: readOnly,
       canRequestFocus: canRequestFocus,
       style: CustomTextTheme.textStyle,
@@ -57,11 +60,11 @@ class CustomTextFormField extends StatelessWidget {
         prefixIcon: Icon(icon, color: customColors.foregroundGray),
         filled: true,
         fillColor: customColors.backgroundGray,
-        border: CustomInputBorder.borderTheme(
+        border: CustomInputBorderTheme.borderTheme(
             borderColor: Colors.red, isBordered: true),
-        enabledBorder: CustomInputBorder.borderTheme(),
-        focusedBorder: CustomInputBorder.borderTheme(isBordered: true),
-        errorBorder: CustomInputBorder.borderTheme(
+        enabledBorder: CustomInputBorderTheme.borderTheme(),
+        focusedBorder: CustomInputBorderTheme.borderTheme(isBordered: true),
+        errorBorder: CustomInputBorderTheme.borderTheme(
           isBordered: true,
           borderColor: Colors.red,
         ),

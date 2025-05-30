@@ -33,4 +33,6 @@ abstract class LocaleKey {
   static const chooseCurrency = "choose_currency";
   static const noCurrencyFound = "bo_currency_found";
   static const clear = "clear";
+  static const loading = "loading";
+  static const noCustomerFound = "no_customer_found";
 }
