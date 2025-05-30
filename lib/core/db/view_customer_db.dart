@@ -14,10 +14,12 @@ class ViewCustomerDB extends DatabaseHelper {
   // Prevent the initialization of ViewCustomer class
   ViewCustomerDB._intern();
 
-  Future<List<CustomerModel>> viewCustomers() async {
+  Future<List<CustomerModel>> viewCustomers({required String userId}) async {
     Database? db = await database;
     var response = await db!.query(
       customerTableName,
+      where: 'user_id = ?',
+      whereArgs: [userId],
       orderBy: 'id DESC',
     );
 

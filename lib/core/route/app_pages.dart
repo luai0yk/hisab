@@ -1,6 +1,7 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:hisab/features/auth/view/signup_page.dart';
 import 'package:hisab/features/hisab/customers/view/add_customer_page.dart';
+import 'package:hisab/features/hisab/customers/view/customer_profile_page.dart';
 import 'package:hisab/features/hisab/home.dart';
 
 import '../../features/auth/view/login_page.dart';
@@ -27,6 +28,10 @@ abstract class AppPages {
     GetPage(
       name: AppRoutes.addCustomerPage,
       page: () => AddCustomerPage(),
+    ),
+    GetPage(
+      name: AppRoutes.customerProfilePage,
+      page: () => CustomerProfilePage(),
     ),
   ];
 }

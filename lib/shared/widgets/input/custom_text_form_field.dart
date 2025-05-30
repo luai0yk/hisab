@@ -46,7 +46,7 @@ class CustomTextFormField extends StatelessWidget {
       style: CustomTextTheme.textStyle,
       textInputAction: TextInputAction.next,
       cursorColor: Constants.primaryColor.withOpacity(.5),
-      cursorWidth: 5,
+      cursorWidth: 3,
       maxLength: maxLength,
       obscureText: obscureText,
       buildCounter: (context,

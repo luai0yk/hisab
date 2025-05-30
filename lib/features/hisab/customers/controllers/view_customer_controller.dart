@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:hisab/core/db/view_customer_db.dart';
 import 'package:hisab/features/hisab/customers/model/customer_model.dart';
+import 'package:hisab/main.dart';
 
 class ViewCustomerController extends GetxController {
   List<CustomerModel>? _originList, _filteredList;
@@ -10,7 +11,8 @@ class ViewCustomerController extends GetxController {
 
   Future<void> viewCustomers() async {
     ViewCustomerDB customer = ViewCustomerDB.instance;
-    _originList = await customer.viewCustomers();
+    _originList =
+        await customer.viewCustomers(userId: prefs!.getString('user_id')!);
     _filteredList = _originList;
     update(['customer_list']);
   }

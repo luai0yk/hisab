@@ -5,6 +5,7 @@ class CustomerModel {
   final String? address;
   final String? currency;
   final bool? isSynced;
+  final String? userID;
   String? addedAt = '';
   String? updatedAt = '';
 
@@ -15,6 +16,7 @@ class CustomerModel {
     this.address = '',
     this.currency,
     this.isSynced = false,
+    this.userID,
     this.addedAt,
     this.updatedAt,
   });
@@ -27,6 +29,7 @@ class CustomerModel {
       address: map['address'],
       currency: map['currency'],
       isSynced: map['is_sync'] == 1,
+      userID: map['user_id'],
       addedAt: map['added_at'],
       updatedAt: map['updated_at'],
     );
@@ -41,6 +44,7 @@ class CustomerModel {
       'address': address,
       'currency': currency,
       'is_sync': isSynced == true ? 1 : 0,
+      'user_id': userID,
     };
   }
 }

@@ -1,0 +1,70 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:hisab/core/constants/constants.dart';
+import 'package:hisab/core/constants/theme/custom_theme/custom_text_theme.dart';
+import 'package:hisab/features/hisab/customers/model/customer_model.dart';
+import 'package:hisab/shared/widgets/button/custom_icon_button.dart';
+import 'package:hugeicons/hugeicons.dart';
+
+import '../../../../core/localization/locale_key.dart';
+import '../../../../shared/widgets/custom_appbar.dart';
+
+class CustomerProfilePage extends StatelessWidget {
+  const CustomerProfilePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    CustomerModel customer = Get.arguments!;
+    return SafeArea(
+      child: Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.all(Constants.spaceWith15x),
+          child: SizedBox(
+            width: double.infinity,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CustomAppbar(
+                  title:
+                      '${customer.name!.split(' ')[0]} ${LocaleKey.profile.tr}',
+                  actions: [
+                    CustomIconButton(
+                      onPressed: () => Get.back(),
+                      toolTip: LocaleKey.close.tr,
+                      icon: HugeIcons.strokeRoundedMultiplicationSign,
+                    )
+                  ],
+                ),
+                const SizedBox(height: Constants.spaceWith20x),
+                Container(
+                  alignment: Alignment.center,
+                  width: 120,
+                  height: 120,
+                  decoration: BoxDecoration(
+                    color: Constants.primaryColor.withOpacity(.1),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Text(
+                    customer.name!.substring(0, 1).toUpperCase(),
+                    style: TextStyle(
+                      fontSize: 65,
+                      fontWeight: FontWeight.w900,
+                      color: Constants.primaryColor,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: Constants.spaceWith15x),
+                Text(
+                  customer.name!.toUpperCase(),
+                  style: CustomTextTheme.textStyle.copyWith(
+                    fontSize: 20,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

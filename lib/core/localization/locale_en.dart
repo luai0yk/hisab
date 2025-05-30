@@ -37,5 +37,6 @@ class LocaleEn {
     LocaleKey.clear: 'Clear',
     LocaleKey.loading: 'Loading..',
     LocaleKey.noCustomerFound: 'No customer found!',
+    LocaleKey.profile: 'profile',
   };
 }

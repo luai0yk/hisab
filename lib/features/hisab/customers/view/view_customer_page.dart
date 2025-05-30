@@ -8,6 +8,7 @@ import 'package:hisab/core/route/app_routes.dart';
 import 'package:hisab/features/hisab/customers/controllers/view_customer_controller.dart';
 import 'package:hisab/features/hisab/customers/model/customer_model.dart';
 import 'package:hisab/features/hisab/customers/widget/customer_item.dart';
+import 'package:hisab/main.dart';
 import 'package:hisab/shared/widgets/button/custom_icon_button.dart';
 import 'package:hisab/shared/widgets/custom_appbar.dart';
 import 'package:hisab/shared/widgets/icon/custom_huge_icon.dart';
@@ -31,10 +32,13 @@ class ViewCustomerPage extends GetView<ViewCustomerController> {
                 title: LocaleKey.customers.tr,
                 actions: [
                   CustomIconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      prefs!.setBool(Constants.isLoggedIn, false);
+                      Get.offAllNamed(AppRoutes.loginPage);
+                    },
                     icon: HugeIcons.strokeRoundedSettings01,
                     toolTip: LocaleKey.settings.tr,
-                  )
+                  ),
                 ],
               ),
               CustomTextFormField(
@@ -74,7 +78,13 @@ class ViewCustomerPage extends GetView<ViewCustomerController> {
                       itemBuilder: (context, index) {
                         CustomerModel customer =
                             controller.customerList![index];
-                        return CustomerItem(customer: customer);
+                        return CustomerItem(
+                          customer: customer,
+                          onTap: () => Get.toNamed(
+                            AppRoutes.customerProfilePage,
+                            arguments: customer,
+                          ),
+                        );
                       },
                     );
                   },

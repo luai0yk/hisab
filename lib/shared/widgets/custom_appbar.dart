@@ -21,7 +21,7 @@ class CustomAppbar extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            title ?? '',
+            title!.toUpperCase(),
             style: CustomTextTheme.textStyle.copyWith(
               fontSize: 22,
             ),

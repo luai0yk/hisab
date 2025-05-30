@@ -35,4 +35,5 @@ abstract class LocaleKey {
   static const clear = "clear";
   static const loading = "loading";
   static const noCustomerFound = "no_customer_found";
+  static const profile = "profile";
 }

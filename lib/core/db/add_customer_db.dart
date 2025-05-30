@@ -14,12 +14,15 @@ class AddCustomerDB extends DatabaseHelper {
   // Prevent the initialization of CreateCustomer class
   AddCustomerDB._intern();
 
-  Future<bool> isPhoneUsed(String phone) async {
+  Future<bool> isPhoneUsed({
+    required String phone,
+    required String userId,
+  }) async {
     Database? db = await database;
     var response = await db!.query(
       customerTableName,
-      where: 'phone == ?',
-      whereArgs: [phone],
+      where: 'phone == ? AND user_id == ?',
+      whereArgs: [phone, userId],
     );
     return response.isNotEmpty;
   }

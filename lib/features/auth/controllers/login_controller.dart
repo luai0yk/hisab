@@ -46,6 +46,7 @@ class LoginController extends GetxController {
     if (status == Constants.statusSuccess) {
       final UserModel userData = UserModel.fromJson(response['data']);
       prefs!.setBool(Constants.isLoggedIn, true);
+      prefs!.setString('user_id', userData.id);
       prefs!.setString(Constants.fullName, userData.fullName);
       prefs!.setString(Constants.email, userData.email!);
       Get.offAllNamed(AppRoutes.customerPage);
