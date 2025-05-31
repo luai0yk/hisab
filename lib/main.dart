@@ -4,26 +4,14 @@ import 'package:get/get.dart';
 import 'package:hisab/core/constants/theme/dark_theme.dart';
 import 'package:hisab/core/constants/theme/light_theme.dart';
 import 'package:hisab/core/route/app_pages.dart';
-import 'package:hisab/features/auth/controllers/login_controller.dart';
-import 'package:hisab/features/hisab/customers/controllers/add_customer_controller.dart';
-import 'package:hisab/features/hisab/home_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/localization/app_translation.dart';
-import 'features/auth/controllers/signup_controller.dart';
-import 'features/hisab/customers/controllers/view_customer_controller.dart';
 
 SharedPreferences? prefs;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   prefs = await SharedPreferences.getInstance();
-
-  Get.put(SignupController());
-  Get.put(LoginController());
-  Get.put(HomeController());
-  Get.put(AddCustomerController());
-  Get.put(ViewCustomerController());
-
   runApp(const MyApp());
 }
 

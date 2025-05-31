@@ -3,7 +3,9 @@ import 'package:get/get.dart';
 import 'package:hisab/core/constants/constants.dart';
 import 'package:hisab/core/constants/theme/custom_theme/custom_text_theme.dart';
 import 'package:hisab/features/hisab/customers/model/customer_model.dart';
+import 'package:hisab/shared/widgets/button/custom_button.dart';
 import 'package:hisab/shared/widgets/button/custom_icon_button.dart';
+import 'package:hisab/shared/widgets/card/custom_text_card.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 import '../../../../core/localization/locale_key.dart';
@@ -22,7 +24,7 @@ class CustomerProfilePage extends StatelessWidget {
           child: SizedBox(
             width: double.infinity,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 CustomAppbar(
                   title:
@@ -54,12 +56,36 @@ class CustomerProfilePage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: Constants.spaceWith15x),
-                Text(
-                  customer.name!.toUpperCase(),
-                  style: CustomTextTheme.textStyle.copyWith(
-                    fontSize: 20,
+                Center(
+                  child: Text(
+                    customer.name!.toUpperCase(),
+                    style: CustomTextTheme.textStyle.copyWith(
+                      fontSize: 20,
+                    ),
                   ),
                 ),
+                const SizedBox(height: Constants.spaceWith20x),
+                CustomTextCard(text: customer.phone!),
+                CustomTextCard(text: customer.currency!),
+                const Spacer(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Expanded(
+                      child: CustomButton(
+                        onPressed: () {},
+                        text: 'Edit',
+                      ),
+                    ),
+                    const SizedBox(width: Constants.spaceWith15x),
+                    Expanded(
+                      child: CustomButton(
+                        onPressed: () {},
+                        text: 'view',
+                      ),
+                    ),
+                  ],
+                )
               ],
             ),
           ),

@@ -32,7 +32,7 @@ class ViewCustomerPage extends GetView<ViewCustomerController> {
                 title: LocaleKey.customers.tr,
                 actions: [
                   CustomIconButton(
-                    onPressed: () {
+                    onPressed: () async {
                       prefs!.setBool(Constants.isLoggedIn, false);
                       Get.offAllNamed(AppRoutes.loginPage);
                     },

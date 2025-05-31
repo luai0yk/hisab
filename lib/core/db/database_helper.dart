@@ -25,7 +25,7 @@ class DatabaseHelper {
       CREATE TABLE $customerTableName (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
-        phone TEXT NOT NULL,
+        phone TEXT NOT NULL UNIQUE,
         is_sync INTEGER NOT NULL DEFAULT 0,
         currency TEXT,
         address TEXT,

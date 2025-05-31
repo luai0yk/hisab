@@ -16,14 +16,10 @@ class AddCustomerDB extends DatabaseHelper {
 
   Future<bool> isPhoneUsed({
     required String phone,
-    required String userId,
   }) async {
     Database? db = await database;
-    var response = await db!.query(
-      customerTableName,
-      where: 'phone == ? AND user_id == ?',
-      whereArgs: [phone, userId],
-    );
+    var response = await db!
+        .query(customerTableName, where: 'phone == ?', whereArgs: [phone]);
     return response.isNotEmpty;
   }
 

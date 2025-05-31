@@ -26,9 +26,14 @@ class AddCustomerController extends GetxController {
     AddCustomerDB addCustomer = AddCustomerDB.instance;
     bool isPhoneUsed = await addCustomer.isPhoneUsed(
       phone: phoneController.text,
-      userId: prefs!.getString('user_id')!,
     );
-    if (!isPhoneUsed) {
+    if (isPhoneUsed) {
+      Get.snackbar(
+        'Error',
+        'Phone number is already used',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    } else {
       await addCustomer.addedCustomer(
         customer: CustomerModel(
           name: nameController.text,
@@ -39,9 +44,6 @@ class AddCustomerController extends GetxController {
           userID: prefs!.getString('user_id'),
         ),
       );
-      nameController.clear();
-      phoneController.clear();
-      addressController.clear();
       Get.back();
     }
   }
