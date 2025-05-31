@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hisab/core/constants/constants.dart';
+import 'package:hisab/core/constants/theme/custom_theme/custom_hint_style.dart';
 import 'package:hisab/core/constants/theme/custom_theme/custom_text_theme.dart';
 import 'package:hisab/features/hisab/customers/model/customer_model.dart';
 import 'package:hisab/shared/widgets/button/custom_button.dart';
@@ -33,18 +35,6 @@ class CustomerProfilePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // CustomAppbar(
-              //   title:
-              //       '${customer.name!.split(' ')[0]} ${LocaleKey.profile.tr}',
-              //   actions: [
-              //     CustomIconButton(
-              //       onPressed: () => Get.back(),
-              //       toolTip: LocaleKey.close.tr,
-              //       icon: HugeIcons.strokeRoundedMultiplicationSign,
-              //     )
-              //   ],
-              // ),
-              const SizedBox(height: Constants.spaceWith20x),
               Container(
                 alignment: Alignment.center,
                 width: 120,
@@ -71,9 +61,57 @@ class CustomerProfilePage extends StatelessWidget {
                   ),
                 ),
               ),
+              Center(
+                child: Text(
+                  customer.addedAt!,
+                  style: CustomHintStyle.hintStyle,
+                ),
+              ),
               const SizedBox(height: Constants.spaceWith20x),
-              CustomTextCard(text: customer.phone!),
-              CustomTextCard(text: customer.currency!),
+              Row(
+                children: [
+                  Expanded(
+                    child: CustomTextCard(
+                      text: customer.phone!,
+                      hint: LocaleKey.phone.tr,
+                    ),
+                  ),
+                  const SizedBox(width: Constants.spaceWith10x),
+                  Expanded(
+                    child: CustomTextCard(
+                      text: customer.currency!,
+                      hint: LocaleKey.currency.tr,
+                    ),
+                  ),
+                ],
+              ),
+              if (customer.address!.isNotEmpty) ...[
+                CustomTextCard(
+                  text: customer.address!,
+                  hint: LocaleKey.address.tr,
+                ),
+              ],
+              Row(
+                children: [
+                  Expanded(
+                    child: CustomTextCard(
+                      text: '867,60',
+                      hint: LocaleKey.got.tr,
+                      color: CupertinoColors.systemRed.withOpacity(.1),
+                      textColor: CupertinoColors.systemRed,
+                    ),
+                  ),
+                  const SizedBox(width: Constants.spaceWith10x),
+                  Expanded(
+                    child: CustomTextCard(
+                      text: '777,50',
+                      hint: LocaleKey.gave.tr,
+                      color: CupertinoColors.systemGreen.withOpacity(.1),
+                      textColor: CupertinoColors.systemGreen,
+                    ),
+                  ),
+                ],
+              ),
               const Spacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,

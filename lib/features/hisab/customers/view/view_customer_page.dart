@@ -68,7 +68,9 @@ class ViewCustomerPage extends GetView<ViewCustomerController> {
                   );
                 }
                 return ListView.builder(
-                  padding: const EdgeInsets.all(Constants.spaceWith15x),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: Constants.spaceWith15x,
+                  ),
                   itemCount: controller.customerList!.length,
                   itemBuilder: (context, index) {
                     CustomerModel customer = controller.customerList![index];

@@ -6,6 +6,8 @@ class CustomAppbar {
   static AppBar appBar({List<Widget>? actions, required String title}) {
     return AppBar(
       actions: actions,
+      leading: const SizedBox(),
+      leadingWidth: 0,
       title: Text(
         title.toUpperCase(),
         style: CustomTextTheme.textStyle.copyWith(fontSize: 20),

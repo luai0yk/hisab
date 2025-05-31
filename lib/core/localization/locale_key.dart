@@ -36,4 +36,5 @@ abstract class LocaleKey {
   static const loading = "loading";
   static const noCustomerFound = "no_customer_found";
   static const profile = "profile";
+  static const currency = "currency";
 }
