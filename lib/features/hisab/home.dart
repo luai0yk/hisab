@@ -5,6 +5,7 @@ import 'package:hisab/core/constants/constants.dart';
 import 'package:hisab/core/constants/theme/color_extension.dart';
 import 'package:hisab/core/localization/locale_key.dart';
 import 'package:hisab/features/hisab/home_controller.dart';
+import 'package:hisab/shared/widgets/icon/custom_huge_icon.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 class HomePage extends GetView<HomeController> {
@@ -18,7 +19,7 @@ class HomePage extends GetView<HomeController> {
       bottomNavigationBar: GetBuilder<HomeController>(
         id: 'bottom_navigation',
         builder: (controller) => NavigationBar(
-          indicatorColor: customColors.backgroundGray,
+          indicatorColor: Constants.primaryColor.withOpacity(.1),
           indicatorShape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(
               Constants.radius,
@@ -32,23 +33,32 @@ class HomePage extends GetView<HomeController> {
               controller.changeIndex(index: value),
           destinations: [
             NavigationDestination(
-              icon: HugeIcon(
+              icon: const CustomHugeIcon(
                 icon: HugeIcons.strokeRoundedUserGroup,
-                color: customColors.foregroundGray,
+              ),
+              selectedIcon: CustomHugeIcon(
+                icon: HugeIcons.strokeRoundedUserGroup,
+                color: Constants.primaryColor,
               ),
               label: LocaleKey.customers.tr,
             ),
             NavigationDestination(
-              icon: HugeIcon(
+              icon: const CustomHugeIcon(
                 icon: HugeIcons.strokeRoundedAnalyticsUp,
-                color: customColors.foregroundGray,
+              ),
+              selectedIcon: CustomHugeIcon(
+                icon: HugeIcons.strokeRoundedAnalyticsUp,
+                color: Constants.primaryColor,
               ),
               label: 'Overview',
             ),
             NavigationDestination(
-              icon: HugeIcon(
+              icon: const CustomHugeIcon(
                 icon: HugeIcons.strokeRoundedTransactionHistory,
-                color: customColors.foregroundGray,
+              ),
+              selectedIcon: CustomHugeIcon(
+                icon: HugeIcons.strokeRoundedTransactionHistory,
+                color: Constants.primaryColor,
               ),
               label: 'History',
             ),

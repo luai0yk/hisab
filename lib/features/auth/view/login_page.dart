@@ -22,7 +22,7 @@ class LoginPage extends GetView<LoginController> {
       resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: ListView(
-          padding: const EdgeInsets.all(Constants.spaceWith20x),
+          padding: const EdgeInsets.all(Constants.spaceWith15x),
           children: [
             SizedBox(height: MediaQuery.of(context).size.height / 8),
             Form(
@@ -50,7 +50,6 @@ class LoginPage extends GetView<LoginController> {
                     ),
                     controller: controller.emailController,
                   ),
-                  const SizedBox(height: Constants.spaceWith10x),
                   CustomTextFormField(
                     hint: LocaleKey.password.tr,
                     icon: HugeIcons.strokeRoundedSquareLockPassword,

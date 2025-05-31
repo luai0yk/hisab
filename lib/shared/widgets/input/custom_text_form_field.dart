@@ -19,6 +19,7 @@ class CustomTextFormField extends StatelessWidget {
   final Function(String text)? onChanged;
   final bool readOnly;
   final bool canRequestFocus;
+  final bool withMargin;
   const CustomTextFormField({
     super.key,
     required this.hint,
@@ -31,6 +32,7 @@ class CustomTextFormField extends StatelessWidget {
     this.onTap,
     this.onChanged,
     this.readOnly = false,
+    this.withMargin = false,
     this.canRequestFocus = true,
   });
 
@@ -38,40 +40,46 @@ class CustomTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     final customColors = Get.theme.extension<ColorExtension>()!;
 
-    return TextFormField(
-      onTap: onTap,
-      onChanged: onChanged,
-      readOnly: readOnly,
-      canRequestFocus: canRequestFocus,
-      style: CustomTextTheme.textStyle,
-      textInputAction: TextInputAction.next,
-      cursorColor: Constants.primaryColor.withOpacity(.5),
-      cursorWidth: 3,
-      maxLength: maxLength,
-      obscureText: obscureText,
-      buildCounter: (context,
-          {required currentLength, required isFocused, required maxLength}) {
-        return const SizedBox();
-      },
-      keyboardType: textInputType ?? TextInputType.text,
-      controller: controller,
-      cursorRadius: const Radius.circular(Constants.radius),
-      decoration: InputDecoration(
-        prefixIcon: Icon(icon, color: customColors.foregroundGray),
-        filled: true,
-        fillColor: customColors.backgroundGray,
-        border: CustomInputBorderTheme.borderTheme(
-            borderColor: Colors.red, isBordered: true),
-        enabledBorder: CustomInputBorderTheme.borderTheme(),
-        focusedBorder: CustomInputBorderTheme.borderTheme(isBordered: true),
-        errorBorder: CustomInputBorderTheme.borderTheme(
-          isBordered: true,
-          borderColor: Colors.red,
+    return Container(
+      padding: const EdgeInsets.only(bottom: Constants.spaceWith10x),
+      margin: withMargin
+          ? const EdgeInsets.symmetric(horizontal: Constants.spaceWith15x)
+          : EdgeInsets.zero,
+      child: TextFormField(
+        onTap: onTap,
+        onChanged: onChanged,
+        readOnly: readOnly,
+        canRequestFocus: canRequestFocus,
+        style: CustomTextTheme.textStyle,
+        textInputAction: TextInputAction.next,
+        cursorColor: Constants.primaryColor.withOpacity(.5),
+        cursorWidth: 3,
+        maxLength: maxLength,
+        obscureText: obscureText,
+        buildCounter: (context,
+            {required currentLength, required isFocused, required maxLength}) {
+          return const SizedBox();
+        },
+        keyboardType: textInputType ?? TextInputType.text,
+        controller: controller,
+        cursorRadius: const Radius.circular(Constants.radius),
+        decoration: InputDecoration(
+          prefixIcon: Icon(icon, color: customColors.foregroundGray),
+          filled: true,
+          fillColor: customColors.backgroundGray,
+          border: CustomInputBorderTheme.borderTheme(
+              borderColor: Colors.red, isBordered: true),
+          enabledBorder: CustomInputBorderTheme.borderTheme(),
+          focusedBorder: CustomInputBorderTheme.borderTheme(isBordered: true),
+          errorBorder: CustomInputBorderTheme.borderTheme(
+            isBordered: true,
+            borderColor: Colors.red,
+          ),
+          hintText: hint.toUpperCase(),
+          hintStyle: CustomHintStyle.hintStyle,
         ),
-        hintText: hint.toUpperCase(),
-        hintStyle: CustomHintStyle.hintStyle,
+        validator: validator,
       ),
-      validator: validator,
     );
   }
 }

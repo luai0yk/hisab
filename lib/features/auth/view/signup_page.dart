@@ -22,7 +22,7 @@ class SignupPage extends GetView<SignupController> {
       resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: ListView(
-          padding: const EdgeInsets.all(Constants.spaceWith20x),
+          padding: const EdgeInsets.all(Constants.spaceWith15x),
           children: [
             SizedBox(height: MediaQuery.of(context).size.height / 8),
             Form(
@@ -50,7 +50,6 @@ class SignupPage extends GetView<SignupController> {
                       fieldName: LocaleKey.fullName.tr,
                     ),
                   ),
-                  const SizedBox(height: Constants.spaceWith10x),
                   CustomTextFormField(
                     controller: controller.emailController,
                     hint: LocaleKey.email.tr,
@@ -62,7 +61,6 @@ class SignupPage extends GetView<SignupController> {
                       fieldName: LocaleKey.email.tr,
                     ),
                   ),
-                  const SizedBox(height: Constants.spaceWith10x),
                   CustomTextFormField(
                     controller: controller.passwordController,
                     hint: LocaleKey.password.tr,
