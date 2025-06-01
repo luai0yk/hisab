@@ -20,6 +20,7 @@ class CustomTextFormField extends StatelessWidget {
   final bool readOnly;
   final bool canRequestFocus;
   final bool withMargin;
+  final bool withBottomPadding;
   const CustomTextFormField({
     super.key,
     required this.hint,
@@ -33,6 +34,7 @@ class CustomTextFormField extends StatelessWidget {
     this.onChanged,
     this.readOnly = false,
     this.withMargin = false,
+    this.withBottomPadding = true,
     this.canRequestFocus = true,
   });
 
@@ -41,7 +43,9 @@ class CustomTextFormField extends StatelessWidget {
     final customColors = Get.theme.extension<ColorExtension>()!;
 
     return Container(
-      padding: const EdgeInsets.only(bottom: Constants.spaceWith10x),
+      padding: withBottomPadding
+          ? const EdgeInsets.only(bottom: Constants.spaceWith15x)
+          : EdgeInsets.zero,
       margin: withMargin
           ? const EdgeInsets.symmetric(horizontal: Constants.spaceWith15x)
           : EdgeInsets.zero,

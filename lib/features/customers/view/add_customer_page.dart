@@ -3,13 +3,13 @@ import 'package:get/get.dart';
 import 'package:hisab/core/constants/constants.dart';
 import 'package:hisab/core/localization/locale_key.dart';
 import 'package:hisab/core/validator/input_validator.dart';
-import 'package:hisab/features/hisab/customers/controllers/add_customer_controller.dart';
-import 'package:hisab/features/hisab/customers/widget/custom_drop_down_menu.dart';
 import 'package:hisab/shared/widgets/button/custom_button.dart';
 import 'package:hisab/shared/widgets/input/custom_text_form_field.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 import '../../../../shared/widgets/custom_appbar.dart';
+import '../controllers/add_customer_controller.dart';
+import '../widget/custom_drop_down_menu.dart';
 
 class AddCustomerPage extends GetView<AddCustomerController> {
   final GlobalKey<FormState> formState = GlobalKey<FormState>();

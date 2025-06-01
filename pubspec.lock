@@ -9,6 +9,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.1"
+  archive:
+    dependency: transitive
+    description:
+      name: archive
+      sha256: cb6a278ef2dbb298455e1a713bda08524a175630ec643a242c399c932a0a1f7d
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.6.1"
   async:
     dependency: transitive
     description:
@@ -49,6 +57,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.18.0"
+  crypto:
+    dependency: transitive
+    description:
+      name: crypto
+      sha256: "1e445881f28f22d6140f181e07737b22f1e099a5e1ff94b0af2f9e4a463f4855"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.6"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -57,6 +73,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.8"
+  draggable_home:
+    dependency: "direct main"
+    description:
+      name: draggable_home
+      sha256: c89a1faa702712b2db4ef5c6615b6a7819aa0aa0b03c0ba79c7e17d042880b2a
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.5"
   fake_async:
     dependency: transitive
     description:
@@ -149,6 +173,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.19.0"
+  jiffy:
+    dependency: "direct main"
+    description:
+      name: jiffy
+      sha256: "1c1b86459969ff9f32dc5b0ffe392f1e08181e66396cf9dd8fa7c90552a691af"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.3.2"
   leak_tracker:
     dependency: transitive
     description:
@@ -181,6 +213,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.0"
+  lottie:
+    dependency: "direct main"
+    description:
+      name: lottie
+      sha256: fa39707f36786707b01eca7626d2c16c32aa603b3f3a146518518458847dc127
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.2.0"
   matcher:
     dependency: transitive
     description:
@@ -253,6 +293,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.8"
+  rxdart:
+    dependency: transitive
+    description:
+      name: rxdart
+      sha256: "0c7c0cedd93788d996e33041ffecda924cc54389199cde4e6a34b440f50044cb"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.27.7"
   shared_preferences:
     dependency: "direct main"
     description:

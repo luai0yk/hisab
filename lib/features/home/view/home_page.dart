@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:hisab/core/constants/constants.dart';
 import 'package:hisab/core/constants/theme/color_extension.dart';
 import 'package:hisab/core/localization/locale_key.dart';
-import 'package:hisab/features/hisab/home_controller.dart';
+import 'package:hisab/features/home/controller/home_controller.dart';
 import 'package:hisab/shared/widgets/icon/custom_huge_icon.dart';
 import 'package:hugeicons/hugeicons.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-import 'customers/view/view_customer_page.dart';
+import '../../customers/view/view_customer_page.dart';
 
 class HomeController extends GetxController {
   int selectedIndex = 0;

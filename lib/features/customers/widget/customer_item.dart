@@ -4,7 +4,9 @@ import 'package:hisab/core/constants/constants.dart';
 import 'package:hisab/core/constants/theme/custom_theme/custom_hint_style.dart';
 import 'package:hisab/core/constants/theme/custom_theme/custom_text_theme.dart';
 import 'package:hisab/core/localization/locale_key.dart';
-import 'package:hisab/features/hisab/customers/model/customer_model.dart';
+import 'package:jiffy/jiffy.dart';
+
+import '../model/customer_model.dart';
 
 class CustomerItem extends StatelessWidget {
   final CustomerModel customer;
@@ -52,7 +54,7 @@ class CustomerItem extends StatelessWidget {
                       style: CustomTextTheme.textStyle.copyWith(fontSize: 20),
                     ),
                     Text(
-                      customer.addedAt!,
+                      Jiffy.parse(customer.addedAt!).fromNow(),
                       style: CustomHintStyle.hintStyle.copyWith(fontSize: 12),
                     ),
                   ],
@@ -90,7 +92,7 @@ class CustomerItem extends StatelessWidget {
             height: 1.5,
             width: (MediaQuery.of(context).size.width / 2),
             color: CupertinoColors.systemGrey.withOpacity(.1),
-          )
+          ),
         ],
       ),
     );

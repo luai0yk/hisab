@@ -4,12 +4,13 @@ import 'package:get/get.dart';
 import 'package:hisab/core/constants/constants.dart';
 import 'package:hisab/core/constants/theme/custom_theme/custom_hint_style.dart';
 import 'package:hisab/core/constants/theme/custom_theme/custom_text_theme.dart';
-import 'package:hisab/features/hisab/customers/model/customer_model.dart';
 import 'package:hisab/shared/widgets/button/custom_button.dart';
 import 'package:hisab/shared/widgets/card/custom_text_card.dart';
 import 'package:hisab/shared/widgets/custom_appbar.dart';
+import 'package:jiffy/jiffy.dart';
 
 import '../../../../core/localization/locale_key.dart';
+import '../model/customer_model.dart';
 
 class CustomerProfilePage extends StatelessWidget {
   const CustomerProfilePage({super.key});
@@ -63,7 +64,7 @@ class CustomerProfilePage extends StatelessWidget {
               ),
               Center(
                 child: Text(
-                  customer.addedAt!,
+                  Jiffy.parse(customer.addedAt!).fromNow(),
                   style: CustomHintStyle.hintStyle,
                 ),
               ),

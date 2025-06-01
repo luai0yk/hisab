@@ -5,9 +5,6 @@ import 'package:hisab/core/constants/constants.dart';
 import 'package:hisab/core/constants/theme/custom_theme/custom_hint_style.dart';
 import 'package:hisab/core/localization/locale_key.dart';
 import 'package:hisab/core/route/app_routes.dart';
-import 'package:hisab/features/hisab/customers/controllers/view_customer_controller.dart';
-import 'package:hisab/features/hisab/customers/model/customer_model.dart';
-import 'package:hisab/features/hisab/customers/widget/customer_item.dart';
 import 'package:hisab/shared/widgets/custom_appbar.dart';
 import 'package:hisab/shared/widgets/icon/custom_huge_icon.dart';
 import 'package:hisab/shared/widgets/input/custom_text_form_field.dart';
@@ -15,6 +12,9 @@ import 'package:hugeicons/hugeicons.dart';
 
 import '../../../../main.dart';
 import '../../../../shared/widgets/button/custom_icon_button.dart';
+import '../controllers/view_customer_controller.dart';
+import '../model/customer_model.dart';
+import '../widget/customer_item.dart';
 
 class ViewCustomerPage extends GetView<ViewCustomerController> {
   const ViewCustomerPage({
@@ -39,6 +39,7 @@ class ViewCustomerPage extends GetView<ViewCustomerController> {
           CustomTextFormField(
             hint: LocaleKey.search.tr,
             withMargin: true,
+            withBottomPadding: false,
             onChanged: (text) => controller.searchCustomer(query: text),
             controller: controller.searchController,
             icon: const CustomHugeIcon(
@@ -68,16 +69,14 @@ class ViewCustomerPage extends GetView<ViewCustomerController> {
                   );
                 }
                 return ListView.builder(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: Constants.spaceWith15x,
-                  ),
+                  padding: const EdgeInsets.all(Constants.spaceWith15x),
                   itemCount: controller.customerList!.length,
                   itemBuilder: (context, index) {
                     CustomerModel customer = controller.customerList![index];
                     return CustomerItem(
                       customer: customer,
                       onTap: () => Get.toNamed(
-                        AppRoutes.customerProfilePage,
+                        AppRoutes.transactionPage,
                         arguments: customer,
                       ),
                     );

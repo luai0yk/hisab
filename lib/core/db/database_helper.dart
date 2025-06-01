@@ -21,6 +21,7 @@ class DatabaseHelper {
   }
 
   onCreate(Database db, int version) async {
+    // Create customers table
     await db.execute('''
       CREATE TABLE $customerTableName (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -32,6 +33,22 @@ class DatabaseHelper {
         user_id TEXT NOT NULL,
         added_at TEXT NOT NULL DEFAULT (CURRENT_TIMESTAMP),
         updated_at TEXT NOT NULL DEFAULT (CURRENT_TIMESTAMP)
+      )
+    ''');
+
+    // Create transactions table with cascading behavior
+    await db.execute('''
+      CREATE TABLE $transactionTableName (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        customer_id INTEGER NOT NULL,
+        amount REAL NOT NULL,
+        type TEXT NOT NULL,
+        description TEXT,
+        added_at TEXT NOT NULL DEFAULT (CURRENT_TIMESTAMP),
+        updated_at TEXT NOT NULL DEFAULT (CURRENT_TIMESTAMP),
+        FOREIGN KEY (customer_id) REFERENCES $customerTableName (id) 
+          ON DELETE CASCADE 
+          ON UPDATE CASCADE
       )
     ''');
   }

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:hisab/core/constants/theme/dark_theme.dart';
 import 'package:hisab/core/constants/theme/light_theme.dart';
 import 'package:hisab/core/route/app_pages.dart';
+import 'package:jiffy/jiffy.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/localization/app_translation.dart';
@@ -11,6 +12,8 @@ import 'core/localization/app_translation.dart';
 SharedPreferences? prefs;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Jiffy.setLocale('en');
+
   prefs = await SharedPreferences.getInstance();
   runApp(const MyApp());
 }

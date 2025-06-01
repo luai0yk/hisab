@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hisab/core/constants/theme/custom_theme/custom_input_border_theme.dart';
 import 'package:hisab/core/localization/locale_key.dart';
-import 'package:hisab/features/hisab/customers/controllers/add_customer_controller.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 import '../../../../core/constants/constants.dart';
@@ -11,6 +10,7 @@ import '../../../../core/constants/theme/color_extension.dart';
 import '../../../../core/constants/theme/custom_theme/custom_hint_style.dart';
 import '../../../../core/constants/theme/custom_theme/custom_text_theme.dart';
 import '../../../../shared/widgets/icon/custom_huge_icon.dart';
+import '../controllers/add_customer_controller.dart';
 
 class CustomDropDownMenu extends GetView<AddCustomerController> {
   const CustomDropDownMenu({super.key});

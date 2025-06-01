@@ -22,7 +22,10 @@ class LightTheme {
       selectionColor: Constants.primaryColor,
       selectionHandleColor: Constants.primaryColor,
     ),
-    appBarTheme: const AppBarTheme(backgroundColor: CupertinoColors.white),
+    appBarTheme: const AppBarTheme(
+      backgroundColor: CupertinoColors.white,
+      surfaceTintColor: CupertinoColors.white,
+    ),
     scaffoldBackgroundColor: CupertinoColors.white,
     elevatedButtonTheme: CustomElevatedButtonTheme.buttonTheme,
   );

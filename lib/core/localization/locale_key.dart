@@ -37,4 +37,6 @@ abstract class LocaleKey {
   static const noCustomerFound = "no_customer_found";
   static const profile = "profile";
   static const currency = "currency";
+  static const transactions = "transactions";
+  static const transaction = "transaction";
 }

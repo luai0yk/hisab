@@ -22,7 +22,10 @@ class DarkTheme {
       selectionColor: Constants.primaryColor,
       selectionHandleColor: Constants.primaryColor,
     ),
-    appBarTheme: const AppBarTheme(backgroundColor: CupertinoColors.black),
+    appBarTheme: const AppBarTheme(
+      backgroundColor: CupertinoColors.black,
+      surfaceTintColor: CupertinoColors.black,
+    ),
     scaffoldBackgroundColor: CupertinoColors.black,
     elevatedButtonTheme: CustomElevatedButtonTheme.buttonTheme,
   );

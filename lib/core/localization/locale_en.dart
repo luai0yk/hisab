@@ -39,5 +39,7 @@ class LocaleEn {
     LocaleKey.noCustomerFound: 'No customer found!',
     LocaleKey.profile: 'profile',
     LocaleKey.currency: 'Currency',
+    LocaleKey.transaction: 'Transaction',
+    LocaleKey.transactions: 'Transactions',
   };
 }
