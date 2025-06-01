@@ -25,8 +25,4 @@ class Constants {
 
   static const String statusSuccess = 'success';
   static const String statusError = 'error';
-
-  static const String isLoggedIn = 'is_logged_in';
-  static const String fullName = 'full_name';
-  static const String email = 'email';
 }

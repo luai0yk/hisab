@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hisab/core/constants/constants.dart';
+import 'package:hisab/core/constants/storage_key.dart';
 import 'package:hisab/core/constants/theme/custom_theme/custom_hint_style.dart';
 import 'package:hisab/core/localization/locale_key.dart';
 import 'package:hisab/core/route/app_routes.dart';
@@ -10,16 +11,18 @@ import 'package:hisab/shared/widgets/icon/custom_huge_icon.dart';
 import 'package:hisab/shared/widgets/input/custom_text_form_field.dart';
 import 'package:hugeicons/hugeicons.dart';
 
-import '../../../../main.dart';
 import '../../../../shared/widgets/button/custom_icon_button.dart';
+import '../../../core/services/storage_service.dart';
 import '../controllers/view_customer_controller.dart';
 import '../model/customer_model.dart';
 import '../widget/customer_item.dart';
 
 class ViewCustomerPage extends GetView<ViewCustomerController> {
-  const ViewCustomerPage({
+  ViewCustomerPage({
     super.key,
   });
+
+  final storage = Get.find<StorageService>();
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +30,7 @@ class ViewCustomerPage extends GetView<ViewCustomerController> {
       appBar: CustomAppbar.appBar(title: LocaleKey.customers.tr, actions: [
         CustomIconButton(
           onPressed: () async {
-            prefs!.setBool(Constants.isLoggedIn, false);
+            storage.setBool(StorageKey.isUserLogged, false);
             Get.offAllNamed(AppRoutes.loginPage);
           },
           icon: HugeIcons.strokeRoundedSettings01,

@@ -7,7 +7,7 @@ class HomeController extends GetxController {
   int selectedIndex = 0;
 
   final List<Widget> pages = [
-    const ViewCustomerPage(),
+    ViewCustomerPage(),
   ];
 
   final PageController pageController = PageController();

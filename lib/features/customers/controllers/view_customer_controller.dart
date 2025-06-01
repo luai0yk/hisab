@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:hisab/core/constants/storage_key.dart';
 import 'package:hisab/core/db/view_customer_db.dart';
-import 'package:hisab/main.dart';
 
+import '../../../core/services/storage_service.dart';
 import '../model/customer_model.dart';
 
 class ViewCustomerController extends GetxController {
@@ -12,8 +13,10 @@ class ViewCustomerController extends GetxController {
 
   Future<void> viewCustomers() async {
     ViewCustomerDB customer = ViewCustomerDB.instance;
-    _originList =
-        await customer.viewCustomers(userId: prefs!.getString('user_id')!);
+    final storage = Get.find<StorageService>();
+
+    _originList = await customer.viewCustomers(
+        userId: storage.getString(StorageKey.userID)!);
     _filteredList = _originList;
     update(['customer_list']);
   }

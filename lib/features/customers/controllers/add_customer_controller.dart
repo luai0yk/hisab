@@ -1,9 +1,10 @@
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:hisab/main.dart';
+import 'package:hisab/core/constants/storage_key.dart';
 
 import '../../../../core/db/add_customer_db.dart';
+import '../../../core/services/storage_service.dart';
 import '../model/customer_model.dart';
 
 class AddCustomerController extends GetxController {
@@ -34,6 +35,8 @@ class AddCustomerController extends GetxController {
         snackPosition: SnackPosition.BOTTOM,
       );
     } else {
+      final storage = Get.find<StorageService>();
+
       await addCustomer.addedCustomer(
         customer: CustomerModel(
           name: nameController.text,
@@ -41,7 +44,7 @@ class AddCustomerController extends GetxController {
           address: addressController.text,
           currency: currencyController.value,
           isSynced: false,
-          userID: prefs!.getString('user_id'),
+          userID: storage.getString(StorageKey.userID),
         ),
       );
       Get.back();
