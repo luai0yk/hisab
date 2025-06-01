@@ -5,11 +5,13 @@ class ColorExtension extends ThemeExtension<ColorExtension> {
   final Color primaryAccent;
   final Color foregroundGray;
   final Color backgroundGray;
+  final Color surfaceColor;
 
   const ColorExtension({
     required this.primaryAccent,
     required this.foregroundGray,
     required this.backgroundGray,
+    required this.surfaceColor,
   });
 
   @override
@@ -20,6 +22,7 @@ class ColorExtension extends ThemeExtension<ColorExtension> {
       primaryAccent: primaryAccent ?? this.primaryAccent,
       foregroundGray: foregroundGray,
       backgroundGray: backgroundGray,
+      surfaceColor: surfaceColor,
     );
   }
 
@@ -30,6 +33,7 @@ class ColorExtension extends ThemeExtension<ColorExtension> {
       primaryAccent: Color.lerp(primaryAccent, other.primaryAccent, t)!,
       foregroundGray: Color.lerp(foregroundGray, other.foregroundGray, t)!,
       backgroundGray: Color.lerp(backgroundGray, other.backgroundGray, t)!,
+      surfaceColor: Color.lerp(surfaceColor, other.surfaceColor, t)!,
     );
   }
 }

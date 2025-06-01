@@ -11,11 +11,14 @@ import '../../../../core/constants/theme/custom_theme/custom_hint_style.dart';
 import '../../../../core/constants/theme/custom_theme/custom_text_theme.dart';
 import '../../../../shared/widgets/icon/custom_huge_icon.dart';
 
-class CustomDropDownMenu extends StatelessWidget {
+class CustomCurrencyDropDown extends StatelessWidget {
   final SingleSelectController<String> controller;
   final List<String> items;
-  const CustomDropDownMenu(
-      {super.key, required this.controller, required this.items});
+  const CustomCurrencyDropDown({
+    super.key,
+    required this.controller,
+    required this.items,
+  });
 
   @override
   Widget build(BuildContext context) {

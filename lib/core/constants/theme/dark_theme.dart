@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../constants.dart';
 import 'color_extension.dart';
-import 'custom_theme/custom_elevated_button_theme.dart';
 
 class DarkTheme {
   static final dark = ThemeData.light().copyWith(
@@ -12,6 +11,7 @@ class DarkTheme {
         primaryAccent: Constants.primaryColor,
         foregroundGray: CupertinoColors.systemGrey,
         backgroundGray: CupertinoColors.darkBackgroundGray,
+        surfaceColor: CupertinoColors.black,
       ),
     ],
     colorScheme: ColorScheme.fromSwatch(
@@ -27,6 +27,6 @@ class DarkTheme {
       surfaceTintColor: CupertinoColors.black,
     ),
     scaffoldBackgroundColor: CupertinoColors.black,
-    elevatedButtonTheme: CustomElevatedButtonTheme.buttonTheme,
+    // elevatedButtonTheme: CustomElevatedButtonTheme.buttonTheme,
   );
 }

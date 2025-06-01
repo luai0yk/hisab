@@ -1,7 +1,13 @@
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
+import 'package:bottom_picker/bottom_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:hisab/core/constants/theme/color_extension.dart';
+import 'package:hisab/core/constants/theme/custom_theme/custom_text_theme.dart';
+import 'package:hisab/features/transactions/controller/add_transaction_controller.dart';
+import 'package:hisab/features/transactions/widget/custom_drop_down.dart';
+import 'package:hisab/shared/widgets/button/custom_icon_button.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 import '../../../core/constants/constants.dart';
@@ -11,7 +17,7 @@ import '../../../shared/widgets/button/custom_button.dart';
 import '../../../shared/widgets/custom_appbar.dart';
 import '../../../shared/widgets/input/custom_text_form_field.dart';
 
-class AddTransactionPage extends StatelessWidget {
+class AddTransactionPage extends GetWidget<AddTransactionController> {
   final GlobalKey<FormState> formState = GlobalKey<FormState>();
   final SingleSelectController<String> typeController =
       SingleSelectController('Got');
@@ -20,6 +26,8 @@ class AddTransactionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ColorExtension customColors = Get.theme.extension<ColorExtension>()!;
+
     return Scaffold(
       appBar: CustomAppbar.appBar(
         title: 'add transaction',
@@ -40,7 +48,6 @@ class AddTransactionPage extends StatelessWidget {
                     validator: (value) {
                       return InputValidator.validateInput(
                         value: value!,
-                        min: Constants.minNameLength,
                         fieldName: LocaleKey.amount.tr,
                       );
                     },
@@ -56,27 +63,26 @@ class AddTransactionPage extends StatelessWidget {
                     icon: HugeIcons.strokeRoundedTextAlignCenter,
                   ),
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
-                        child: CustomTextFormField(
-                          //controller: controller.phoneController,
-                          maxLength: Constants.maxLengthPhone,
-
-                          readOnly: true,
-                          hint: LocaleKey.type.tr,
-                          textInputType: TextInputType.phone,
-                          icon: HugeIcons.strokeRoundedTransaction,
+                        child: CustomDropDown(
+                          controller: controller.typeController,
+                          items: const ['Got', 'Gave'],
                         ),
                       ),
                       const SizedBox(width: Constants.spaceWith15x),
                       Expanded(
                         child: CustomTextFormField(
-                          //controller: controller.phoneController,
-                          maxLength: Constants.maxLengthPhone,
-
+                          controller: controller.dateController,
+                          onTap: () {
+                            setDate(
+                              context: context,
+                              customColors: customColors,
+                            );
+                          },
                           readOnly: true,
                           hint: LocaleKey.date.tr,
-                          textInputType: TextInputType.phone,
                           icon: HugeIcons.strokeRoundedDateTime,
                         ),
                       ),
@@ -88,9 +94,7 @@ class AddTransactionPage extends StatelessWidget {
             const Spacer(),
             CustomButton(
               onPressed: () {
-                if (formState.currentState!.validate()) {
-                  //controller.addCustomer();
-                }
+                if (formState.currentState!.validate()) {}
               },
               text: LocaleKey.addTransaction.tr,
             ),
@@ -98,5 +102,44 @@ class AddTransactionPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void setDate({context, customColors}) {
+    BottomPicker.date(
+      pickerTitle: Padding(
+        padding: const EdgeInsets.symmetric(
+          vertical: Constants.spaceWith10x,
+        ),
+        child: Text(
+          'Transaction Date',
+          style: CustomTextTheme.textStyle.copyWith(
+            fontSize: 22,
+          ),
+        ),
+      ),
+      initialDateTime: DateTime.now(),
+      pickerTextStyle: CustomTextTheme.textStyle.copyWith(
+        fontSize: 18,
+      ),
+      backgroundColor: customColors.surfaceColor,
+      onChange: (index) {
+        controller.setDateTime(dateTime: index);
+      },
+      // use24hFormat: false,
+      // showTimeSeparator: true,
+      displaySubmitButton: false,
+      buttonStyle: BoxDecoration(
+        color: Constants.primaryColor,
+        borderRadius: BorderRadius.circular(
+          Constants.radius,
+        ),
+      ),
+      buttonWidth: 300,
+      closeWidget: CustomIconButton(
+        icon: HugeIcons.strokeRoundedMultiplicationSign,
+        toolTip: LocaleKey.close.tr,
+        onPressed: () => Get.back(),
+      ),
+    ).show(context);
   }
 }

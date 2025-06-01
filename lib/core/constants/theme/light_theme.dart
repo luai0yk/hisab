@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../constants.dart';
 import 'color_extension.dart';
-import 'custom_theme/custom_elevated_button_theme.dart';
 
 class LightTheme {
   static final light = ThemeData.light().copyWith(
@@ -12,6 +11,7 @@ class LightTheme {
         primaryAccent: Constants.primaryColor,
         foregroundGray: CupertinoColors.secondaryLabel,
         backgroundGray: CupertinoColors.lightBackgroundGray,
+        surfaceColor: CupertinoColors.white,
       ),
     ],
     colorScheme: ColorScheme.fromSwatch(
@@ -27,6 +27,6 @@ class LightTheme {
       surfaceTintColor: CupertinoColors.white,
     ),
     scaffoldBackgroundColor: CupertinoColors.white,
-    elevatedButtonTheme: CustomElevatedButtonTheme.buttonTheme,
+    // elevatedButtonTheme: CustomElevatedButtonTheme.buttonTheme,
   );
 }

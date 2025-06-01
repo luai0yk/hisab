@@ -74,6 +74,7 @@ class CustomTextFormField extends StatelessWidget {
         inputFormatters: inputFormatters ?? [],
         cursorRadius: const Radius.circular(Constants.radius),
         decoration: InputDecoration(
+          contentPadding: const EdgeInsets.all(17.7),
           prefixIcon: Icon(icon, color: customColors.foregroundGray),
           filled: true,
           fillColor: customColors.backgroundGray,

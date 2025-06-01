@@ -3,6 +3,7 @@ import 'package:hisab/features/auth/controllers/login_controller.dart';
 import 'package:hisab/features/auth/view/signup_page.dart';
 import 'package:hisab/features/home/controller/home_controller.dart';
 import 'package:hisab/features/home/view/home_page.dart';
+import 'package:hisab/features/transactions/controller/add_transaction_controller.dart';
 import 'package:hisab/features/transactions/view/add_transaction_page.dart';
 
 import '../../features/auth/controllers/signup_controller.dart';
@@ -74,6 +75,13 @@ abstract class AppPages {
     GetPage(
       name: AppRoutes.addTransactionPage,
       page: () => AddTransactionPage(),
+      binding: BindingsBuilder(
+        () {
+          Get.lazyPut(
+            () => AddTransactionController(),
+          );
+        },
+      ),
     ),
     GetPage(
       name: AppRoutes.customerProfilePage,
