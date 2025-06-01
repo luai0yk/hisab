@@ -1,7 +1,8 @@
+import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelper {
-  final String dbName = 'hisab.db';
+  static const String dbName = 'hisab.db';
   final String customerTableName = 'customers';
   final String transactionTableName = 'transactions';
 
@@ -44,6 +45,7 @@ class DatabaseHelper {
         amount REAL NOT NULL,
         type TEXT NOT NULL,
         description TEXT,
+        date TEXT NOT NULL,
         added_at TEXT NOT NULL DEFAULT (CURRENT_TIMESTAMP),
         updated_at TEXT NOT NULL DEFAULT (CURRENT_TIMESTAMP),
         FOREIGN KEY (customer_id) REFERENCES $customerTableName (id) 
@@ -51,5 +53,11 @@ class DatabaseHelper {
           ON UPDATE CASCADE
       )
     ''');
+  }
+
+  static Future<void> deleteHisabDatabase() async {
+    final String databasesPath = await getDatabasesPath();
+    final String path = join(databasesPath, dbName);
+    await deleteDatabase(path);
   }
 }

@@ -8,8 +8,8 @@ import 'package:hisab/shared/widgets/input/custom_text_form_field.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 import '../../../../shared/widgets/custom_appbar.dart';
+import '../../../shared/widgets/input/custom_drop_down_menu.dart';
 import '../controllers/add_customer_controller.dart';
-import '../widget/custom_drop_down_menu.dart';
 
 class AddCustomerPage extends GetView<AddCustomerController> {
   final GlobalKey<FormState> formState = GlobalKey<FormState>();
@@ -30,11 +30,11 @@ class AddCustomerPage extends GetView<AddCustomerController> {
                 children: [
                   CustomTextFormField(
                     controller: controller.nameController,
-                    maxLength: Constants.maxLengthName,
+                    maxLength: Constants.maxNameLength,
                     validator: (value) {
                       return InputValidator.validateInput(
                         value: value!,
-                        min: Constants.minLengthName,
+                        min: Constants.minNameLength,
                         fieldName: LocaleKey.customerName.tr,
                       );
                     },
@@ -60,7 +60,10 @@ class AddCustomerPage extends GetView<AddCustomerController> {
                     hint: LocaleKey.address.tr,
                     icon: HugeIcons.strokeRoundedLocation01,
                   ),
-                  const CustomDropDownMenu(),
+                  CustomDropDownMenu(
+                    controller: controller.currencyController,
+                    items: arabCurrencies,
+                  ),
                 ],
               ),
             ),
@@ -78,4 +81,25 @@ class AddCustomerPage extends GetView<AddCustomerController> {
       ),
     );
   }
+
+  final List<String> arabCurrencies = [
+    'USD - United States Dollar',
+    'EUR - Euro',
+    'SAR - Saudi Riyal',
+    'AED - UAE Dirham',
+    'EGP - Egyptian Pound',
+    'IQD - Iraqi Dinar',
+    'YER - Yemeni Rial',
+    'KWD - Kuwaiti Dinar',
+    'QAR - Qatari Riyal',
+    'OMR - Omani Rial',
+    'BHD - Bahraini Dinar',
+    'LYD - Libyan Dinar',
+    'SYP - Syrian Pound',
+    'DZD - Algerian Dinar',
+    'TND - Tunisian Dinar',
+    'MAD - Moroccan Dirham',
+    'SDG - Sudanese Pound',
+    'MRU - Mauritanian Ouguiya',
+  ];
 }

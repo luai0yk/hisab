@@ -10,17 +10,19 @@ import '../../../../core/constants/theme/color_extension.dart';
 import '../../../../core/constants/theme/custom_theme/custom_hint_style.dart';
 import '../../../../core/constants/theme/custom_theme/custom_text_theme.dart';
 import '../../../../shared/widgets/icon/custom_huge_icon.dart';
-import '../controllers/add_customer_controller.dart';
 
-class CustomDropDownMenu extends GetView<AddCustomerController> {
-  const CustomDropDownMenu({super.key});
+class CustomDropDownMenu extends StatelessWidget {
+  final SingleSelectController<String> controller;
+  final List<String> items;
+  const CustomDropDownMenu(
+      {super.key, required this.controller, required this.items});
 
   @override
   Widget build(BuildContext context) {
     final ColorExtension customColors = Get.theme.extension<ColorExtension>()!;
 
     return CustomDropdown<String>.search(
-      controller: controller.currencyController,
+      controller: controller,
       hintText: LocaleKey.chooseCurrency.tr.toUpperCase(),
       noResultFoundBuilder: (context, text) => Center(
         child: Padding(
@@ -72,29 +74,8 @@ class CustomDropDownMenu extends GetView<AddCustomerController> {
       ),
       searchHintText: LocaleKey.search.tr.toUpperCase(),
       closedHeaderPadding: const EdgeInsets.all(Constants.spaceWith15x),
-      items: arabCurrencies,
+      items: items,
       onChanged: (value) {},
     );
   }
 }
-
-final List<String> arabCurrencies = [
-  'USD - United States Dollar',
-  'EUR - Euro',
-  'SAR - Saudi Riyal',
-  'AED - UAE Dirham',
-  'EGP - Egyptian Pound',
-  'IQD - Iraqi Dinar',
-  'YER - Yemeni Rial',
-  'KWD - Kuwaiti Dinar',
-  'QAR - Qatari Riyal',
-  'OMR - Omani Rial',
-  'BHD - Bahraini Dinar',
-  'LYD - Libyan Dinar',
-  'SYP - Syrian Pound',
-  'DZD - Algerian Dinar',
-  'TND - Tunisian Dinar',
-  'MAD - Moroccan Dirham',
-  'SDG - Sudanese Pound',
-  'MRU - Mauritanian Ouguiya',
-];

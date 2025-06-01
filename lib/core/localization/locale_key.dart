@@ -39,4 +39,10 @@ abstract class LocaleKey {
   static const currency = "currency";
   static const transactions = "transactions";
   static const transaction = "transaction";
+  static const amount = "amount";
+  static const date = "date";
+  static const addTransaction = "add_transaction";
+  static const transactionType = "transaction_type";
+  static const description = "description";
+  static const type = "type";
 }

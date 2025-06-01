@@ -39,9 +39,9 @@ class AddCustomerController extends GetxController {
 
       await addCustomer.addedCustomer(
         customer: CustomerModel(
-          name: nameController.text,
-          phone: phoneController.text,
-          address: addressController.text,
+          name: nameController.text.trim(),
+          phone: phoneController.text.trim(),
+          address: addressController.text.trim(),
           currency: currencyController.value,
           isSynced: false,
           userID: storage.getString(StorageKey.userID),

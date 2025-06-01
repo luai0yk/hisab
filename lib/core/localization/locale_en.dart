@@ -41,5 +41,11 @@ class LocaleEn {
     LocaleKey.currency: 'Currency',
     LocaleKey.transaction: 'Transaction',
     LocaleKey.transactions: 'Transactions',
+    LocaleKey.amount: 'Amount',
+    LocaleKey.date: 'Date',
+    LocaleKey.addTransaction: 'Add transaction',
+    LocaleKey.transactionType: 'Transaction Type',
+    LocaleKey.description: 'Description',
+    LocaleKey.type: 'Type',
   };
 }

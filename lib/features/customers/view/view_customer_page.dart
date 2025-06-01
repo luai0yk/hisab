@@ -27,16 +27,19 @@ class ViewCustomerPage extends GetView<ViewCustomerController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppbar.appBar(title: LocaleKey.customers.tr, actions: [
-        CustomIconButton(
-          onPressed: () async {
-            storage.setBool(StorageKey.isUserLogged, false);
-            Get.offAllNamed(AppRoutes.loginPage);
-          },
-          icon: HugeIcons.strokeRoundedSettings01,
-          toolTip: LocaleKey.settings.tr,
-        ),
-      ]),
+      appBar: CustomAppbar.appBar(
+        title: LocaleKey.customers.tr,
+        actions: [
+          CustomIconButton(
+            onPressed: () async {
+              storage.setBool(StorageKey.isUserLogged, false);
+              Get.offAllNamed(AppRoutes.loginPage);
+            },
+            icon: HugeIcons.strokeRoundedSettings01,
+            toolTip: LocaleKey.settings.tr,
+          ),
+        ],
+      ),
       body: Column(
         children: [
           CustomTextFormField(

@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hisab/core/constants/constants.dart';
 import 'package:hisab/core/constants/theme/custom_theme/custom_hint_style.dart';
@@ -19,8 +20,9 @@ class CustomerItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: onTap,
+      borderRadius: BorderRadius.circular(Constants.radius),
       child: Column(
         children: [
           Padding(

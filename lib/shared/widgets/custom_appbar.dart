@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hisab/core/localization/locale_key.dart';
 import 'package:hisab/shared/widgets/button/custom_icon_button.dart';
 import 'package:hugeicons/hugeicons.dart';
 
@@ -18,6 +19,7 @@ class CustomAppbar {
       leading: canGoBack
           ? CustomIconButton(
               onPressed: () => Get.back(),
+              toolTip: LocaleKey.close.tr,
               icon: HugeIcons.strokeRoundedMultiplicationSign,
             )
           : null,

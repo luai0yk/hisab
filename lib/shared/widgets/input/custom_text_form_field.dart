@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:hisab/core/constants/constants.dart';
 import 'package:hisab/core/constants/theme/color_extension.dart';
@@ -21,6 +22,7 @@ class CustomTextFormField extends StatelessWidget {
   final bool canRequestFocus;
   final bool withMargin;
   final bool withBottomPadding;
+  final List<TextInputFormatter>? inputFormatters;
   const CustomTextFormField({
     super.key,
     required this.hint,
@@ -36,6 +38,7 @@ class CustomTextFormField extends StatelessWidget {
     this.withMargin = false,
     this.withBottomPadding = true,
     this.canRequestFocus = true,
+    this.inputFormatters,
   });
 
   @override
@@ -64,8 +67,11 @@ class CustomTextFormField extends StatelessWidget {
             {required currentLength, required isFocused, required maxLength}) {
           return const SizedBox();
         },
+        // maxLines: 5,
+        // minLines: 1,
         keyboardType: textInputType ?? TextInputType.text,
         controller: controller,
+        inputFormatters: inputFormatters ?? [],
         cursorRadius: const Radius.circular(Constants.radius),
         decoration: InputDecoration(
           prefixIcon: Icon(icon, color: customColors.foregroundGray),
