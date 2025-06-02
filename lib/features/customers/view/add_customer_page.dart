@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:hisab/core/constants/constants.dart';
 import 'package:hisab/core/localization/locale_key.dart';
@@ -44,6 +45,7 @@ class AddCustomerPage extends GetView<AddCustomerController> {
                   CustomTextFormField(
                     controller: controller.phoneController,
                     maxLength: Constants.maxLengthPhone,
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     validator: (value) {
                       return InputValidator.validateInput(
                         value: value!,

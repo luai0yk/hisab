@@ -1,4 +1,3 @@
-import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:bottom_picker/bottom_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -19,8 +18,6 @@ import '../../../shared/widgets/input/custom_text_form_field.dart';
 
 class AddTransactionPage extends GetWidget<AddTransactionController> {
   final GlobalKey<FormState> formState = GlobalKey<FormState>();
-  final SingleSelectController<String> typeController =
-      SingleSelectController('Got');
 
   AddTransactionPage({super.key});
 
@@ -30,7 +27,7 @@ class AddTransactionPage extends GetWidget<AddTransactionController> {
 
     return Scaffold(
       appBar: CustomAppbar.appBar(
-        title: 'add transaction',
+        title: LocaleKey.addTransaction.tr,
       ),
       body: Padding(
         padding: const EdgeInsets.all(Constants.spaceWith15x),
@@ -44,7 +41,7 @@ class AddTransactionPage extends GetWidget<AddTransactionController> {
                   CustomTextFormField(
                     controller: controller.amountController,
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                    maxLength: 9,
+                    maxLength: Constants.maxLengthAmount,
                     validator: (value) {
                       return InputValidator.validateInput(
                         value: value!,
@@ -57,7 +54,7 @@ class AddTransactionPage extends GetWidget<AddTransactionController> {
                   ),
                   CustomTextFormField(
                     controller: controller.descriptionController,
-                    maxLength: 50,
+                    maxLength: Constants.maxLengthDescription,
                     hint: LocaleKey.description.tr,
                     icon: HugeIcons.strokeRoundedTextAlignCenter,
                   ),
@@ -126,8 +123,8 @@ class AddTransactionPage extends GetWidget<AddTransactionController> {
       onChange: (index) {
         controller.setDateTime(dateTime: index);
       },
-      // use24hFormat: false,
-      // showTimeSeparator: true,
+      minDateTime: DateTime(2050, 1, 1),
+      maxDateTime: DateTime(2030, 1, 1),
       displaySubmitButton: false,
       buttonStyle: BoxDecoration(
         color: Constants.primaryColor,

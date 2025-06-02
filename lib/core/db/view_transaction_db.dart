@@ -1,3 +1,4 @@
+import 'package:hisab/core/constants/database_key.dart';
 import 'package:hisab/core/db/database_helper.dart';
 import 'package:hisab/features/transactions/model/transaction_model.dart';
 import 'package:sqflite/sqflite.dart';
@@ -18,10 +19,10 @@ class ViewTransactionDB extends DatabaseHelper {
     Database? db = await database;
     // Run rawQuery with userId as argument
     final List<Map<String, dynamic>> response = await db!.query(
-      transactionTableName,
-      where: 'customer_id = ?',
+      DatabaseKey.transactionTable,
+      where: '${DatabaseKey.customerId} = ?',
       whereArgs: [customerID],
-      orderBy: 'id DESC',
+      orderBy: '${DatabaseKey.transactionId} DESC',
     );
 
     List<TransactionModel> customers = response.isNotEmpty

@@ -1,3 +1,4 @@
+import 'package:hisab/core/constants/database_key.dart';
 import 'package:hisab/core/db/database_helper.dart';
 import 'package:hisab/features/transactions/model/transaction_model.dart';
 import 'package:sqflite/sqflite.dart';
@@ -17,7 +18,7 @@ class AddTransactionDB extends DatabaseHelper {
   Future<void> addTransaction({required TransactionModel transaction}) async {
     Database? db = await database;
     await db!.insert(
-      transactionTableName,
+      DatabaseKey.transactionTable,
       transaction.toMap(),
     );
   }

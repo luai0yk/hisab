@@ -1,3 +1,5 @@
+import '../../../core/constants/database_key.dart';
+
 class TransactionModel {
   final int? id;
   final int? customerId;
@@ -15,33 +17,35 @@ class TransactionModel {
     this.type,
     this.description,
     this.date,
-    this.addedAt = '',
-    this.updatedAt = '',
+    this.addedAt,
+    this.updatedAt,
   });
 
   // Convert a map to TransactionModel
   factory TransactionModel.fromMap(Map<String, dynamic> map) {
     return TransactionModel(
-      id: map['id'],
-      customerId: map['customer_id'],
-      amount: map['amount'],
-      type: map['type'],
-      description: map['description'],
-      date: map['date'],
-      addedAt: map['added_at'],
-      updatedAt: map['updated_at'],
+      id: map[DatabaseKey.transactionId],
+      customerId: map[DatabaseKey.transactionCustomerId],
+      amount: map[DatabaseKey.transactionAmount],
+      type: map[DatabaseKey.transactionType],
+      description: map[DatabaseKey.transactionDescription],
+      date: map[DatabaseKey.transactionDate],
+      addedAt: map[DatabaseKey.transactionAddedAt],
+      updatedAt: map[DatabaseKey.transactionUpdatedAt],
     );
   }
 
   // Convert TransactionModel to a map
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
-      'customer_id': customerId,
-      'amount': amount,
-      'type': type,
-      'description': description,
-      'date': date,
+      DatabaseKey.transactionId: id,
+      DatabaseKey.transactionCustomerId: customerId,
+      DatabaseKey.transactionAmount: amount,
+      DatabaseKey.transactionType: type,
+      DatabaseKey.transactionDescription: description,
+      DatabaseKey.transactionDate: date,
+      DatabaseKey.transactionAddedAt: addedAt,
+      DatabaseKey.transactionUpdatedAt: updatedAt,
     };
   }
 }

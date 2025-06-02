@@ -1,3 +1,5 @@
+import '../../core/constants/database_key.dart';
+
 class CustomerModel {
   final int? id;
   final String? name;
@@ -24,25 +26,27 @@ class CustomerModel {
     this.updatedAt,
     this.totalGivenAmount = 0.0,
     this.totalGottenAmount = 0.0,
-    double? netBalance, // Optional override
+    double? netBalance,
   }) : netBalance = netBalance ?? (totalGottenAmount - totalGivenAmount).abs();
 
-  bool get isCustomerGiven => (totalGivenAmount) > (totalGottenAmount);
+  bool get isCustomerGiven => totalGivenAmount > totalGottenAmount;
 
   factory CustomerModel.fromMap(Map<String, dynamic> map) {
-    final double debit = (map['total_debit'] ?? 0).toDouble();
-    final double credit = (map['total_credit'] ?? 0).toDouble();
+    final double debit =
+        (map['total_debit'] ?? 0).toDouble(); // From JOIN/AGG query
+    final double credit =
+        (map['total_credit'] ?? 0).toDouble(); // From JOIN/AGG query
 
     return CustomerModel(
-      id: map['id'],
-      name: map['name'],
-      phone: map['phone'],
-      address: map['address'],
-      currency: map['currency'],
-      isSynced: map['is_sync'] == 1,
-      userID: map['user_id'],
-      addedAt: map['added_at'],
-      updatedAt: map['updated_at'],
+      id: map[DatabaseKey.customerId],
+      name: map[DatabaseKey.customerName],
+      phone: map[DatabaseKey.customerPhone],
+      address: map[DatabaseKey.customerAddress],
+      currency: map[DatabaseKey.customerCurrency],
+      isSynced: map[DatabaseKey.customerIsSync] == 1,
+      userID: map[DatabaseKey.customerUserId],
+      addedAt: map[DatabaseKey.customerAddedAt],
+      updatedAt: map[DatabaseKey.customerUpdatedAt],
       totalGivenAmount: debit,
       totalGottenAmount: credit,
       netBalance: (credit - debit).abs(),
@@ -51,15 +55,15 @@ class CustomerModel {
 
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
-      'name': name,
-      'phone': phone,
-      'address': address,
-      'currency': currency,
-      'is_sync': isSynced == true ? 1 : 0,
-      'user_id': userID,
-      'added_at': addedAt,
-      'updated_at': updatedAt,
+      DatabaseKey.customerId: id,
+      DatabaseKey.customerName: name,
+      DatabaseKey.customerPhone: phone,
+      DatabaseKey.customerAddress: address,
+      DatabaseKey.customerCurrency: currency,
+      DatabaseKey.customerIsSync: isSynced == true ? 1 : 0,
+      DatabaseKey.customerUserId: userID,
+      DatabaseKey.customerAddedAt: addedAt,
+      DatabaseKey.customerUpdatedAt: updatedAt,
     };
   }
 }

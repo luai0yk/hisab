@@ -39,6 +39,8 @@ class AddTransactionController extends GetxController {
         date: fullDate,
         type: typeController.value,
         customerId: customer.id,
+        addedAt: DateTime.now().toString(),
+        updatedAt: DateTime.now().toString(),
       ),
     );
     Get.back();

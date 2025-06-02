@@ -1,3 +1,4 @@
+import 'package:hisab/core/constants/database_key.dart';
 import 'package:hisab/core/db/database_helper.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -19,15 +20,15 @@ class AddCustomerDB extends DatabaseHelper {
     required String phone,
   }) async {
     Database? db = await database;
-    var response = await db!
-        .query(customerTableName, where: 'phone == ?', whereArgs: [phone]);
+    var response = await db!.query(DatabaseKey.customerTable,
+        where: '${DatabaseKey.customerPhone} == ?', whereArgs: [phone]);
     return response.isNotEmpty;
   }
 
   Future<void> addedCustomer({required CustomerModel customer}) async {
     Database? db = await database;
     await db!.insert(
-      customerTableName,
+      DatabaseKey.customerTable,
       customer.toMap(),
     );
   }

@@ -1,12 +1,11 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-class DatabaseHelper {
-  static const String dbName = 'hisab.db';
-  final String customerTableName = 'customers';
-  final String transactionTableName = 'transactions';
+import '../constants/database_key.dart';
 
+class DatabaseHelper {
   Database? _database;
+
   Future<Database?> get database async {
     if (_database != null) return _database;
     _database = await _initDatabase();
@@ -15,40 +14,38 @@ class DatabaseHelper {
 
   _initDatabase() {
     return openDatabase(
-      dbName,
+      DatabaseKey.dbName,
       version: 1,
       onCreate: onCreate,
     );
   }
 
   onCreate(Database db, int version) async {
-    // Create customers table
     await db.execute('''
-      CREATE TABLE $customerTableName (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT NOT NULL,
-        phone TEXT NOT NULL UNIQUE,
-        is_sync INTEGER NOT NULL DEFAULT 0,
-        currency TEXT,
-        address TEXT,
-        user_id TEXT NOT NULL,
-        added_at TEXT NOT NULL,
-        updated_at TEXT NOT NULL
+      CREATE TABLE ${DatabaseKey.customerTable} (
+        ${DatabaseKey.customerId} INTEGER PRIMARY KEY AUTOINCREMENT,
+        ${DatabaseKey.customerName} TEXT NOT NULL,
+        ${DatabaseKey.customerPhone} TEXT NOT NULL UNIQUE,
+        ${DatabaseKey.customerIsSync} INTEGER NOT NULL DEFAULT 0,
+        ${DatabaseKey.customerCurrency} TEXT,
+        ${DatabaseKey.customerAddress} TEXT,
+        ${DatabaseKey.customerUserId} TEXT NOT NULL,
+        ${DatabaseKey.customerAddedAt} TEXT NOT NULL,
+        ${DatabaseKey.customerUpdatedAt} TEXT NOT NULL
       )
     ''');
 
-    // Create transactions table with cascading behavior
     await db.execute('''
-      CREATE TABLE $transactionTableName (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        customer_id INTEGER NOT NULL,
-        amount REAL NOT NULL,
-        type TEXT NOT NULL,
-        description TEXT,
-        date TEXT NOT NULL,
-        added_at TEXT NOT NULL DEFAULT (CURRENT_TIMESTAMP),
-        updated_at TEXT NOT NULL DEFAULT (CURRENT_TIMESTAMP),
-        FOREIGN KEY (customer_id) REFERENCES $customerTableName (id) 
+      CREATE TABLE ${DatabaseKey.transactionTable} (
+        ${DatabaseKey.transactionId} INTEGER PRIMARY KEY AUTOINCREMENT,
+        ${DatabaseKey.transactionCustomerId} INTEGER NOT NULL,
+        ${DatabaseKey.transactionAmount} REAL NOT NULL,
+        ${DatabaseKey.transactionType} TEXT NOT NULL,
+        ${DatabaseKey.transactionDescription} TEXT,
+        ${DatabaseKey.transactionDate} TEXT NOT NULL,
+        ${DatabaseKey.transactionAddedAt} TEXT NOT NULL,
+        ${DatabaseKey.transactionUpdatedAt} TEXT NOT NULL,
+        FOREIGN KEY (${DatabaseKey.transactionCustomerId}) REFERENCES ${DatabaseKey.customerTable} (${DatabaseKey.customerId})
           ON DELETE CASCADE 
           ON UPDATE CASCADE
       )
@@ -57,7 +54,7 @@ class DatabaseHelper {
 
   static Future<void> deleteHisabDatabase() async {
     final String databasesPath = await getDatabasesPath();
-    final String path = join(databasesPath, dbName);
+    final String path = join(databasesPath, DatabaseKey.dbName);
     await deleteDatabase(path);
   }
 }
