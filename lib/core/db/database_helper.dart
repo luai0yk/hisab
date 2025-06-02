@@ -32,8 +32,8 @@ class DatabaseHelper {
         currency TEXT,
         address TEXT,
         user_id TEXT NOT NULL,
-        added_at TEXT NOT NULL DEFAULT (CURRENT_TIMESTAMP),
-        updated_at TEXT NOT NULL DEFAULT (CURRENT_TIMESTAMP)
+        added_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL
       )
     ''');
 

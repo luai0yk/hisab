@@ -39,22 +39,24 @@ class TransactionItem extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: Constants.spaceWith10x),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    Jiffy.parse(transaction.date!).format(pattern: 'dd/MMM/yy'),
-                    style: CustomTextTheme.textStyle,
-                  ),
-                  if (transaction.description!.isNotEmpty) ...[
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
                     Text(
-                      transaction.description!,
-                      style: CustomHintStyle.hintStyle,
+                      Jiffy.parse(transaction.date!)
+                          .format(pattern: 'dd/MMM/yy'),
+                      style: CustomTextTheme.textStyle,
                     ),
-                  ]
-                ],
+                    if (transaction.description!.isNotEmpty) ...[
+                      Text(
+                        transaction.description!,
+                        style: CustomHintStyle.hintStyle,
+                      ),
+                    ]
+                  ],
+                ),
               ),
-              const Spacer(),
               Text(
                 transaction.amount.toString(),
                 style: CustomTextTheme.textStyle.copyWith(

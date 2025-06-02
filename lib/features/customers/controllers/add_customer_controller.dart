@@ -43,6 +43,8 @@ class AddCustomerController extends GetxController {
           phone: phoneController.text.trim(),
           address: addressController.text.trim(),
           currency: currencyController.value,
+          addedAt: DateTime.now().toString(),
+          updatedAt: DateTime.now().toString(),
           isSynced: false,
           userID: storage.getString(StorageKey.userID),
         ),

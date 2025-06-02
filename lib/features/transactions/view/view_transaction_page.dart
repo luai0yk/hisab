@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hisab/core/constants/constants.dart';
 import 'package:hisab/core/route/app_routes.dart';
 import 'package:hisab/features/transactions/controller/view_transaction_controller.dart';
 import 'package:hisab/features/transactions/model/transaction_model.dart';
@@ -69,6 +70,7 @@ class ViewTransactionPage extends GetView<ViewTransactionController> {
           }
 
           return ListView.builder(
+            padding: const EdgeInsets.all(Constants.spaceWith10x),
             itemCount: controller.transactionList!.length,
             itemBuilder: (context, index) {
               TransactionModel transaction = controller.transactionList![index];

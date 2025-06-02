@@ -6,8 +6,8 @@ class CustomerModel {
   final String? currency;
   final bool? isSynced;
   final String? userID;
-  String? addedAt = '';
-  String? updatedAt = '';
+  final String? addedAt;
+  final String? updatedAt;
   final double totalGivenAmount;
   final double totalGottenAmount;
   final double netBalance;
@@ -58,6 +58,8 @@ class CustomerModel {
       'currency': currency,
       'is_sync': isSynced == true ? 1 : 0,
       'user_id': userID,
+      'added_at': addedAt,
+      'updated_at': updatedAt,
     };
   }
 }

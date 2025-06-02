@@ -59,7 +59,7 @@ class CustomerProfilePage extends StatelessWidget {
               ),
               Center(
                 child: Text(
-                  Jiffy.parse(customer.addedAt!).fromNow(),
+                  Jiffy.parse(customer.addedAt!).format(pattern: 'dd/MMM/yyyy'),
                   style: CustomHintStyle.hintStyle,
                 ),
               ),
@@ -75,7 +75,7 @@ class CustomerProfilePage extends StatelessWidget {
                   const SizedBox(width: Constants.spaceWith10x),
                   Expanded(
                     child: CustomTextCard(
-                      text: customer.currency!,
+                      text: customer.currency!.split('-')[1].trim(),
                       hint: LocaleKey.currency.tr,
                     ),
                   ),
@@ -91,8 +91,9 @@ class CustomerProfilePage extends StatelessWidget {
                 children: [
                   Expanded(
                     child: CustomTextCard(
-                      text: '867,60',
-                      hint: LocaleKey.got.tr,
+                      text: '${customer.totalGivenAmount.toInt().toString()}'
+                          '.${customer.currency!.split('-')[0].trim()}',
+                      hint: LocaleKey.gave.tr,
                       color: CupertinoColors.systemRed.withOpacity(.1),
                       textColor: CupertinoColors.systemRed,
                     ),
@@ -100,8 +101,9 @@ class CustomerProfilePage extends StatelessWidget {
                   const SizedBox(width: Constants.spaceWith10x),
                   Expanded(
                     child: CustomTextCard(
-                      text: '777,50',
-                      hint: LocaleKey.gave.tr,
+                      text: '${customer.totalGottenAmount.toInt().toString()}'
+                          '.${customer.currency!.split('-')[0].trim()}',
+                      hint: LocaleKey.got.tr,
                       color: CupertinoColors.systemGreen.withOpacity(.1),
                       textColor: CupertinoColors.systemGreen,
                     ),

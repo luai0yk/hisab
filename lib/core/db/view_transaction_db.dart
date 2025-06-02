@@ -18,9 +18,11 @@ class ViewTransactionDB extends DatabaseHelper {
     Database? db = await database;
     // Run rawQuery with userId as argument
     final List<Map<String, dynamic>> response = await db!.query(
-        transactionTableName,
-        where: 'customer_id = ?',
-        whereArgs: [customerID]);
+      transactionTableName,
+      where: 'customer_id = ?',
+      whereArgs: [customerID],
+      orderBy: 'id DESC',
+    );
 
     List<TransactionModel> customers = response.isNotEmpty
         ? response.map((e) => TransactionModel.fromMap(e)).toList()
