@@ -63,7 +63,7 @@ class ViewTransactionPage extends GetView<ViewTransactionController> {
           } else if (controller.transactionList!.isEmpty) {
             return Center(
               child: Text(
-                'No transactions!',
+                LocaleKey.noTransaction.tr,
                 style: CustomHintStyle.hintStyle,
               ),
             );

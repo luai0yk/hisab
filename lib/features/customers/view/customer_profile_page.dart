@@ -22,7 +22,7 @@ class CustomerProfilePage extends StatelessWidget {
 
     return Scaffold(
       appBar: CustomAppbar.appBar(
-        title: '${customer.name!.split(' ')[0]} ${LocaleKey.profile}',
+        title: '${customer.name!.split(' ')[0]} ${LocaleKey.profile.tr}',
       ),
       body: Padding(
         padding: const EdgeInsets.all(Constants.spaceWith15x),

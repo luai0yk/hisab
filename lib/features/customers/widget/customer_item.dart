@@ -96,7 +96,7 @@ class CustomerItem extends StatelessWidget {
                       ),
                       Text(
                         customer.netBalance == 0
-                            ? 'Empty'
+                            ? LocaleKey.empty.tr
                             : customer.isCustomerGiven
                                 ? LocaleKey.gave.tr
                                 : LocaleKey.got.tr,

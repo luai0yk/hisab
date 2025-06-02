@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hisab/core/db/add_transaction_db.dart';
+import 'package:hisab/core/localization/locale_key.dart';
 import 'package:hisab/features/transactions/model/transaction_model.dart';
 import 'package:hisab/shared/controller/customer_data_controller.dart';
 import 'package:hisab/shared/model/customer_model.dart';
@@ -13,13 +14,21 @@ class AddTransactionController extends GetxController {
   TextEditingController descriptionController = TextEditingController();
   TextEditingController dateController = TextEditingController();
   SingleSelectController<String> typeController =
-      SingleSelectController('gave');
+      SingleSelectController(LocaleKey.gave.tr);
   String? fullDate;
 
   @override
   void onInit() {
     setDateTime(dateTime: DateTime.now());
     super.onInit();
+  }
+
+  String get realTransactionType {
+    if (typeController.value == LocaleKey.gave.tr) {
+      return 'gave';
+    } else {
+      return 'got';
+    }
   }
 
   setDateTime({required DateTime dateTime}) {
@@ -37,7 +46,7 @@ class AddTransactionController extends GetxController {
         amount: double.tryParse(amountController.text),
         description: descriptionController.text,
         date: fullDate,
-        type: typeController.value,
+        type: realTransactionType,
         customerId: customer.id,
         addedAt: DateTime.now().toString(),
         updatedAt: DateTime.now().toString(),

@@ -20,7 +20,7 @@ class ViewTransactionDB extends DatabaseHelper {
     // Run rawQuery with userId as argument
     final List<Map<String, dynamic>> response = await db!.query(
       DatabaseKey.transactionTable,
-      where: '${DatabaseKey.customerId} = ?',
+      where: '${DatabaseKey.transactionCustomerId} = ?',
       whereArgs: [customerID],
       orderBy: '${DatabaseKey.transactionId} DESC',
     );

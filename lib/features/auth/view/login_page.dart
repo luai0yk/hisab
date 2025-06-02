@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hisab/core/constants/constants.dart';
-import 'package:hisab/core/constants/storage_key.dart';
 import 'package:hisab/core/route/app_routes.dart';
-import 'package:hisab/core/services/storage_service.dart';
 import 'package:hisab/core/validator/input_validator.dart';
 import 'package:hisab/features/auth/controllers/login_controller.dart';
 import 'package:hisab/shared/widgets/button/custom_button.dart';
@@ -89,9 +87,9 @@ class LoginPage extends GetView<LoginController> {
                         WidgetSpan(
                           child: InkWell(
                             onTap: () {
-                              Get.find<StorageService>()
-                                  .setString(StorageKey.userID, '1');
-                              Get.offAllNamed(AppRoutes.homePage);
+                              // Get.find<StorageService>()
+                              //     .setString(StorageKey.userID, '1');
+                              Get.offAllNamed(AppRoutes.signupPage);
                             },
                             child: Text(
                               LocaleKey.signup.tr,

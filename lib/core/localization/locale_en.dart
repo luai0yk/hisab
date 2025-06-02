@@ -47,5 +47,8 @@ class LocaleEn {
     LocaleKey.transactionType: 'Transaction Type',
     LocaleKey.description: 'Description',
     LocaleKey.type: 'Type',
+    LocaleKey.noTransaction: 'No Transaction!',
+    LocaleKey.transactionDate: 'Transaction Date',
+    LocaleKey.empty: 'empty',
   };
 }

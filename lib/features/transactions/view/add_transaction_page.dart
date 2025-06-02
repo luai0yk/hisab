@@ -64,7 +64,7 @@ class AddTransactionPage extends GetWidget<AddTransactionController> {
                       Expanded(
                         child: CustomDropDown(
                           controller: controller.typeController,
-                          items: const ['gave', 'got'],
+                          items: [LocaleKey.gave.tr, LocaleKey.got.tr],
                         ),
                       ),
                       const SizedBox(width: Constants.spaceWith15x),
@@ -109,7 +109,7 @@ class AddTransactionPage extends GetWidget<AddTransactionController> {
           vertical: Constants.spaceWith10x,
         ),
         child: Text(
-          'Transaction Date',
+          LocaleKey.transactionDate.tr,
           style: CustomTextTheme.textStyle.copyWith(
             fontSize: 22,
           ),
@@ -123,8 +123,6 @@ class AddTransactionPage extends GetWidget<AddTransactionController> {
       onChange: (index) {
         controller.setDateTime(dateTime: index);
       },
-      minDateTime: DateTime(2050, 1, 1),
-      maxDateTime: DateTime(2030, 1, 1),
       displaySubmitButton: false,
       buttonStyle: BoxDecoration(
         color: Constants.primaryColor,
