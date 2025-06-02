@@ -8,6 +8,9 @@ class CustomerModel {
   final String? userID;
   String? addedAt = '';
   String? updatedAt = '';
+  final double totalDebit;
+  final double totalCredit;
+  final double netBalance;
 
   CustomerModel({
     this.id,
@@ -19,9 +22,15 @@ class CustomerModel {
     this.userID,
     this.addedAt,
     this.updatedAt,
-  });
-  // Convert a map to CustomerModel
+    this.totalDebit = 0.0,
+    this.totalCredit = 0.0,
+    double? netBalance, // Optional override
+  }) : netBalance = netBalance ?? (totalCredit - totalDebit);
+
   factory CustomerModel.fromMap(Map<String, dynamic> map) {
+    final double debit = (map['total_debit'] ?? 0).toDouble();
+    final double credit = (map['total_credit'] ?? 0).toDouble();
+
     return CustomerModel(
       id: map['id'],
       name: map['name'],
@@ -32,10 +41,12 @@ class CustomerModel {
       userID: map['user_id'],
       addedAt: map['added_at'],
       updatedAt: map['updated_at'],
+      totalDebit: debit,
+      totalCredit: credit,
+      netBalance: credit - debit,
     );
   }
 
-  // Convert CustomerModel to a map
   Map<String, dynamic> toMap() {
     return {
       'id': id,

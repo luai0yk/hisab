@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hisab/core/route/app_routes.dart';
-import 'package:hisab/features/customers/model/customer_model.dart';
 import 'package:hisab/shared/widgets/icon/custom_huge_icon.dart';
 import 'package:hugeicons/hugeicons.dart';
 
@@ -16,7 +15,6 @@ class ViewTransactionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CustomerModel customer = Get.arguments;
     return Scaffold(
       appBar: CustomAppbar.appBar(
         title: LocaleKey.transactions.tr,
@@ -27,10 +25,7 @@ class ViewTransactionPage extends StatelessWidget {
             icon: HugeIcons.strokeRoundedSchoolReportCard,
           ),
           CustomIconButton(
-            onPressed: () => Get.toNamed(
-              AppRoutes.customerProfilePage,
-              arguments: customer,
-            ),
+            onPressed: () => Get.toNamed(AppRoutes.customerProfilePage),
             toolTip: LocaleKey.profile.tr,
             icon: HugeIcons.strokeRoundedUser,
           ),
@@ -47,7 +42,7 @@ class ViewTransactionPage extends StatelessWidget {
         ),
       ),
       body: ListView(
-        children: [
+        children: const [
           TransactionItem(),
           TransactionItem(),
           TransactionItem(),

@@ -1,7 +1,7 @@
 import 'package:hisab/core/db/database_helper.dart';
 import 'package:sqflite/sqflite.dart';
 
-import '../../features/customers/model/customer_model.dart';
+import '../../shared/model/customer_model.dart';
 
 class AddCustomerDB extends DatabaseHelper {
   static AddCustomerDB? _createCustomer;

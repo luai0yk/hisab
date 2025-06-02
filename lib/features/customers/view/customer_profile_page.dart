@@ -10,24 +10,19 @@ import 'package:hisab/shared/widgets/custom_appbar.dart';
 import 'package:jiffy/jiffy.dart';
 
 import '../../../../core/localization/locale_key.dart';
-import '../model/customer_model.dart';
+import '../../../shared/controller/customer_data_controller.dart';
+import '../../../shared/model/customer_model.dart';
 
 class CustomerProfilePage extends StatelessWidget {
   const CustomerProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    CustomerModel customer = Get.arguments!;
+    CustomerModel customer = Get.find<CustomerDataController>().customer;
+
     return Scaffold(
       appBar: CustomAppbar.appBar(
         title: '${customer.name!.split(' ')[0]} ${LocaleKey.profile}',
-        // actions: [
-        //   CustomIconButton(
-        //     onPressed: () => Get.back(),
-        //     toolTip: LocaleKey.close.tr,
-        //     icon: HugeIcons.strokeRoundedMultiplicationSign,
-        //   )
-        // ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(Constants.spaceWith15x),

@@ -1,7 +1,7 @@
 import 'package:hisab/core/db/database_helper.dart';
 import 'package:sqflite/sqflite.dart';
 
-import '../../features/customers/model/customer_model.dart';
+import '../../shared/model/customer_model.dart';
 
 class ViewCustomerDB extends DatabaseHelper {
   static ViewCustomerDB? _viewCustomer;
@@ -17,13 +17,25 @@ class ViewCustomerDB extends DatabaseHelper {
 
   Future<List<CustomerModel>> viewCustomers({required String userId}) async {
     Database? db = await database;
-    var response = await db!.query(
-      customerTableName,
-      where: 'user_id = ?',
-      whereArgs: [userId],
-      orderBy: 'id DESC',
-    );
 
+    // Your SQL query with user_id filter
+    final String sql = '''
+    SELECT 
+      c.*,
+      COALESCE(SUM(CASE WHEN t.type = 'gave' THEN t.amount ELSE 0 END), 0) AS total_debit,
+      COALESCE(SUM(CASE WHEN t.type = 'got' THEN t.amount ELSE 0 END), 0) AS total_credit
+      FROM $customerTableName c
+      LEFT JOIN $transactionTableName t ON c.id = t.customer_id
+      WHERE c.user_id = ?
+      GROUP BY c.id
+      ORDER BY c.id DESC;
+      ''';
+
+    // Run rawQuery with userId as argument
+    final List<Map<String, dynamic>> response =
+        await db!.rawQuery(sql, [userId]);
+
+    // Map response to list of CustomerModel
     List<CustomerModel> customers = response.isNotEmpty
         ? response.map((e) => CustomerModel.fromMap(e)).toList()
         : [];

@@ -5,6 +5,7 @@ import 'package:hisab/features/home/controller/home_controller.dart';
 import 'package:hisab/features/home/view/home_page.dart';
 import 'package:hisab/features/transactions/controller/add_transaction_controller.dart';
 import 'package:hisab/features/transactions/view/add_transaction_page.dart';
+import 'package:hisab/shared/controller/customer_data_controller.dart';
 
 import '../../features/auth/controllers/signup_controller.dart';
 import '../../features/auth/view/login_page.dart';
@@ -53,6 +54,9 @@ abstract class AppPages {
           );
           Get.lazyPut(
             () => ViewCustomerController(),
+          );
+          Get.lazyPut(
+            () => CustomerDataController(),
           );
         },
       ),

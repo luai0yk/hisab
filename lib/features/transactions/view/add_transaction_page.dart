@@ -68,7 +68,7 @@ class AddTransactionPage extends GetWidget<AddTransactionController> {
                       Expanded(
                         child: CustomDropDown(
                           controller: controller.typeController,
-                          items: const ['Got', 'Gave'],
+                          items: [LocaleKey.gave.tr, LocaleKey.got.tr],
                         ),
                       ),
                       const SizedBox(width: Constants.spaceWith15x),

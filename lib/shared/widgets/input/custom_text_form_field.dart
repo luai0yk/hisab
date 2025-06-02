@@ -67,8 +67,6 @@ class CustomTextFormField extends StatelessWidget {
             {required currentLength, required isFocused, required maxLength}) {
           return const SizedBox();
         },
-        // maxLines: 5,
-        // minLines: 1,
         keyboardType: textInputType ?? TextInputType.text,
         controller: controller,
         inputFormatters: inputFormatters ?? [],

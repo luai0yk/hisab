@@ -6,6 +6,7 @@ import 'package:hisab/core/constants/storage_key.dart';
 import 'package:hisab/core/constants/theme/custom_theme/custom_hint_style.dart';
 import 'package:hisab/core/localization/locale_key.dart';
 import 'package:hisab/core/route/app_routes.dart';
+import 'package:hisab/shared/controller/customer_data_controller.dart';
 import 'package:hisab/shared/widgets/custom_appbar.dart';
 import 'package:hisab/shared/widgets/icon/custom_huge_icon.dart';
 import 'package:hisab/shared/widgets/input/custom_text_form_field.dart';
@@ -13,8 +14,8 @@ import 'package:hugeicons/hugeicons.dart';
 
 import '../../../../shared/widgets/button/custom_icon_button.dart';
 import '../../../core/services/storage_service.dart';
+import '../../../shared/model/customer_model.dart';
 import '../controllers/view_customer_controller.dart';
-import '../model/customer_model.dart';
 import '../widget/customer_item.dart';
 
 class ViewCustomerPage extends GetView<ViewCustomerController> {
@@ -81,10 +82,10 @@ class ViewCustomerPage extends GetView<ViewCustomerController> {
                     CustomerModel customer = controller.customerList![index];
                     return CustomerItem(
                       customer: customer,
-                      onTap: () => Get.toNamed(
-                        AppRoutes.transactionPage,
-                        arguments: customer,
-                      ),
+                      onTap: () {
+                        Get.find<CustomerDataController>().customer = customer;
+                        Get.toNamed(AppRoutes.transactionPage);
+                      },
                     );
                   },
                 );

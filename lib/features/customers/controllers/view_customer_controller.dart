@@ -4,7 +4,7 @@ import 'package:hisab/core/constants/storage_key.dart';
 import 'package:hisab/core/db/view_customer_db.dart';
 
 import '../../../core/services/storage_service.dart';
-import '../model/customer_model.dart';
+import '../../../shared/model/customer_model.dart';
 
 class ViewCustomerController extends GetxController {
   List<CustomerModel>? _originList, _filteredList;
