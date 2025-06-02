@@ -10,6 +10,7 @@ import 'package:hisab/shared/widgets/custom_appbar.dart';
 import 'package:jiffy/jiffy.dart';
 
 import '../../../../core/localization/locale_key.dart';
+import '../../../core/db/customer/delete_customer_db.dart';
 import '../../../shared/controller/customer_data_controller.dart';
 import '../../../shared/model/customer_model.dart';
 
@@ -123,8 +124,14 @@ class CustomerProfilePage extends StatelessWidget {
                   const SizedBox(width: Constants.spaceWith15x),
                   Expanded(
                     child: CustomButton(
-                      onPressed: () {},
-                      text: 'view',
+                      onPressed: () async {
+                        await DeleteCustomerDB().deleteCustomer(
+                          customerID: customer.id,
+                        );
+                        Get.back();
+                        Get.back();
+                      },
+                      text: 'Delete',
                     ),
                   ),
                 ],

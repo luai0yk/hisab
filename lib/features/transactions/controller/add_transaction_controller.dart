@@ -2,7 +2,7 @@ import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hisab/core/db/add_transaction_db.dart';
+import 'package:hisab/core/db/transaction/add_transaction_db.dart';
 import 'package:hisab/core/localization/locale_key.dart';
 import 'package:hisab/features/transactions/model/transaction_model.dart';
 import 'package:hisab/shared/controller/customer_data_controller.dart';

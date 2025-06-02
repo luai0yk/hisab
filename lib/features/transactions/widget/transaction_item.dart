@@ -1,13 +1,15 @@
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 import 'package:hisab/core/constants/constants.dart';
 import 'package:hisab/core/constants/theme/custom_theme/custom_hint_style.dart';
 import 'package:hisab/core/constants/theme/custom_theme/custom_text_theme.dart';
+import 'package:hisab/features/transactions/controller/view_transaction_controller.dart';
 import 'package:hisab/features/transactions/model/transaction_model.dart';
 import 'package:hisab/shared/widgets/icon/custom_huge_icon.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:jiffy/jiffy.dart';
 
-class TransactionItem extends StatelessWidget {
+class TransactionItem extends GetView<ViewTransactionController> {
   final TransactionModel transaction;
   const TransactionItem({super.key, required this.transaction});
 
@@ -58,7 +60,8 @@ class TransactionItem extends StatelessWidget {
                 ),
               ),
               Text(
-                transaction.amount.toString(),
+                '${transaction.amount!.toInt().toString()}'
+                '.${controller.customer.currency!.split('-')[0].trim()}',
                 style: CustomTextTheme.textStyle.copyWith(
                   color: isGot
                       ? CupertinoColors.systemGreen

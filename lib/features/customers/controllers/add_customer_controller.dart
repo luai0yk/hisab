@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:hisab/core/constants/storage_key.dart';
 
-import '../../../../core/db/add_customer_db.dart';
+import '../../../core/db/customer/add_customer_db.dart';
 import '../../../core/services/storage_service.dart';
 import '../../../shared/model/customer_model.dart';
 
