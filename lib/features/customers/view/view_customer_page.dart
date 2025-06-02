@@ -84,7 +84,11 @@ class ViewCustomerPage extends GetView<ViewCustomerController> {
                       customer: customer,
                       onTap: () {
                         Get.find<CustomerDataController>().customer = customer;
-                        Get.toNamed(AppRoutes.transactionPage);
+                        Get.toNamed(AppRoutes.transactionPage)!.then(
+                          (value) async {
+                            await controller.viewCustomers();
+                          },
+                        );
                       },
                     );
                   },

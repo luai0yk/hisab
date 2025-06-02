@@ -30,62 +30,80 @@ class CustomerItem extends StatelessWidget {
                 const EdgeInsets.symmetric(vertical: Constants.spaceWith10x),
             child: Row(
               children: [
-                Container(
-                  width: 65,
-                  height: 65,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: Constants.primaryColor.withOpacity(.1),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Text(
-                    customer.name!.substring(0, 1).toUpperCase(),
-                    style: TextStyle(
-                      color: Constants.primaryColor,
-                      fontSize: 25,
-                      fontWeight: FontWeight.w900,
+                Expanded(
+                  flex: 1,
+                  child: Container(
+                    width: 65,
+                    height: 65,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: Constants.primaryColor.withOpacity(.1),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Text(
+                      customer.name!.substring(0, 1).toUpperCase(),
+                      style: TextStyle(
+                        color: Constants.primaryColor,
+                        fontSize: 25,
+                        fontWeight: FontWeight.w900,
+                      ),
                     ),
                   ),
                 ),
                 const SizedBox(width: Constants.spaceWith15x),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      customer.name!,
-                      style: CustomTextTheme.textStyle.copyWith(fontSize: 20),
-                    ),
-                    Text(
-                      Jiffy.parse(customer.addedAt!).fromNow(),
-                      style: CustomHintStyle.hintStyle.copyWith(fontSize: 12),
-                    ),
-                  ],
+                Expanded(
+                  flex: 2,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        customer.name!,
+                        style: CustomTextTheme.textStyle.copyWith(fontSize: 20),
+                      ),
+                      Text(
+                        Jiffy.parse(customer.addedAt!).fromNow(),
+                        style: CustomHintStyle.hintStyle.copyWith(fontSize: 12),
+                      ),
+                    ],
+                  ),
                 ),
                 const Spacer(),
                 Center(
                   child: Container(
                     padding: const EdgeInsets.all(Constants.spaceWith4x),
                     decoration: BoxDecoration(
-                      color: CupertinoColors.systemRed.withOpacity(.3),
+                      color: CupertinoColors.systemRed.withOpacity(.2),
                       shape: BoxShape.circle,
                     ),
                   ),
                 ),
                 const SizedBox(width: Constants.spaceWith20x),
-                Column(
-                  children: [
-                    Text(
-                      '${customer.netBalance} ${customer.currency!.split('-')[0].trim()}',
-                      style: CustomTextTheme.textStyle.copyWith(
-                        color: CupertinoColors.systemGreen,
-                        fontWeight: FontWeight.w900,
+                Expanded(
+                  flex: 1,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        '${customer.netBalance.toInt()}.${customer.currency!.split('-')[0].trim()}',
+                        style: CustomTextTheme.textStyle.copyWith(
+                          color: customer.netBalance == 0
+                              ? Constants.primaryColor
+                              : customer.isCustomerGiven
+                                  ? CupertinoColors.systemRed
+                                  : CupertinoColors.systemGreen,
+                          fontWeight: FontWeight.w900,
+                        ),
                       ),
-                    ),
-                    Text(
-                      LocaleKey.got.tr,
-                      style: CustomHintStyle.hintStyle,
-                    ),
-                  ],
+                      Text(
+                        customer.netBalance == 0
+                            ? 'Empty'
+                            : customer.isCustomerGiven
+                                ? LocaleKey.gave.tr
+                                : LocaleKey.got.tr,
+                        style: CustomHintStyle.hintStyle,
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

@@ -42,7 +42,7 @@ class AddTransactionPage extends GetWidget<AddTransactionController> {
               child: Column(
                 children: [
                   CustomTextFormField(
-                    //controller: controller.nameController,
+                    controller: controller.amountController,
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     maxLength: 9,
                     validator: (value) {
@@ -53,11 +53,10 @@ class AddTransactionPage extends GetWidget<AddTransactionController> {
                     },
                     hint: LocaleKey.amount.tr,
                     textInputType: TextInputType.number,
-
                     icon: HugeIcons.strokeRoundedMoney03,
                   ),
                   CustomTextFormField(
-                    // controller: controller.addressController,
+                    controller: controller.descriptionController,
                     maxLength: 50,
                     hint: LocaleKey.description.tr,
                     icon: HugeIcons.strokeRoundedTextAlignCenter,
@@ -68,7 +67,7 @@ class AddTransactionPage extends GetWidget<AddTransactionController> {
                       Expanded(
                         child: CustomDropDown(
                           controller: controller.typeController,
-                          items: [LocaleKey.gave.tr, LocaleKey.got.tr],
+                          items: const ['gave', 'got'],
                         ),
                       ),
                       const SizedBox(width: Constants.spaceWith15x),
@@ -93,8 +92,10 @@ class AddTransactionPage extends GetWidget<AddTransactionController> {
             ),
             const Spacer(),
             CustomButton(
-              onPressed: () {
-                if (formState.currentState!.validate()) {}
+              onPressed: () async {
+                if (formState.currentState!.validate()) {
+                  await controller.addTransaction();
+                }
               },
               text: LocaleKey.addTransaction.tr,
             ),

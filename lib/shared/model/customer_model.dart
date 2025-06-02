@@ -8,8 +8,8 @@ class CustomerModel {
   final String? userID;
   String? addedAt = '';
   String? updatedAt = '';
-  final double totalDebit;
-  final double totalCredit;
+  final double totalGivenAmount;
+  final double totalGottenAmount;
   final double netBalance;
 
   CustomerModel({
@@ -22,10 +22,12 @@ class CustomerModel {
     this.userID,
     this.addedAt,
     this.updatedAt,
-    this.totalDebit = 0.0,
-    this.totalCredit = 0.0,
+    this.totalGivenAmount = 0.0,
+    this.totalGottenAmount = 0.0,
     double? netBalance, // Optional override
-  }) : netBalance = netBalance ?? (totalCredit - totalDebit);
+  }) : netBalance = netBalance ?? (totalGottenAmount - totalGivenAmount).abs();
+
+  bool get isCustomerGiven => (totalGivenAmount) > (totalGottenAmount);
 
   factory CustomerModel.fromMap(Map<String, dynamic> map) {
     final double debit = (map['total_debit'] ?? 0).toDouble();
@@ -41,9 +43,9 @@ class CustomerModel {
       userID: map['user_id'],
       addedAt: map['added_at'],
       updatedAt: map['updated_at'],
-      totalDebit: debit,
-      totalCredit: credit,
-      netBalance: credit - debit,
+      totalGivenAmount: debit,
+      totalGottenAmount: credit,
+      netBalance: (credit - debit).abs(),
     );
   }
 
