@@ -41,6 +41,7 @@ class DatabaseHelper {
         ${DatabaseKey.transactionCustomerId} INTEGER NOT NULL,
         ${DatabaseKey.transactionAmount} REAL NOT NULL,
         ${DatabaseKey.transactionType} TEXT NOT NULL,
+        ${DatabaseKey.transactionIsSync} INTEGER NOT NULL DEFAULT 0,
         ${DatabaseKey.transactionDescription} TEXT,
         ${DatabaseKey.transactionDate} TEXT NOT NULL,
         ${DatabaseKey.transactionAddedAt} TEXT NOT NULL,

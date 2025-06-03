@@ -30,51 +30,61 @@ class CustomerItem extends StatelessWidget {
                 const EdgeInsets.symmetric(vertical: Constants.spaceWith10x),
             child: Row(
               children: [
-                Expanded(
-                  flex: 1,
-                  child: Container(
-                    width: 65,
-                    height: 65,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: Constants.primaryColor.withOpacity(.1),
-                      shape: BoxShape.circle,
-                    ),
-                    child: Text(
-                      customer.name!.substring(0, 1).toUpperCase(),
-                      style: TextStyle(
-                        color: Constants.primaryColor,
-                        fontSize: 25,
-                        fontWeight: FontWeight.w900,
-                      ),
+                Container(
+                  width: 65,
+                  height: 65,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: Constants.primaryColor.withOpacity(.1),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Text(
+                    customer.name!.substring(0, 1).toUpperCase(),
+                    style: TextStyle(
+                      color: Constants.primaryColor,
+                      fontSize: 25,
+                      fontWeight: FontWeight.w900,
                     ),
                   ),
                 ),
                 const SizedBox(width: Constants.spaceWith15x),
                 Expanded(
-                  flex: 2,
+                  flex: 3,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         customer.name!,
-                        style: CustomTextTheme.textStyle.copyWith(fontSize: 20),
+                        style: CustomTextTheme.textStyle.copyWith(fontSize: 18),
                       ),
                       Text(
                         Jiffy.parse(customer.addedAt!).fromNow(),
-                        style: CustomHintStyle.hintStyle.copyWith(fontSize: 12),
+                        style: CustomHintStyle.hintStyle.copyWith(fontSize: 10),
                       ),
+                      if (!customer.isSynced!) ...[
+                        Container(
+                          margin: const EdgeInsets.only(
+                            top: Constants.spaceWith4x,
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: Constants.spaceWith4x,
+                          ),
+                          decoration: BoxDecoration(
+                            color: CupertinoColors.systemRed.withOpacity(.2),
+                            borderRadius:
+                                BorderRadius.circular(Constants.radius),
+                          ),
+                          child: const Text(
+                            'NOT SYNCED',
+                            style: TextStyle(
+                              color: CupertinoColors.systemRed,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 7,
+                            ),
+                          ),
+                        ),
+                      ]
                     ],
-                  ),
-                ),
-                const Spacer(),
-                Center(
-                  child: Container(
-                    padding: const EdgeInsets.all(Constants.spaceWith4x),
-                    decoration: BoxDecoration(
-                      color: CupertinoColors.systemRed.withOpacity(.2),
-                      shape: BoxShape.circle,
-                    ),
                   ),
                 ),
                 const SizedBox(width: Constants.spaceWith20x),
@@ -83,15 +93,23 @@ class CustomerItem extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Text(
-                        '${customer.netBalance.toInt()}.${customer.currency!.split('-')[0].trim()}',
-                        style: CustomTextTheme.textStyle.copyWith(
-                          color: customer.netBalance == 0
-                              ? Constants.primaryColor
-                              : customer.isCustomerGiven
-                                  ? CupertinoColors.systemRed
-                                  : CupertinoColors.systemGreen,
-                          fontWeight: FontWeight.w900,
+                      RichText(
+                        text: TextSpan(
+                          style: TextStyle(
+                            color: customer.netBalance == 0
+                                ? Constants.primaryColor
+                                : customer.isCustomerGiven
+                                    ? CupertinoColors.systemRed
+                                    : CupertinoColors.systemGreen,
+                            fontWeight: FontWeight.w900,
+                            fontSize: 12,
+                          ),
+                          children: [
+                            TextSpan(text: '${customer.netBalance} '),
+                            TextSpan(
+                                text: customer.currency!.split('-')[0].trim(),
+                                style: const TextStyle(fontSize: 8)),
+                          ],
                         ),
                       ),
                       Text(
@@ -100,7 +118,7 @@ class CustomerItem extends StatelessWidget {
                             : customer.isCustomerGiven
                                 ? LocaleKey.gave.tr
                                 : LocaleKey.got.tr,
-                        style: CustomHintStyle.hintStyle,
+                        style: CustomHintStyle.hintStyle.copyWith(fontSize: 12),
                       ),
                     ],
                   ),

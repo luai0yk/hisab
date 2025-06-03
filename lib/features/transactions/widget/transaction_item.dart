@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hisab/core/constants/constants.dart';
 import 'package:hisab/core/constants/theme/custom_theme/custom_hint_style.dart';
@@ -16,67 +17,109 @@ class TransactionItem extends GetView<ViewTransactionController> {
   @override
   Widget build(BuildContext context) {
     bool isGot = transaction.type == 'got';
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            children: [
-              Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                  color: isGot
-                      ? CupertinoColors.systemGreen.withOpacity(.1)
-                      : CupertinoColors.systemRed.withOpacity(.1),
-                  shape: BoxShape.circle,
+    return InkWell(
+      onTap: () {},
+      borderRadius: BorderRadius.circular(Constants.radius),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: isGot
+                        ? CupertinoColors.systemGreen.withOpacity(.1)
+                        : CupertinoColors.systemRed.withOpacity(.1),
+                    shape: BoxShape.circle,
+                  ),
+                  child: CustomHugeIcon(
+                    icon: isGot
+                        ? HugeIcons.strokeRoundedArrowUp02
+                        : HugeIcons.strokeRoundedArrowDown02,
+                    color: isGot
+                        ? CupertinoColors.systemGreen
+                        : CupertinoColors.systemRed,
+                  ),
                 ),
-                child: CustomHugeIcon(
-                  icon: isGot
-                      ? HugeIcons.strokeRoundedArrowUp02
-                      : HugeIcons.strokeRoundedArrowDown02,
-                  color: isGot
-                      ? CupertinoColors.systemGreen
-                      : CupertinoColors.systemRed,
-                ),
-              ),
-              const SizedBox(width: Constants.spaceWith10x),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      Jiffy.parse(transaction.date!)
-                          .format(pattern: 'dd/MMM/yy'),
-                      style: CustomTextTheme.textStyle,
-                    ),
-                    if (transaction.description!.isNotEmpty) ...[
+                const SizedBox(width: Constants.spaceWith10x),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
                       Text(
-                        transaction.description!,
-                        style: CustomHintStyle.hintStyle,
+                        Jiffy.parse(transaction.date!)
+                            .format(pattern: 'dd/MMM/yy'),
+                        style: CustomTextTheme.textStyle,
                       ),
-                    ]
-                  ],
+                      if (transaction.description!.isNotEmpty) ...[
+                        Text(
+                          transaction.description!,
+                          style: CustomHintStyle.hintStyle.copyWith(
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                      if (!transaction.isSynced!) ...[
+                        Container(
+                          margin: const EdgeInsets.only(
+                            top: Constants.spaceWith4x,
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: Constants.spaceWith4x,
+                          ),
+                          decoration: BoxDecoration(
+                            color: CupertinoColors.systemRed.withOpacity(.2),
+                            borderRadius:
+                                BorderRadius.circular(Constants.radius),
+                          ),
+                          child: const Text(
+                            'NOT SYNCED',
+                            style: TextStyle(
+                              color: CupertinoColors.systemRed,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 7,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ],
+                  ),
                 ),
-              ),
-              Text(
-                '${transaction.amount!.toInt().toString()}'
-                '.${controller.customer.currency!.split('-')[0].trim()}',
-                style: CustomTextTheme.textStyle.copyWith(
-                  color: isGot
-                      ? CupertinoColors.systemGreen
-                      : CupertinoColors.systemRed,
+                RichText(
+                  text: TextSpan(
+                    style: TextStyle(
+                      color: isGot
+                          ? CupertinoColors.systemGreen
+                          : CupertinoColors.systemRed,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    children: [
+                      TextSpan(
+                          text: '${transaction.amount!.toInt().toString()} '),
+                      TextSpan(
+                        text:
+                            controller.customer.currency!.split('-')[0].trim(),
+                        style: const TextStyle(
+                          fontSize: 8,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-        Container(
-          height: 1.5,
-          width: (MediaQuery.of(context).size.width / 2),
-          color: CupertinoColors.systemGrey.withOpacity(.1),
-        ),
-      ],
+          Container(
+            height: 1.5,
+            width: (MediaQuery.of(context).size.width / 2),
+            color: CupertinoColors.systemGrey.withOpacity(.1),
+          ),
+        ],
+      ),
     );
   }
 }

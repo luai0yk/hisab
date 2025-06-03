@@ -22,6 +22,8 @@ class DatabaseKey {
   static const String transactionCustomerId = 'customer_id';
   static const String transactionAmount = 'amount';
   static const String transactionType = 'type';
+  static const String transactionIsSync = 'is_sync';
+
   static const String transactionDescription = 'description';
   static const String transactionDate = 'date';
   static const String transactionAddedAt = 'added_at';
