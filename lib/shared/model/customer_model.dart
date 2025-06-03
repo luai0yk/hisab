@@ -66,4 +66,14 @@ class CustomerModel {
       DatabaseKey.customerUpdatedAt: updatedAt,
     };
   }
+
+  Map<String, dynamic> toMapEdit() {
+    return {
+      DatabaseKey.customerName: name,
+      DatabaseKey.customerPhone: phone,
+      DatabaseKey.customerAddress: address,
+      DatabaseKey.customerCurrency: currency,
+      DatabaseKey.customerUpdatedAt: updatedAt,
+    };
+  }
 }

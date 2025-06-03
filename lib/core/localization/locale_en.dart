@@ -50,5 +50,7 @@ class LocaleEn {
     LocaleKey.noTransaction: 'No Transaction!',
     LocaleKey.transactionDate: 'Transaction Date',
     LocaleKey.empty: 'empty',
+    LocaleKey.delete: 'delete',
+    LocaleKey.edit: 'edit',
   };
 }

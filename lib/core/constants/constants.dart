@@ -27,4 +27,25 @@ class Constants {
 
   static const String statusSuccess = 'success';
   static const String statusError = 'error';
+
+  static const List<String> arabCurrencies = [
+    'USD - United States Dollar',
+    'EUR - Euro',
+    'SAR - Saudi Riyal',
+    'AED - UAE Dirham',
+    'EGP - Egyptian Pound',
+    'IQD - Iraqi Dinar',
+    'YER - Yemeni Rial',
+    'KWD - Kuwaiti Dinar',
+    'QAR - Qatari Riyal',
+    'OMR - Omani Rial',
+    'BHD - Bahraini Dinar',
+    'LYD - Libyan Dinar',
+    'SYP - Syrian Pound',
+    'DZD - Algerian Dinar',
+    'TND - Tunisian Dinar',
+    'MAD - Moroccan Dirham',
+    'SDG - Sudanese Pound',
+    'MRU - Mauritanian Ouguiya',
+  ];
 }

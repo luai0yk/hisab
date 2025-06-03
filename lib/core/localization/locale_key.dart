@@ -48,4 +48,6 @@ abstract class LocaleKey {
   static const noTransaction = "no_transaction";
   static const transactionDate = "transaction_date";
   static const empty = "empty";
+  static const delete = "delete";
+  static const edit = "edit";
 }
