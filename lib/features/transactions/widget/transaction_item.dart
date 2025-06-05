@@ -12,13 +12,20 @@ import 'package:jiffy/jiffy.dart';
 
 class TransactionItem extends GetView<ViewTransactionController> {
   final TransactionModel transaction;
-  const TransactionItem({super.key, required this.transaction});
+  final Function()? onTab, onLongPress;
+  const TransactionItem({
+    super.key,
+    required this.transaction,
+    this.onTab,
+    this.onLongPress,
+  });
 
   @override
   Widget build(BuildContext context) {
     bool isGot = transaction.type == 'got';
     return InkWell(
-      onTap: () {},
+      onTap: onTab,
+      onLongPress: onLongPress,
       borderRadius: BorderRadius.circular(Constants.radius),
       child: Column(
         children: [

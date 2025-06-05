@@ -12,7 +12,7 @@ class ViewTransactionDB extends DatabaseHelper {
     return _viewTransaction!;
   }
 
-  // Prevent the initialization of CreateCustomer class
+  // Prevent the initialization of ViewTransactionDB class
   ViewTransactionDB._intern();
 
   Future<List<TransactionModel>> viewTransactions({required customerID}) async {

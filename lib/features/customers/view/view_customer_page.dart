@@ -95,58 +95,9 @@ class ViewCustomerPage extends GetView<ViewCustomerController> {
                         );
                       },
                       onLongPress: () {
-                        DialogHelper.show(
+                        _showOptionsDialog(
                           context: context,
-                          child: AppDialog(
-                            title: LocaleKey.options.tr,
-                            customContent: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                CustomListTile(
-                                  title: LocaleKey.edit.tr,
-                                  icon: HugeIcons.strokeRoundedEdit01,
-                                  onTap: () {
-                                    Get.find<CustomerDataController>()
-                                        .customer = customer;
-                                    Get.back();
-                                    Get.toNamed(AppRoutes.editCustomerPage)!
-                                        .then(
-                                      (value) async {
-                                        await controller.viewCustomers();
-                                      },
-                                    );
-                                  },
-                                ),
-                                CustomListTile(
-                                  title: LocaleKey.delete.tr,
-                                  icon: HugeIcons.strokeRoundedDelete01,
-                                  onTap: () {
-                                    Get.back();
-                                    DialogHelper.show(
-                                      context: context,
-                                      child: AppDialog(
-                                        title: LocaleKey.delete.tr,
-                                        content: LocaleKey
-                                            .areYouSureToDeleteCustomer.tr,
-                                        onCancel: () => null,
-                                        onOkay: () async {
-                                          await DeleteCustomerDB()
-                                              .deleteCustomer(
-                                            customerID: customer.id,
-                                          );
-                                          await controller.viewCustomers();
-                                          Get.back();
-                                        },
-                                        okayColor: CupertinoColors.systemRed,
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ],
-                            ),
-                            cancelText: LocaleKey.cancel.tr,
-                            onCancel: () => null,
-                          ),
+                          customer: customer,
                         );
                       },
                     );
@@ -176,6 +127,69 @@ class ViewCustomerPage extends GetView<ViewCustomerController> {
           icon: HugeIcons.strokeRoundedAddTeam,
           color: CupertinoColors.white,
         ),
+      ),
+    );
+  }
+
+  void _showOptionsDialog({
+    required BuildContext context,
+    required CustomerModel customer,
+  }) {
+    DialogHelper.show(
+      context: context,
+      child: AppDialog(
+        title: LocaleKey.options.tr,
+        customContent: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            CustomListTile(
+              title: LocaleKey.edit.tr,
+              icon: HugeIcons.strokeRoundedEdit01,
+              onTap: () {
+                Get.find<CustomerDataController>().customer = customer;
+                Get.back();
+                Get.toNamed(AppRoutes.editCustomerPage)!.then(
+                  (value) async {
+                    await controller.viewCustomers();
+                  },
+                );
+              },
+            ),
+            CustomListTile(
+              title: LocaleKey.delete.tr,
+              icon: HugeIcons.strokeRoundedDelete01,
+              onTap: () {
+                _showConfirmationDeleteDialog(
+                  context: context,
+                  customer: customer,
+                );
+              },
+            ),
+          ],
+        ),
+        cancelText: LocaleKey.cancel.tr,
+        onCancel: () => null,
+      ),
+    );
+  }
+
+  _showConfirmationDeleteDialog(
+      {required BuildContext context, required CustomerModel customer}) {
+    Get.back();
+    DialogHelper.show(
+      context: context,
+      child: AppDialog(
+        title: LocaleKey.delete.tr,
+        content: LocaleKey.areYouSureToDeleteCustomer.tr,
+        onCancel: () => null,
+        onOkay: () async {
+          await DeleteCustomerDB().deleteCustomer(
+            customerID: customer.id,
+          );
+          await controller.viewCustomers();
+          Get.back();
+        },
+        okayColor: CupertinoColors.systemRed,
       ),
     );
   }

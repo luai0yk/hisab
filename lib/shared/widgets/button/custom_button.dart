@@ -20,6 +20,7 @@ class CustomButton extends StatelessWidget {
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         backgroundColor: color ?? Constants.primaryColor,
+        padding: const EdgeInsets.symmetric(horizontal: Constants.spaceWith10x),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(
             Constants.radius,

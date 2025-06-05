@@ -58,5 +58,7 @@ class LocaleEn {
     LocaleKey.cancel: 'Cancel',
     LocaleKey.areYouSureToDeleteCustomer:
         'Are you sure to delete this customer?',
+    LocaleKey.areYouSureToDeleteTransaction:
+        'Are you sure to delete this transaction?',
   };
 }
