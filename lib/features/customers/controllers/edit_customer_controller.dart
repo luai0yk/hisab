@@ -10,10 +10,9 @@ class EditCustomerController extends GetxController {
   TextEditingController phoneController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   SingleSelectController<String>? currencyController;
-  late CustomerModel customer;
   @override
   void onInit() {
-    customer = Get.find<CustomerDataController>().customer;
+    CustomerModel customer = Get.find<CustomerDataController>().customer;
     currencyController = SingleSelectController(customer.currency);
     nameController.text = customer.name!;
     phoneController.text = customer.phone!;
@@ -22,17 +21,15 @@ class EditCustomerController extends GetxController {
   }
 
   Future<void> editCustomer() async {
-    customer = CustomerModel(
-      name: nameController.text,
-      phone: phoneController.text,
-      address: addressController.text,
-      currency: currencyController!.value,
-      updatedAt: DateTime.now().toString(),
-    );
     await EditCustomerDB.instance.editCustomer(
-      customer: customer,
+      customer: CustomerModel(
+        name: nameController.text,
+        phone: phoneController.text,
+        address: addressController.text,
+        currency: currencyController!.value,
+        updatedAt: DateTime.now().toString(),
+      ),
     );
-    update();
     Get.back();
   }
 }

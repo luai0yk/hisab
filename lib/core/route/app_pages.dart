@@ -100,6 +100,10 @@ abstract class AppPages {
     GetPage(
       name: AppRoutes.customerProfilePage,
       page: () => CustomerProfilePage(),
+    ),
+    GetPage(
+      name: AppRoutes.editCustomerPage,
+      page: () => EditCustomerPage(),
       binding: BindingsBuilder(
         () {
           Get.lazyPut(
@@ -107,10 +111,6 @@ abstract class AppPages {
           );
         },
       ),
-    ),
-    GetPage(
-      name: AppRoutes.editCustomerPage,
-      page: () => EditCustomerPage(),
     ),
   ];
 }

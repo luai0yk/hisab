@@ -70,7 +70,7 @@ class CustomerItem extends StatelessWidget {
                             horizontal: Constants.spaceWith4x,
                           ),
                           decoration: BoxDecoration(
-                            color: CupertinoColors.systemRed.withOpacity(.2),
+                            color: CupertinoColors.systemRed.withOpacity(.1),
                             borderRadius:
                                 BorderRadius.circular(Constants.radius),
                           ),

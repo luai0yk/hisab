@@ -43,4 +43,28 @@ class ViewCustomerDB extends DatabaseHelper {
 
     return customers;
   }
+
+  Future<CustomerModel> viewCustomerByID({
+    required String userId,
+    required int customerId,
+  }) async {
+    Database? db = await database;
+
+    const String sql = '''
+    SELECT 
+      c.*,
+      COALESCE(SUM(CASE WHEN t.type = 'gave' THEN t.amount ELSE 0 END), 0) AS total_debit,
+      COALESCE(SUM(CASE WHEN t.type = 'got' THEN t.amount ELSE 0 END), 0) AS total_credit
+    FROM ${DatabaseKey.customerTable} c
+    LEFT JOIN ${DatabaseKey.transactionTable} t ON c.id = t.customer_id
+    WHERE c.user_id = ? AND c.id = ?
+    GROUP BY c.id
+    ORDER BY c.id DESC;
+  ''';
+
+    final List<Map<String, Object?>> response =
+        await db!.rawQuery(sql, [userId, customerId]);
+
+    return CustomerModel.fromMap(response.first);
+  }
 }
