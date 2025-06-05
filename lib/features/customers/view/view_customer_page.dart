@@ -6,13 +6,17 @@ import 'package:hisab/core/constants/storage_key.dart';
 import 'package:hisab/core/constants/theme/custom_theme/custom_hint_style.dart';
 import 'package:hisab/core/localization/locale_key.dart';
 import 'package:hisab/core/route/app_routes.dart';
+import 'package:hisab/core/utils/dialog_helper.dart';
 import 'package:hisab/shared/controller/customer_data_controller.dart';
 import 'package:hisab/shared/widgets/custom_appbar.dart';
+import 'package:hisab/shared/widgets/custom_list_tile.dart';
+import 'package:hisab/shared/widgets/dialog/app_dialog.dart';
 import 'package:hisab/shared/widgets/icon/custom_huge_icon.dart';
 import 'package:hisab/shared/widgets/input/custom_text_form_field.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 import '../../../../shared/widgets/button/custom_icon_button.dart';
+import '../../../core/db/customer/delete_customer_db.dart';
 import '../../../core/services/storage_service.dart';
 import '../../../shared/model/customer_model.dart';
 import '../controllers/view_customer_controller.dart';
@@ -88,6 +92,61 @@ class ViewCustomerPage extends GetView<ViewCustomerController> {
                           (value) async {
                             await controller.viewCustomers();
                           },
+                        );
+                      },
+                      onLongPress: () {
+                        DialogHelper.show(
+                          context: context,
+                          child: AppDialog(
+                            title: LocaleKey.options.tr,
+                            customContent: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                CustomListTile(
+                                  title: LocaleKey.edit.tr,
+                                  icon: HugeIcons.strokeRoundedEdit01,
+                                  onTap: () {
+                                    Get.find<CustomerDataController>()
+                                        .customer = customer;
+                                    Get.back();
+                                    Get.toNamed(AppRoutes.editCustomerPage)!
+                                        .then(
+                                      (value) async {
+                                        await controller.viewCustomers();
+                                      },
+                                    );
+                                  },
+                                ),
+                                CustomListTile(
+                                  title: LocaleKey.delete.tr,
+                                  icon: HugeIcons.strokeRoundedDelete01,
+                                  onTap: () {
+                                    Get.back();
+                                    DialogHelper.show(
+                                      context: context,
+                                      child: AppDialog(
+                                        title: LocaleKey.delete.tr,
+                                        content: LocaleKey
+                                            .areYouSureToDeleteCustomer.tr,
+                                        onCancel: () => null,
+                                        onOkay: () async {
+                                          await DeleteCustomerDB()
+                                              .deleteCustomer(
+                                            customerID: customer.id,
+                                          );
+                                          await controller.viewCustomers();
+                                          Get.back();
+                                        },
+                                        okayColor: CupertinoColors.systemRed,
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
+                            cancelText: LocaleKey.cancel.tr,
+                            onCancel: () => null,
+                          ),
                         );
                       },
                     );

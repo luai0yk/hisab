@@ -49,8 +49,14 @@ class LocaleEn {
     LocaleKey.type: 'Type',
     LocaleKey.noTransaction: 'No Transaction!',
     LocaleKey.transactionDate: 'Transaction Date',
-    LocaleKey.empty: 'empty',
-    LocaleKey.delete: 'delete',
-    LocaleKey.edit: 'edit',
+    LocaleKey.empty: 'Empty',
+    LocaleKey.delete: 'Delete',
+    LocaleKey.edit: 'Edit',
+    LocaleKey.yes: 'Yes',
+    LocaleKey.no: 'No',
+    LocaleKey.options: 'Options',
+    LocaleKey.cancel: 'Cancel',
+    LocaleKey.areYouSureToDeleteCustomer:
+        'Are you sure to delete this customer?',
   };
 }

@@ -12,16 +12,19 @@ import '../../../shared/model/customer_model.dart';
 class CustomerItem extends StatelessWidget {
   final CustomerModel customer;
   final Function() onTap;
+  final Function()? onLongPress;
   const CustomerItem({
     super.key,
     required this.customer,
     required this.onTap,
+    this.onLongPress,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
+      onLongPress: onLongPress,
       borderRadius: BorderRadius.circular(Constants.radius),
       child: Column(
         children: [
