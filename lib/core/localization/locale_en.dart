@@ -56,6 +56,7 @@ class LocaleEn {
     LocaleKey.no: 'No',
     LocaleKey.options: 'Options',
     LocaleKey.cancel: 'Cancel',
+    LocaleKey.editTransaction: 'Edit Transaction',
     LocaleKey.areYouSureToDeleteCustomer:
         'Are you sure to delete this customer?',
     LocaleKey.areYouSureToDeleteTransaction:

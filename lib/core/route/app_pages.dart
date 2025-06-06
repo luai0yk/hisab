@@ -6,8 +6,11 @@ import 'package:hisab/features/customers/view/edit_customer_page.dart';
 import 'package:hisab/features/home/controller/home_controller.dart';
 import 'package:hisab/features/home/view/home_page.dart';
 import 'package:hisab/features/transactions/controller/add_transaction_controller.dart';
+import 'package:hisab/features/transactions/controller/edit_transaction_controller.dart';
+import 'package:hisab/features/transactions/controller/transaction_data_controller.dart';
 import 'package:hisab/features/transactions/controller/view_transaction_controller.dart';
 import 'package:hisab/features/transactions/view/add_transaction_page.dart';
+import 'package:hisab/features/transactions/view/edit_transaction_page.dart';
 import 'package:hisab/shared/controller/customer_data_controller.dart';
 
 import '../../features/auth/controllers/signup_controller.dart';
@@ -83,6 +86,9 @@ abstract class AppPages {
           Get.lazyPut(
             () => ViewTransactionController(),
           );
+          Get.lazyPut(
+            () => TransactionDataController(),
+          );
         },
       ),
     ),
@@ -108,6 +114,17 @@ abstract class AppPages {
         () {
           Get.lazyPut(
             () => EditCustomerController(),
+          );
+        },
+      ),
+    ),
+    GetPage(
+      name: AppRoutes.editTransactionPage,
+      page: () => EditTransactionPage(),
+      binding: BindingsBuilder(
+        () {
+          Get.lazyPut(
+            () => EditTransactionController(),
           );
         },
       ),

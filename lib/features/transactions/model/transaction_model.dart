@@ -52,4 +52,15 @@ class TransactionModel {
       DatabaseKey.transactionUpdatedAt: updatedAt,
     };
   }
+
+  Map<String, dynamic> toMapEdit() {
+    return {
+      DatabaseKey.transactionAmount: amount,
+      DatabaseKey.transactionType: type,
+      DatabaseKey.transactionDescription: description,
+      DatabaseKey.transactionDate: date,
+      DatabaseKey.transactionIsSync: isSynced == true ? 1 : 0,
+      DatabaseKey.transactionUpdatedAt: updatedAt,
+    };
+  }
 }

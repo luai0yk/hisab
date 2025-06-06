@@ -11,7 +11,7 @@ class AppDialog extends StatelessWidget {
   final Function()? onOkay, onCancel, onOther;
   final String? okayText, cancelText, otherText;
   final Widget? customContent;
-  final Color? okayColor;
+  final Color? okayColor, cancelColor;
 
   const AppDialog({
     super.key,
@@ -25,6 +25,7 @@ class AppDialog extends StatelessWidget {
     this.otherText,
     this.customContent,
     this.okayColor,
+    this.cancelColor,
   });
 
   @override
@@ -39,7 +40,7 @@ class AppDialog extends StatelessWidget {
       contentPadding: customContent != null
           ? EdgeInsets.zero
           : const EdgeInsets.symmetric(horizontal: Constants.spaceWith15x),
-      actionsPadding: const EdgeInsets.all(Constants.spaceWith8x),
+      actionsPadding: const EdgeInsets.all(Constants.spaceWith10x),
       title: title != null
           ? Text(
               title!,
@@ -64,6 +65,7 @@ class AppDialog extends StatelessWidget {
                   onCancel!();
                   Navigator.of(context).pop();
                 },
+                color: cancelColor,
               ),
             const SizedBox(width: Constants.spaceWith10x),
             if (onOkay != null)

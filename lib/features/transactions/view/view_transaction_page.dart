@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:hisab/core/constants/constants.dart';
 import 'package:hisab/core/db/transaction/delete_transaction_db.dart';
 import 'package:hisab/core/route/app_routes.dart';
+import 'package:hisab/features/transactions/controller/transaction_data_controller.dart';
 import 'package:hisab/features/transactions/controller/view_transaction_controller.dart';
 import 'package:hisab/features/transactions/model/transaction_model.dart';
 import 'package:hisab/shared/widgets/icon/custom_huge_icon.dart';
@@ -105,15 +106,13 @@ class ViewTransactionPage extends GetView<ViewTransactionController> {
               title: LocaleKey.edit.tr,
               icon: HugeIcons.strokeRoundedEdit01,
               onTap: () {
-                // Get.find<CustomerDataController>()
-                //     .customer = customer;
-                // Get.back();
-                // Get.toNamed(AppRoutes.editCustomerPage)!
-                //     .then(
-                //       (value) async {
-                //     await controller.viewCustomers();
-                //   },
-                // );
+                Get.back();
+                Get.find<TransactionDataController>().transaction = transaction;
+                Get.toNamed(AppRoutes.editTransactionPage)!.then(
+                  (value) async {
+                    await controller.viewTransaction();
+                  },
+                );
               },
             ),
             CustomListTile(
@@ -146,7 +145,7 @@ class ViewTransactionPage extends GetView<ViewTransactionController> {
         content: LocaleKey.areYouSureToDeleteTransaction.tr,
         onCancel: () => null,
         onOkay: () async {
-          DeleteTransactionDB.instance.deleteTransaction(
+          await DeleteTransactionDB.instance.deleteTransaction(
             transactionId: transaction.id!,
           );
           await controller.viewTransaction();

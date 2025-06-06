@@ -31,7 +31,7 @@ class AddTransactionController extends GetxController {
     }
   }
 
-  setDateTime({required DateTime dateTime}) {
+  void setDateTime({required DateTime dateTime}) {
     String formattedDate = Jiffy.parseFromDateTime(dateTime).format(
       pattern: 'yy-MM-dd',
     );

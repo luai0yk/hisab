@@ -54,6 +54,7 @@ abstract class LocaleKey {
   static const no = "no";
   static const cancel = "cancel";
   static const options = "options";
+  static const editTransaction = "edit_transaction";
   static const areYouSureToDeleteCustomer = "are_you_sure_to_delete_customer";
   static const areYouSureToDeleteTransaction =
       "are_you_sure_to_delete_transaction";

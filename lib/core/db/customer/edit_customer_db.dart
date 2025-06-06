@@ -15,9 +15,15 @@ class EditCustomerDB extends DatabaseHelper {
   // Prevent the initialization of EditCustomerDB class
   EditCustomerDB._intern();
 
-  Future<void> editCustomer({required CustomerModel customer}) async {
+  Future<void> editCustomer(
+      {required int customerId, required CustomerModel customer}) async {
     Database? db = await database;
 
-    db!.update(DatabaseKey.customerTable, customer.toMapEdit());
+    db!.update(
+      DatabaseKey.customerTable,
+      customer.toMapEdit(),
+      where: '${DatabaseKey.customerId} = ?',
+      whereArgs: [customerId],
+    );
   }
 }

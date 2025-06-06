@@ -73,6 +73,7 @@ class CustomerModel {
       DatabaseKey.customerPhone: phone,
       DatabaseKey.customerAddress: address,
       DatabaseKey.customerCurrency: currency,
+      DatabaseKey.customerIsSync: isSynced == true ? 1 : 0,
       DatabaseKey.customerUpdatedAt: updatedAt,
     };
   }
