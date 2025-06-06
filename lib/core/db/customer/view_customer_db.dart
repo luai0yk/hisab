@@ -16,7 +16,7 @@ class ViewCustomerDB extends DatabaseHelper {
   // Prevent the initialization of ViewCustomer class
   ViewCustomerDB._intern();
 
-  Future<List<CustomerModel>> viewCustomers({required String userId}) async {
+  Future<List<CustomerModel>> viewCustomers({required int userId}) async {
     Database? db = await database;
 
     // Your SQL query with user_id filter
@@ -45,7 +45,7 @@ class ViewCustomerDB extends DatabaseHelper {
   }
 
   Future<CustomerModel> viewCustomerByID({
-    required String userId,
+    required int userId,
     required int customerId,
   }) async {
     Database? db = await database;
@@ -60,7 +60,7 @@ class ViewCustomerDB extends DatabaseHelper {
     WHERE c.user_id = ? AND c.id = ?
     GROUP BY c.id
     ORDER BY c.id DESC;
-  ''';
+    ''';
 
     final List<Map<String, Object?>> response =
         await db!.rawQuery(sql, [userId, customerId]);

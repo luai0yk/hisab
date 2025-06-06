@@ -57,7 +57,7 @@ class LoginController extends GetxController {
   void saveUserData({required UserModel data}) {
     final storage = Get.find<StorageService>();
     storage.setBool(StorageKey.isUserLogged, true);
-    storage.setString(StorageKey.userID, data.id);
+    storage.setInt(StorageKey.userID, int.parse(data.id));
     storage.setString(StorageKey.userFullName, data.fullName);
     storage.setString(StorageKey.userEmail, data.email!);
   }

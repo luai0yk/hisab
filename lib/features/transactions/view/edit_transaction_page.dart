@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:hisab/core/constants/theme/color_extension.dart';
 import 'package:hisab/features/transactions/widget/custom_drop_down.dart';
 import 'package:hisab/features/transactions/widget/date_setter.dart';
 import 'package:hugeicons/hugeicons.dart';
@@ -21,8 +20,6 @@ class EditTransactionPage extends GetWidget<EditTransactionController> {
 
   @override
   Widget build(BuildContext context) {
-    ColorExtension customColors = Get.theme.extension<ColorExtension>()!;
-
     return Scaffold(
       appBar: CustomAppbar.appBar(
         title: LocaleKey.editTransaction.tr,

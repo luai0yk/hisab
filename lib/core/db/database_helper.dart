@@ -24,12 +24,12 @@ class DatabaseHelper {
     await db.execute('''
       CREATE TABLE ${DatabaseKey.customerTable} (
         ${DatabaseKey.customerId} INTEGER PRIMARY KEY AUTOINCREMENT,
+        ${DatabaseKey.customerUserId} INTEGER NOT NULL,
         ${DatabaseKey.customerName} TEXT NOT NULL,
         ${DatabaseKey.customerPhone} TEXT NOT NULL UNIQUE,
         ${DatabaseKey.customerIsSync} INTEGER NOT NULL DEFAULT 0,
         ${DatabaseKey.customerCurrency} TEXT,
         ${DatabaseKey.customerAddress} TEXT,
-        ${DatabaseKey.customerUserId} TEXT NOT NULL,
         ${DatabaseKey.customerAddedAt} TEXT NOT NULL,
         ${DatabaseKey.customerUpdatedAt} TEXT NOT NULL
       )

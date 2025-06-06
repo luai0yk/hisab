@@ -7,7 +7,7 @@ class CustomerModel {
   final String? address;
   final String? currency;
   final bool? isSynced;
-  final String? userID;
+  final int? userID;
   final String? addedAt;
   final String? updatedAt;
   final double totalGivenAmount;

@@ -16,7 +16,7 @@ class ViewCustomerController extends GetxController {
     final storage = Get.find<StorageService>();
 
     _originList = await customer.viewCustomers(
-        userId: storage.getString(StorageKey.userID)!);
+        userId: storage.getInt(StorageKey.userID)!);
     _filteredList = _originList;
     update(['customer_list']);
   }

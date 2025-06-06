@@ -46,7 +46,7 @@ class AddCustomerController extends GetxController {
           addedAt: DateTime.now().toString(),
           updatedAt: DateTime.now().toString(),
           isSynced: false,
-          userID: storage.getString(StorageKey.userID),
+          userID: storage.getInt(StorageKey.userID),
         ),
       );
       Get.back();

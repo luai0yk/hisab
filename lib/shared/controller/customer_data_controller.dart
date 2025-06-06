@@ -12,7 +12,7 @@ class CustomerDataController extends GetxController {
 
     ViewCustomerDB customerDB = ViewCustomerDB.instance;
     customer = await customerDB.viewCustomerByID(
-      userId: storage.getString(StorageKey.userID)!,
+      userId: storage.getInt(StorageKey.userID)!,
       customerId: customer.id!,
     );
 
