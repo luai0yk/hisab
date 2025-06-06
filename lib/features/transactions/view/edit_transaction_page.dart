@@ -1,11 +1,9 @@
-import 'package:bottom_picker/bottom_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:hisab/core/constants/theme/color_extension.dart';
-import 'package:hisab/core/constants/theme/custom_theme/custom_text_theme.dart';
 import 'package:hisab/features/transactions/widget/custom_drop_down.dart';
-import 'package:hisab/shared/widgets/button/custom_icon_button.dart';
+import 'package:hisab/features/transactions/widget/date_setter.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 import '../../../core/constants/constants.dart';
@@ -72,9 +70,9 @@ class EditTransactionPage extends GetWidget<EditTransactionController> {
                         child: CustomTextFormField(
                           controller: controller.dateController,
                           onTap: () {
-                            setDate(
+                            DateSetter.setDate(
                               context: context,
-                              customColors: customColors,
+                              controller: controller,
                             );
                           },
                           readOnly: true,
@@ -100,42 +98,5 @@ class EditTransactionPage extends GetWidget<EditTransactionController> {
         ),
       ),
     );
-  }
-
-  void setDate({context, customColors}) {
-    BottomPicker.date(
-      pickerTitle: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: Constants.spaceWith10x,
-        ),
-        child: Text(
-          LocaleKey.transactionDate.tr,
-          style: CustomTextTheme.textStyle.copyWith(
-            fontSize: 22,
-          ),
-        ),
-      ),
-      initialDateTime: DateTime.now(),
-      pickerTextStyle: CustomTextTheme.textStyle.copyWith(
-        fontSize: 18,
-      ),
-      backgroundColor: customColors.surfaceColor,
-      onChange: (index) {
-        //controller.setDateTime(dateTime: index);
-      },
-      displaySubmitButton: false,
-      buttonStyle: BoxDecoration(
-        color: Constants.primaryColor,
-        borderRadius: BorderRadius.circular(
-          Constants.radius,
-        ),
-      ),
-      buttonWidth: 300,
-      closeWidget: CustomIconButton(
-        icon: HugeIcons.strokeRoundedMultiplicationSign,
-        toolTip: LocaleKey.close.tr,
-        onPressed: () => Get.back(),
-      ),
-    ).show(context);
   }
 }

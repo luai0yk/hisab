@@ -99,7 +99,7 @@ class CustomerItem extends StatelessWidget {
                       RichText(
                         text: TextSpan(
                           style: TextStyle(
-                            color: customer.netBalance == 0
+                            color: customer.isCustomerEmpty
                                 ? Constants.primaryColor
                                 : customer.isCustomerGiven
                                     ? CupertinoColors.systemRed
@@ -116,11 +116,13 @@ class CustomerItem extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        customer.netBalance == 0
-                            ? LocaleKey.empty.tr
-                            : customer.isCustomerGiven
-                                ? LocaleKey.gave.tr
-                                : LocaleKey.got.tr,
+                        customer.isCustomerSettled
+                            ? 'Settled'
+                            : customer.netBalance == 0
+                                ? LocaleKey.empty.tr
+                                : customer.isCustomerGiven
+                                    ? LocaleKey.gave.tr
+                                    : LocaleKey.got.tr,
                         style: CustomHintStyle.hintStyle.copyWith(fontSize: 12),
                       ),
                     ],

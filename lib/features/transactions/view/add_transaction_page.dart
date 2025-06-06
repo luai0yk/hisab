@@ -1,12 +1,8 @@
-import 'package:bottom_picker/bottom_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:hisab/core/constants/theme/color_extension.dart';
-import 'package:hisab/core/constants/theme/custom_theme/custom_text_theme.dart';
 import 'package:hisab/features/transactions/controller/add_transaction_controller.dart';
 import 'package:hisab/features/transactions/widget/custom_drop_down.dart';
-import 'package:hisab/shared/widgets/button/custom_icon_button.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 import '../../../core/constants/constants.dart';
@@ -15,6 +11,7 @@ import '../../../core/validator/input_validator.dart';
 import '../../../shared/widgets/button/custom_button.dart';
 import '../../../shared/widgets/custom_appbar.dart';
 import '../../../shared/widgets/input/custom_text_form_field.dart';
+import '../widget/date_setter.dart';
 
 class AddTransactionPage extends GetWidget<AddTransactionController> {
   final GlobalKey<FormState> formState = GlobalKey<FormState>();
@@ -23,8 +20,6 @@ class AddTransactionPage extends GetWidget<AddTransactionController> {
 
   @override
   Widget build(BuildContext context) {
-    ColorExtension customColors = Get.theme.extension<ColorExtension>()!;
-
     return Scaffold(
       appBar: CustomAppbar.appBar(
         title: LocaleKey.addTransaction.tr,
@@ -72,9 +67,9 @@ class AddTransactionPage extends GetWidget<AddTransactionController> {
                         child: CustomTextFormField(
                           controller: controller.dateController,
                           onTap: () {
-                            setDate(
+                            DateSetter.setDate(
                               context: context,
-                              customColors: customColors,
+                              controller: controller,
                             );
                           },
                           readOnly: true,
@@ -100,42 +95,5 @@ class AddTransactionPage extends GetWidget<AddTransactionController> {
         ),
       ),
     );
-  }
-
-  void setDate({context, customColors}) {
-    BottomPicker.date(
-      pickerTitle: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: Constants.spaceWith10x,
-        ),
-        child: Text(
-          LocaleKey.transactionDate.tr,
-          style: CustomTextTheme.textStyle.copyWith(
-            fontSize: 22,
-          ),
-        ),
-      ),
-      initialDateTime: DateTime.now(),
-      pickerTextStyle: CustomTextTheme.textStyle.copyWith(
-        fontSize: 18,
-      ),
-      backgroundColor: customColors.surfaceColor,
-      onChange: (index) {
-        controller.setDateTime(dateTime: index);
-      },
-      displaySubmitButton: false,
-      buttonStyle: BoxDecoration(
-        color: Constants.primaryColor,
-        borderRadius: BorderRadius.circular(
-          Constants.radius,
-        ),
-      ),
-      buttonWidth: 300,
-      closeWidget: CustomIconButton(
-        icon: HugeIcons.strokeRoundedMultiplicationSign,
-        toolTip: LocaleKey.close.tr,
-        onPressed: () => Get.back(),
-      ),
-    ).show(context);
   }
 }

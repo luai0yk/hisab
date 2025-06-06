@@ -30,6 +30,9 @@ class CustomerModel {
   }) : netBalance = netBalance ?? (totalGottenAmount - totalGivenAmount).abs();
 
   bool get isCustomerGiven => totalGivenAmount > totalGottenAmount;
+  bool get isCustomerEmpty => netBalance == 0;
+  bool get isCustomerSettled =>
+      totalGottenAmount > 0 && totalGivenAmount > 0 && netBalance == 0;
 
   factory CustomerModel.fromMap(Map<String, dynamic> map) {
     final double debit =

@@ -21,8 +21,8 @@ class CustomerProfilePage extends GetView<CustomerDataController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppbar.appBar(
-        title: '${controller.customer.name!.split(' ')[0]}'
-            '${LocaleKey.profile.tr}',
+        title:
+            "${controller.customer.name!.split(' ')[0]} ${LocaleKey.profile.tr}",
       ),
       body: Column(
         children: [
@@ -98,7 +98,7 @@ class CustomerProfilePage extends GetView<CustomerDataController> {
                         Expanded(
                           child: CustomTextCard(
                             text:
-                                '${controller.customer.totalGivenAmount.toInt().toString()}'
+                                '${controller.customer.totalGivenAmount.toString()}'
                                 '.${controller.customer.currency!.split('-')[0].trim()}',
                             hint: LocaleKey.gave.tr,
                             color: CupertinoColors.systemRed.withOpacity(.1),
@@ -109,7 +109,7 @@ class CustomerProfilePage extends GetView<CustomerDataController> {
                         Expanded(
                           child: CustomTextCard(
                             text:
-                                '${controller.customer.totalGottenAmount.toInt().toString()}'
+                                '${controller.customer.totalGottenAmount.toString()}'
                                 '.${controller.customer.currency!.split('-')[0].trim()}',
                             hint: LocaleKey.got.tr,
                             color: CupertinoColors.systemGreen.withOpacity(.1),
