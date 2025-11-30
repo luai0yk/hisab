@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:hisab/core/services/api_services.dart';
 import 'package:hisab/features/auth/model/user_model.dart';
 
-import '../../../core/constants/api_links.dart';
 import '../../../core/constants/constants.dart';
 import '../../../core/route/app_routes.dart';
 
@@ -35,7 +34,7 @@ class SignupController extends GetxController {
     ).toJson();
 
     final response = await ApiServices.postRequest(
-      url: ApiLinks.signUpLink,
+      url: 'ApiLinks.signUpLink',
       data: userData,
     );
 

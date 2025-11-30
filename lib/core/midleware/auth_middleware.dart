@@ -13,7 +13,7 @@ class AuthMiddleware extends GetMiddleware {
     bool isLoggedIn = storage.getBool(StorageKey.isUserLogged) ?? false;
 
     if (isLoggedIn) {
-      return const RouteSettings(name: AppRoutes.homePage);
+      return const RouteSettings(name: AppRoutes.viewCustomerPage);
     }
 
     return null;

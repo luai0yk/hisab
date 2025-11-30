@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:hisab/features/transactions/controller/add_transaction_controller.dart';
+import 'package:hisab/features/transactions/controller/transaction_controller.dart';
 import 'package:hisab/features/transactions/widget/custom_drop_down.dart';
 import 'package:hugeicons/hugeicons.dart';
 
@@ -13,10 +13,12 @@ import '../../../shared/widgets/custom_appbar.dart';
 import '../../../shared/widgets/input/custom_text_form_field.dart';
 import '../widget/date_setter.dart';
 
-class AddTransactionPage extends GetWidget<AddTransactionController> {
+class AddTransactionPage extends GetView<TransactionController> {
   final GlobalKey<FormState> formState = GlobalKey<FormState>();
-
-  AddTransactionPage({super.key});
+  final int customerId = Get.arguments;
+  AddTransactionPage({super.key}) {
+    controller.clearControllers();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +88,7 @@ class AddTransactionPage extends GetWidget<AddTransactionController> {
             CustomButton(
               onPressed: () async {
                 if (formState.currentState!.validate()) {
-                  await controller.addTransaction();
+                  await controller.addTransaction(customerId: customerId);
                 }
               },
               text: LocaleKey.addTransaction.tr,

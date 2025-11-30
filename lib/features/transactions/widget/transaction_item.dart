@@ -4,17 +4,20 @@ import 'package:get/get.dart';
 import 'package:hisab/core/constants/constants.dart';
 import 'package:hisab/core/constants/theme/custom_theme/custom_hint_style.dart';
 import 'package:hisab/core/constants/theme/custom_theme/custom_text_theme.dart';
-import 'package:hisab/features/transactions/controller/view_transaction_controller.dart';
+import 'package:hisab/features/transactions/controller/transaction_controller.dart';
 import 'package:hisab/features/transactions/model/transaction_model.dart';
+import 'package:hisab/shared/model/customer_model.dart';
 import 'package:hisab/shared/widgets/icon/custom_huge_icon.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:jiffy/jiffy.dart';
 
-class TransactionItem extends GetView<ViewTransactionController> {
+class TransactionItem extends GetView<TransactionController> {
+  final CustomerModel customer;
   final TransactionModel transaction;
   final Function()? onTab, onLongPress;
   const TransactionItem({
     super.key,
+    required this.customer,
     required this.transaction,
     this.onTab,
     this.onLongPress,
@@ -65,33 +68,33 @@ class TransactionItem extends GetView<ViewTransactionController> {
                         Text(
                           transaction.description!,
                           style: CustomHintStyle.hintStyle.copyWith(
-                            fontSize: 12,
+                            fontSize: Constants.size12,
                           ),
                         ),
                       ],
-                      if (!transaction.isSynced!) ...[
-                        Container(
-                          margin: const EdgeInsets.only(
-                            top: Constants.spaceWith4x,
-                          ),
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: Constants.spaceWith4x,
-                          ),
-                          decoration: BoxDecoration(
-                            color: CupertinoColors.systemRed.withOpacity(.1),
-                            borderRadius:
-                                BorderRadius.circular(Constants.radius),
-                          ),
-                          child: const Text(
-                            'NOT SYNCED',
-                            style: TextStyle(
-                              color: CupertinoColors.systemRed,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 7,
-                            ),
-                          ),
-                        ),
-                      ],
+                      // if (!transaction.isSynced!) ...[
+                      //   Container(
+                      //     margin: const EdgeInsets.only(
+                      //       top: Constants.spaceWith4x,
+                      //     ),
+                      //     padding: const EdgeInsets.symmetric(
+                      //       horizontal: Constants.spaceWith4x,
+                      //     ),
+                      //     decoration: BoxDecoration(
+                      //       color: CupertinoColors.systemRed.withOpacity(.1),
+                      //       borderRadius:
+                      //           BorderRadius.circular(Constants.radius),
+                      //     ),
+                      //     child: const Text(
+                      //       'NOT SYNCED',
+                      //       style: TextStyle(
+                      //         color: CupertinoColors.systemRed,
+                      //         fontWeight: FontWeight.w500,
+                      //         fontSize: 7,
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ],
                     ],
                   ),
                 ),
@@ -108,8 +111,7 @@ class TransactionItem extends GetView<ViewTransactionController> {
                       TextSpan(
                           text: '${transaction.amount!.toInt().toString()} '),
                       TextSpan(
-                        text:
-                            controller.customer.currency!.split('-')[0].trim(),
+                        text: customer.currency!.split('-')[0].trim(),
                         style: const TextStyle(
                           fontSize: 8,
                         ),

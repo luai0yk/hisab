@@ -1,21 +1,15 @@
 import 'package:get/get.dart';
 import 'package:hisab/features/auth/controllers/login_controller.dart';
 import 'package:hisab/features/auth/view/signup_page.dart';
-import 'package:hisab/features/customers/controllers/edit_customer_controller.dart';
 import 'package:hisab/features/customers/view/edit_customer_page.dart';
-import 'package:hisab/features/home/controller/home_controller.dart';
-import 'package:hisab/features/home/view/home_page.dart';
-import 'package:hisab/features/transactions/controller/add_transaction_controller.dart';
-import 'package:hisab/features/transactions/controller/edit_transaction_controller.dart';
-import 'package:hisab/features/transactions/controller/transaction_data_controller.dart';
-import 'package:hisab/features/transactions/controller/view_transaction_controller.dart';
+import 'package:hisab/features/customers/view/view_customer_page.dart';
+import 'package:hisab/features/transactions/controller/transaction_controller.dart';
 import 'package:hisab/features/transactions/view/add_transaction_page.dart';
 import 'package:hisab/features/transactions/view/edit_transaction_page.dart';
 import 'package:hisab/shared/controller/customer_data_controller.dart';
 
 import '../../features/auth/controllers/signup_controller.dart';
 import '../../features/auth/view/login_page.dart';
-import '../../features/customers/controllers/add_customer_controller.dart';
 import '../../features/customers/controllers/view_customer_controller.dart';
 import '../../features/customers/view/add_customer_page.dart';
 import '../../features/customers/view/customer_profile_page.dart';
@@ -51,13 +45,10 @@ abstract class AppPages {
       ),
     ),
     GetPage(
-      name: AppRoutes.homePage,
-      page: () => const HomePage(),
+      name: AppRoutes.viewCustomerPage,
+      page: () => ViewCustomerPage(),
       binding: BindingsBuilder(
         () {
-          Get.lazyPut(
-            () => HomeController(),
-          );
           Get.lazyPut(
             () => ViewCustomerController(),
           );
@@ -70,13 +61,6 @@ abstract class AppPages {
     GetPage(
       name: AppRoutes.addCustomerPage,
       page: () => AddCustomerPage(),
-      binding: BindingsBuilder(
-        () {
-          Get.lazyPut(
-            () => AddCustomerController(),
-          );
-        },
-      ),
     ),
     GetPage(
       name: AppRoutes.transactionPage,
@@ -84,10 +68,7 @@ abstract class AppPages {
       binding: BindingsBuilder(
         () {
           Get.lazyPut(
-            () => ViewTransactionController(),
-          );
-          Get.lazyPut(
-            () => TransactionDataController(),
+            () => TransactionController(),
           );
         },
       ),
@@ -95,39 +76,18 @@ abstract class AppPages {
     GetPage(
       name: AppRoutes.addTransactionPage,
       page: () => AddTransactionPage(),
-      binding: BindingsBuilder(
-        () {
-          Get.lazyPut(
-            () => AddTransactionController(),
-          );
-        },
-      ),
     ),
     GetPage(
       name: AppRoutes.customerProfilePage,
-      page: () => CustomerProfilePage(),
+      page: () => const CustomerProfilePage(),
     ),
     GetPage(
       name: AppRoutes.editCustomerPage,
       page: () => EditCustomerPage(),
-      binding: BindingsBuilder(
-        () {
-          Get.lazyPut(
-            () => EditCustomerController(),
-          );
-        },
-      ),
     ),
     GetPage(
       name: AppRoutes.editTransactionPage,
       page: () => EditTransactionPage(),
-      binding: BindingsBuilder(
-        () {
-          Get.lazyPut(
-            () => EditTransactionController(),
-          );
-        },
-      ),
     ),
   ];
 }

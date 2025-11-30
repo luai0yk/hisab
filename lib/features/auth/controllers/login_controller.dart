@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:hisab/core/constants/storage_key.dart';
 import 'package:hisab/core/route/app_routes.dart';
 
-import '../../../core/constants/api_links.dart';
 import '../../../core/constants/constants.dart';
 import '../../../core/services/api_services.dart';
 import '../../../core/services/storage_service.dart';
@@ -34,7 +33,7 @@ class LoginController extends GetxController {
     ).toJson();
 
     final response = await ApiServices.postRequest(
-      url: ApiLinks.loginLink,
+      url: 'ApiLinks.loginLink',
       data: userInput,
     );
 

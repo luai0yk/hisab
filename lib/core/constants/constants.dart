@@ -12,6 +12,7 @@ class Constants {
   static const double spaceWith20x = 20;
   static const double spaceWith25x = 25;
 
+  static const double size12 = 12;
   static const double size14 = 14;
   static const double size20 = 20;
   static const double size40 = 40;

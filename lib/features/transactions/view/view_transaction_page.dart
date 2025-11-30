@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hisab/core/constants/constants.dart';
-import 'package:hisab/core/db/transaction/delete_transaction_db.dart';
 import 'package:hisab/core/route/app_routes.dart';
-import 'package:hisab/features/transactions/controller/transaction_data_controller.dart';
-import 'package:hisab/features/transactions/controller/view_transaction_controller.dart';
+import 'package:hisab/features/transactions/controller/transaction_controller.dart';
 import 'package:hisab/features/transactions/model/transaction_model.dart';
+import 'package:hisab/shared/model/customer_model.dart';
+import 'package:hisab/shared/widgets/card/progress_card.dart';
 import 'package:hisab/shared/widgets/icon/custom_huge_icon.dart';
 import 'package:hugeicons/hugeicons.dart';
 
@@ -19,8 +19,9 @@ import '../../../shared/widgets/custom_list_tile.dart';
 import '../../../shared/widgets/dialog/app_dialog.dart';
 import '../widget/transaction_item.dart';
 
-class ViewTransactionPage extends GetView<ViewTransactionController> {
-  const ViewTransactionPage({super.key});
+class ViewTransactionPage extends GetView<TransactionController> {
+  final CustomerModel customer = Get.arguments;
+  ViewTransactionPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +30,9 @@ class ViewTransactionPage extends GetView<ViewTransactionController> {
         title: LocaleKey.transactions.tr,
         actions: [
           CustomIconButton(
-            onPressed: () => null,
-            toolTip: LocaleKey.profile.tr,
-            icon: HugeIcons.strokeRoundedSchoolReportCard,
+            onPressed: () {},
+            toolTip: LocaleKey.report.tr,
+            icon: HugeIcons.strokeRoundedPdf01,
           ),
           CustomIconButton(
             onPressed: () => Get.toNamed(AppRoutes.customerProfilePage),
@@ -40,55 +41,60 @@ class ViewTransactionPage extends GetView<ViewTransactionController> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          Get.toNamed(AppRoutes.addTransactionPage)!.then(
-            (value) async {
-              await controller.viewTransaction();
+      body: GetBuilder<TransactionController>(
+        builder: (controller) {
+          return FutureBuilder<List<TransactionModel>>(
+            future: controller.getAllCustomerTransactions(customer: customer),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return ProgressCard(message: LocaleKey.loading.tr);
+              } else if (snapshot.hasError) {
+                return Center(
+                  child: Text(
+                    "Error Occurred",
+                    style: CustomHintStyle.hintStyle,
+                  ),
+                );
+              } else {
+                final transactionList = snapshot.data as List<TransactionModel>;
+                if (transactionList.isEmpty) {
+                  return Center(
+                    child: Text(
+                      LocaleKey.noTransaction.tr,
+                      style: CustomHintStyle.hintStyle,
+                    ),
+                  );
+                }
+
+                return ListView.builder(
+                  padding: const EdgeInsets.all(Constants.spaceWith10x),
+                  itemCount: transactionList.length,
+                  itemBuilder: (context, index) {
+                    TransactionModel transaction = transactionList[index];
+                    return TransactionItem(
+                      customer: customer,
+                      transaction: transaction,
+                      onLongPress: () => _showOptionDialog(
+                        context: context,
+                        transaction: transaction,
+                      ),
+                    );
+                  },
+                );
+              }
             },
           );
+        },
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          Get.toNamed(AppRoutes.addTransactionPage, arguments: customer.id);
         },
         label: Text(LocaleKey.add.tr),
         icon: const CustomHugeIcon(
           icon: HugeIcons.strokeRoundedMoneyAdd02,
           color: CupertinoColors.white,
         ),
-      ),
-      body: GetBuilder<ViewTransactionController>(
-        id: 'transaction_list',
-        initState: (state) async => await controller.viewTransaction(),
-        builder: (controller) {
-          if (controller.transactionList == null) {
-            return Center(
-              child: Text(
-                LocaleKey.loading.tr,
-                style: CustomHintStyle.hintStyle,
-              ),
-            );
-          } else if (controller.transactionList!.isEmpty) {
-            return Center(
-              child: Text(
-                LocaleKey.noTransaction.tr,
-                style: CustomHintStyle.hintStyle,
-              ),
-            );
-          }
-
-          return ListView.builder(
-            padding: const EdgeInsets.all(Constants.spaceWith10x),
-            itemCount: controller.transactionList!.length,
-            itemBuilder: (context, index) {
-              TransactionModel transaction = controller.transactionList![index];
-              return TransactionItem(
-                transaction: transaction,
-                onLongPress: () => _showOptionDialog(
-                  context: context,
-                  transaction: transaction,
-                ),
-              );
-            },
-          );
-        },
       ),
     );
   }
@@ -107,12 +113,8 @@ class ViewTransactionPage extends GetView<ViewTransactionController> {
               icon: HugeIcons.strokeRoundedEdit01,
               onTap: () {
                 Get.back();
-                Get.find<TransactionDataController>().transaction = transaction;
-                Get.toNamed(AppRoutes.editTransactionPage)!.then(
-                  (value) async {
-                    await controller.viewTransaction();
-                  },
-                );
+                Get.toNamed(AppRoutes.editTransactionPage,
+                    arguments: transaction);
               },
             ),
             CustomListTile(
@@ -145,10 +147,7 @@ class ViewTransactionPage extends GetView<ViewTransactionController> {
         content: LocaleKey.areYouSureToDeleteTransaction.tr,
         onCancel: () => null,
         onOkay: () async {
-          await DeleteTransactionDB.instance.deleteTransaction(
-            transactionId: transaction.id!,
-          );
-          await controller.viewTransaction();
+          await controller.deleteTransaction(transaction.id!);
         },
         okayColor: CupertinoColors.systemRed,
       ),

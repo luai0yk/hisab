@@ -64,29 +64,29 @@ class CustomerItem extends StatelessWidget {
                         Jiffy.parse(customer.addedAt!).fromNow(),
                         style: CustomHintStyle.hintStyle.copyWith(fontSize: 10),
                       ),
-                      if (!customer.isSynced!) ...[
-                        Container(
-                          margin: const EdgeInsets.only(
-                            top: Constants.spaceWith4x,
-                          ),
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: Constants.spaceWith4x,
-                          ),
-                          decoration: BoxDecoration(
-                            color: CupertinoColors.systemRed.withOpacity(.1),
-                            borderRadius:
-                                BorderRadius.circular(Constants.radius),
-                          ),
-                          child: const Text(
-                            'NOT SYNCED',
-                            style: TextStyle(
-                              color: CupertinoColors.systemRed,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 7,
-                            ),
-                          ),
-                        ),
-                      ]
+                      // if (!customer.isSynced!) ...[
+                      //   Container(
+                      //     margin: const EdgeInsets.only(
+                      //       top: Constants.spaceWith4x,
+                      //     ),
+                      //     padding: const EdgeInsets.symmetric(
+                      //       horizontal: Constants.spaceWith4x,
+                      //     ),
+                      //     decoration: BoxDecoration(
+                      //       color: CupertinoColors.systemRed.withOpacity(.1),
+                      //       borderRadius:
+                      //           BorderRadius.circular(Constants.radius),
+                      //     ),
+                      //     child: const Text(
+                      //       'NOT SYNCED',
+                      //       style: TextStyle(
+                      //         color: CupertinoColors.systemRed,
+                      //         fontWeight: FontWeight.w500,
+                      //         fontSize: 7,
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ]
                     ],
                   ),
                 ),

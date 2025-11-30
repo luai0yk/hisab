@@ -2,12 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hisab/core/constants/constants.dart';
-import 'package:hisab/core/constants/storage_key.dart';
-import 'package:hisab/core/constants/theme/custom_theme/custom_hint_style.dart';
 import 'package:hisab/core/localization/locale_key.dart';
 import 'package:hisab/core/route/app_routes.dart';
 import 'package:hisab/core/utils/dialog_helper.dart';
 import 'package:hisab/shared/controller/customer_data_controller.dart';
+import 'package:hisab/shared/widgets/card/progress_card.dart';
 import 'package:hisab/shared/widgets/custom_appbar.dart';
 import 'package:hisab/shared/widgets/custom_list_tile.dart';
 import 'package:hisab/shared/widgets/dialog/app_dialog.dart';
@@ -15,19 +14,13 @@ import 'package:hisab/shared/widgets/icon/custom_huge_icon.dart';
 import 'package:hisab/shared/widgets/input/custom_text_form_field.dart';
 import 'package:hugeicons/hugeicons.dart';
 
-import '../../../../shared/widgets/button/custom_icon_button.dart';
-import '../../../core/db/customer/delete_customer_db.dart';
-import '../../../core/services/storage_service.dart';
 import '../../../shared/model/customer_model.dart';
+import '../../../shared/widgets/button/custom_icon_button.dart';
 import '../controllers/view_customer_controller.dart';
 import '../widget/customer_item.dart';
 
 class ViewCustomerPage extends GetView<ViewCustomerController> {
-  ViewCustomerPage({
-    super.key,
-  });
-
-  final storage = Get.find<StorageService>();
+  ViewCustomerPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,10 +29,7 @@ class ViewCustomerPage extends GetView<ViewCustomerController> {
         title: LocaleKey.customers.tr,
         actions: [
           CustomIconButton(
-            onPressed: () async {
-              storage.setBool(StorageKey.isUserLogged, false);
-              Get.offAllNamed(AppRoutes.loginPage);
-            },
+            onPressed: () {},
             icon: HugeIcons.strokeRoundedSettings01,
             toolTip: LocaleKey.settings.tr,
           ),
@@ -51,7 +41,9 @@ class ViewCustomerPage extends GetView<ViewCustomerController> {
             hint: LocaleKey.search.tr,
             withMargin: true,
             withBottomPadding: false,
-            onChanged: (text) => controller.searchCustomer(query: text),
+            onChanged: (text) {
+              controller.searchCustomer(text); // filter list locally
+            },
             controller: controller.searchController,
             icon: const CustomHugeIcon(
               icon: HugeIcons.strokeRoundedSearch01,
@@ -60,39 +52,33 @@ class ViewCustomerPage extends GetView<ViewCustomerController> {
           Expanded(
             child: GetBuilder<ViewCustomerController>(
               id: 'customer_list',
-              initState: (state) async {
-                await controller.viewCustomers();
-              },
               builder: (controller) {
-                if (controller.customerList == null) {
+                var customers = controller.filteredList;
+
+                if (customers == null) {
+                  return const ProgressCard(message: LocaleKey.loading);
+                }
+
+                if (customers.isEmpty) {
                   return Center(
-                    child: Text(
-                      LocaleKey.loading.tr,
-                      style: CustomHintStyle.hintStyle,
-                    ),
-                  );
-                } else if (controller.customerList!.isEmpty) {
-                  return Center(
-                    child: Text(
-                      LocaleKey.noCustomerFound.tr,
-                      style: CustomHintStyle.hintStyle,
-                    ),
+                    child: Text(LocaleKey.noCustomerFound.tr),
                   );
                 }
+
                 return ListView.builder(
                   padding: const EdgeInsets.all(Constants.spaceWith15x),
-                  itemCount: controller.customerList!.length,
+                  itemCount: customers.length,
                   itemBuilder: (context, index) {
-                    CustomerModel customer = controller.customerList![index];
+                    CustomerModel customer = customers[index];
                     return CustomerItem(
                       customer: customer,
                       onTap: () {
                         Get.find<CustomerDataController>().customer = customer;
-                        Get.toNamed(AppRoutes.transactionPage)!.then(
-                          (value) async {
-                            await controller.viewCustomers();
-                          },
-                        );
+                        Get.toNamed(AppRoutes.transactionPage,
+                                arguments: customer)!
+                            .then((value) async {
+                          await controller.viewCustomers();
+                        });
                       },
                       onLongPress: () {
                         _showOptionsDialog(
@@ -109,18 +95,10 @@ class ViewCustomerPage extends GetView<ViewCustomerController> {
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => Get.toNamed(AppRoutes.addCustomerPage)!.then(
-          (value) async {
-            await controller.viewCustomers();
-          },
-        ),
-        label: Text(
-          LocaleKey.add.tr,
-        ),
+        onPressed: () => Get.toNamed(AppRoutes.addCustomerPage),
+        label: Text(LocaleKey.add.tr),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(
-            Constants.radius,
-          ),
+          borderRadius: BorderRadius.circular(Constants.radius),
         ),
         backgroundColor: Constants.primaryColor,
         icon: const CustomHugeIcon(
@@ -146,13 +124,8 @@ class ViewCustomerPage extends GetView<ViewCustomerController> {
               title: LocaleKey.edit.tr,
               icon: HugeIcons.strokeRoundedEdit01,
               onTap: () {
-                Get.find<CustomerDataController>().customer = customer;
                 Get.back();
-                Get.toNamed(AppRoutes.editCustomerPage)!.then(
-                  (value) async {
-                    await controller.viewCustomers();
-                  },
-                );
+                Get.toNamed(AppRoutes.editCustomerPage, arguments: customer);
               },
             ),
             CustomListTile(
@@ -173,8 +146,10 @@ class ViewCustomerPage extends GetView<ViewCustomerController> {
     );
   }
 
-  _showConfirmationDeleteDialog(
-      {required BuildContext context, required CustomerModel customer}) {
+  _showConfirmationDeleteDialog({
+    required BuildContext context,
+    required CustomerModel customer,
+  }) {
     Get.back();
     DialogHelper.show(
       context: context,
@@ -183,10 +158,7 @@ class ViewCustomerPage extends GetView<ViewCustomerController> {
         content: LocaleKey.areYouSureToDeleteCustomer.tr,
         onCancel: () => null,
         onOkay: () async {
-          await DeleteCustomerDB().deleteCustomer(
-            customerID: customer.id,
-          );
-          await controller.viewCustomers();
+          await controller.deleteCustomer(customer.id!);
           Get.back();
         },
         okayColor: CupertinoColors.systemRed,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:hisab/features/transactions/controller/transaction_controller.dart';
+import 'package:hisab/features/transactions/model/transaction_model.dart';
 import 'package:hisab/features/transactions/widget/custom_drop_down.dart';
 import 'package:hisab/features/transactions/widget/date_setter.dart';
 import 'package:hugeicons/hugeicons.dart';
@@ -11,12 +13,14 @@ import '../../../core/validator/input_validator.dart';
 import '../../../shared/widgets/button/custom_button.dart';
 import '../../../shared/widgets/custom_appbar.dart';
 import '../../../shared/widgets/input/custom_text_form_field.dart';
-import '../controller/edit_transaction_controller.dart';
 
-class EditTransactionPage extends GetWidget<EditTransactionController> {
+class EditTransactionPage extends GetView<TransactionController> {
   final GlobalKey<FormState> formState = GlobalKey<FormState>();
+  final TransactionModel transaction = Get.arguments;
 
-  EditTransactionPage({super.key});
+  EditTransactionPage({super.key}) {
+    controller.loadDataForEditPage(transaction);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +90,7 @@ class EditTransactionPage extends GetWidget<EditTransactionController> {
             CustomButton(
               onPressed: () async {
                 if (formState.currentState!.validate()) {
-                  await controller.editTransaction();
+                  await controller.editTransaction(transaction.id!);
                 }
               },
               text: LocaleKey.editTransaction.tr,

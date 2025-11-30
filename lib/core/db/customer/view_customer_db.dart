@@ -16,7 +16,10 @@ class ViewCustomerDB extends DatabaseHelper {
   // Prevent the initialization of ViewCustomer class
   ViewCustomerDB._intern();
 
-  Future<List<CustomerModel>> viewCustomers({required int userId}) async {
+  Future<List<CustomerModel>> viewCustomers({
+    required int userId,
+    String? query,
+  }) async {
     Database? db = await database;
 
     // Your SQL query with user_id filter
@@ -27,13 +30,13 @@ class ViewCustomerDB extends DatabaseHelper {
       COALESCE(SUM(CASE WHEN t.type = 'got' THEN t.amount ELSE 0 END), 0) AS total_credit
       FROM ${DatabaseKey.customerTable} c
       LEFT JOIN ${DatabaseKey.transactionTable} t ON c.id = t.customer_id
-      WHERE c.user_id = ?
+      WHERE c.user_id = ? || c.name LIKE '%' || ? || '%'
       GROUP BY c.id
       ORDER BY c.id DESC;
       ''';
 
     // Run rawQuery with userId as argument
-    List args = [userId];
+    List args = [userId, query ?? ''];
     final List<Map<String, dynamic>> response = await db!.rawQuery(sql, args);
 
     // Map response to list of CustomerModel

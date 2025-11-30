@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'package:hisab/core/constants/constants.dart';
 import 'package:hisab/core/localization/locale_key.dart';
 import 'package:hisab/core/validator/input_validator.dart';
-import 'package:hisab/features/customers/controllers/edit_customer_controller.dart';
+import 'package:hisab/features/customers/controllers/view_customer_controller.dart';
+import 'package:hisab/shared/model/customer_model.dart';
 import 'package:hisab/shared/widgets/button/custom_button.dart';
 import 'package:hisab/shared/widgets/input/custom_text_form_field.dart';
 import 'package:hugeicons/hugeicons.dart';
@@ -12,9 +13,12 @@ import 'package:hugeicons/hugeicons.dart';
 import '../../../../shared/widgets/custom_appbar.dart';
 import '../widget/custom_currency_drop_down.dart';
 
-class EditCustomerPage extends GetView<EditCustomerController> {
+class EditCustomerPage extends GetView<ViewCustomerController> {
   final GlobalKey<FormState> formState = GlobalKey<FormState>();
-  EditCustomerPage({super.key});
+  final CustomerModel customer = Get.arguments;
+  EditCustomerPage({super.key}) {
+    controller.loadDataForEdit(customer);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +77,7 @@ class EditCustomerPage extends GetView<EditCustomerController> {
             CustomButton(
               onPressed: () {
                 if (formState.currentState!.validate()) {
-                  controller.editCustomer();
+                  controller.editCustomer(customer.id!);
                 }
               },
               text: LocaleKey.editCustomer.tr,

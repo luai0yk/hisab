@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hisab/core/constants/constants.dart';
+import 'package:hisab/core/constants/storage_key.dart';
 import 'package:hisab/core/route/app_routes.dart';
+import 'package:hisab/core/services/storage_service.dart';
 import 'package:hisab/core/validator/input_validator.dart';
 import 'package:hisab/features/auth/controllers/login_controller.dart';
 import 'package:hisab/shared/widgets/button/custom_button.dart';
@@ -69,9 +71,13 @@ class LoginPage extends GetView<LoginController> {
                       return CustomButton(
                         text: controller.isLoading ? '...' : LocaleKey.login.tr,
                         onPressed: () async {
-                          if (_formKey.currentState!.validate()) {
-                            await controller.login();
-                          }
+                          StorageService storage = Get.find<StorageService>();
+                          storage.setInt(StorageKey.userID, 1);
+                          storage.setBool(StorageKey.isUserLogged, true);
+                          Get.offAllNamed(AppRoutes.customerPage);
+                          // if (_formKey.currentState!.validate()) {
+                          // await controller.login();
+                          // }
                         },
                       );
                     },
@@ -87,8 +93,6 @@ class LoginPage extends GetView<LoginController> {
                         WidgetSpan(
                           child: InkWell(
                             onTap: () {
-                              // Get.find<StorageService>()
-                              //     .setString(StorageKey.userID, '1');
                               Get.offAllNamed(AppRoutes.signupPage);
                             },
                             child: Text(
