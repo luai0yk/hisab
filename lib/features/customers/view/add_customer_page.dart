@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:hisab/core/constants/constants.dart';
 import 'package:hisab/core/localization/locale_key.dart';
 import 'package:hisab/core/validator/input_validator.dart';
-import 'package:hisab/features/customers/controllers/view_customer_controller.dart';
+import 'package:hisab/features/customers/controllers/customer_controller.dart';
 import 'package:hisab/shared/widgets/button/custom_button.dart';
 import 'package:hisab/shared/widgets/input/custom_text_form_field.dart';
 import 'package:hugeicons/hugeicons.dart';
@@ -12,7 +12,7 @@ import 'package:hugeicons/hugeicons.dart';
 import '../../../../shared/widgets/custom_appbar.dart';
 import '../widget/custom_currency_drop_down.dart';
 
-class AddCustomerPage extends GetView<ViewCustomerController> {
+class AddCustomerPage extends GetView<CustomerController> {
   final GlobalKey<FormState> formState = GlobalKey<FormState>();
   AddCustomerPage({super.key}) {
     controller.clearControllers();

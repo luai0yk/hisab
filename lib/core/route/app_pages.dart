@@ -10,7 +10,7 @@ import 'package:hisab/shared/controller/customer_data_controller.dart';
 
 import '../../features/auth/controllers/signup_controller.dart';
 import '../../features/auth/view/login_page.dart';
-import '../../features/customers/controllers/view_customer_controller.dart';
+import '../../features/customers/controllers/customer_controller.dart';
 import '../../features/customers/view/add_customer_page.dart';
 import '../../features/customers/view/customer_profile_page.dart';
 import '../../features/transactions/view/view_transaction_page.dart';
@@ -50,7 +50,7 @@ abstract class AppPages {
       binding: BindingsBuilder(
         () {
           Get.lazyPut(
-            () => ViewCustomerController(),
+            () => CustomerController(),
           );
           Get.lazyPut(
             () => CustomerDataController(),

@@ -10,7 +10,7 @@ import 'package:hisab/core/db/customer/view_customer_db.dart';
 import '../../../core/services/storage_service.dart';
 import '../../../shared/model/customer_model.dart';
 
-class ViewCustomerController extends GetxController {
+class CustomerController extends GetxController {
   // Input fields
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
@@ -30,6 +30,10 @@ class ViewCustomerController extends GetxController {
   void onInit() {
     super.onInit();
     viewCustomers(); // load initial data
+
+    searchController.addListener(() {
+      searchCustomer(searchController.text);
+    });
   }
 
   // Load data into controllers for editing
@@ -84,6 +88,7 @@ class ViewCustomerController extends GetxController {
     await db.addedCustomer(customer: newCustomer);
     await viewCustomers(); // refresh list
     Get.back();
+    FocusManager.instance.primaryFocus?.unfocus();
   }
 
   // Edit existing customer
@@ -101,6 +106,7 @@ class ViewCustomerController extends GetxController {
 
     await viewCustomers(); // refresh list
     Get.back();
+    FocusManager.instance.primaryFocus?.unfocus();
   }
 
   // Delete customer

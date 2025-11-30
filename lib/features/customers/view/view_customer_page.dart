@@ -5,7 +5,6 @@ import 'package:hisab/core/constants/constants.dart';
 import 'package:hisab/core/localization/locale_key.dart';
 import 'package:hisab/core/route/app_routes.dart';
 import 'package:hisab/core/utils/dialog_helper.dart';
-import 'package:hisab/shared/controller/customer_data_controller.dart';
 import 'package:hisab/shared/widgets/card/progress_card.dart';
 import 'package:hisab/shared/widgets/custom_appbar.dart';
 import 'package:hisab/shared/widgets/custom_list_tile.dart';
@@ -16,11 +15,11 @@ import 'package:hugeicons/hugeicons.dart';
 
 import '../../../shared/model/customer_model.dart';
 import '../../../shared/widgets/button/custom_icon_button.dart';
-import '../controllers/view_customer_controller.dart';
+import '../controllers/customer_controller.dart';
 import '../widget/customer_item.dart';
 
-class ViewCustomerPage extends GetView<ViewCustomerController> {
-  ViewCustomerPage({super.key});
+class ViewCustomerPage extends GetView<CustomerController> {
+  const ViewCustomerPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -41,16 +40,13 @@ class ViewCustomerPage extends GetView<ViewCustomerController> {
             hint: LocaleKey.search.tr,
             withMargin: true,
             withBottomPadding: false,
-            onChanged: (text) {
-              controller.searchCustomer(text); // filter list locally
-            },
             controller: controller.searchController,
             icon: const CustomHugeIcon(
               icon: HugeIcons.strokeRoundedSearch01,
             ).icon,
           ),
           Expanded(
-            child: GetBuilder<ViewCustomerController>(
+            child: GetBuilder<CustomerController>(
               id: 'customer_list',
               builder: (controller) {
                 var customers = controller.filteredList;
@@ -73,12 +69,17 @@ class ViewCustomerPage extends GetView<ViewCustomerController> {
                     return CustomerItem(
                       customer: customer,
                       onTap: () {
-                        Get.find<CustomerDataController>().customer = customer;
-                        Get.toNamed(AppRoutes.transactionPage,
-                                arguments: customer)!
-                            .then((value) async {
-                          await controller.viewCustomers();
-                        });
+                        FocusManager.instance.primaryFocus?.unfocus();
+                        controller.searchController.clear();
+                        Get.toNamed(
+                          AppRoutes.transactionPage,
+                          arguments: customer,
+                        )!
+                            .then(
+                          (value) async {
+                            await controller.viewCustomers();
+                          },
+                        );
                       },
                       onLongPress: () {
                         _showOptionsDialog(

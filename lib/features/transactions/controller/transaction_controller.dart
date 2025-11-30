@@ -71,6 +71,7 @@ class TransactionController extends GetxController {
     );
     update(); // refresh UI
     Get.back();
+    FocusManager.instance.primaryFocus?.unfocus();
   }
 
   // Edit existing transaction
@@ -87,6 +88,7 @@ class TransactionController extends GetxController {
     );
     update(); // refresh UI
     Get.back();
+    FocusManager.instance.primaryFocus?.unfocus();
   }
 
   // Delete transaction
