@@ -10,7 +10,7 @@ import 'package:hisab/shared/widgets/button/custom_button.dart';
 import 'package:hisab/shared/widgets/input/custom_text_form_field.dart';
 import 'package:hugeicons/hugeicons.dart';
 
-import '../../../../shared/widgets/custom_appbar.dart';
+import '../../../shared/widgets/appbar/custom_appbar.dart';
 import '../widget/custom_currency_drop_down.dart';
 
 class EditCustomerPage extends GetView<CustomerController> {

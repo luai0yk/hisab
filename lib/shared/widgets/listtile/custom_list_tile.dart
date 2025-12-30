@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../core/constants/theme/custom_theme/custom_text_theme.dart';
-import 'icon/custom_huge_icon.dart';
+import '../../../core/constants/theme/custom_theme/custom_text_theme.dart';
+import '../icon/custom_huge_icon.dart';
 
 class CustomListTile extends StatelessWidget {
   final String title;

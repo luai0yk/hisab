@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hisab/core/constants/constants.dart';
 import 'package:hisab/core/route/app_routes.dart';
+import 'package:hisab/core/services/pdf_service.dart';
 import 'package:hisab/features/transactions/controller/transaction_controller.dart';
 import 'package:hisab/features/transactions/model/transaction_model.dart';
 import 'package:hisab/shared/model/customer_model.dart';
@@ -11,12 +12,12 @@ import 'package:hisab/shared/widgets/icon/custom_huge_icon.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 import '../../../../core/localization/locale_key.dart';
-import '../../../../shared/widgets/custom_appbar.dart';
 import '../../../core/constants/theme/custom_theme/custom_hint_style.dart';
 import '../../../core/utils/dialog_helper.dart';
+import '../../../shared/widgets/appbar/custom_appbar.dart';
 import '../../../shared/widgets/button/custom_icon_button.dart';
-import '../../../shared/widgets/custom_list_tile.dart';
 import '../../../shared/widgets/dialog/app_dialog.dart';
+import '../../../shared/widgets/listtile/custom_list_tile.dart';
 import '../widget/transaction_item.dart';
 
 class ViewTransactionPage extends GetView<TransactionController> {
@@ -25,17 +26,32 @@ class ViewTransactionPage extends GetView<TransactionController> {
 
   @override
   Widget build(BuildContext context) {
+    List<TransactionModel> transactions = [];
     return Scaffold(
       appBar: CustomAppbar.appBar(
         title: LocaleKey.transactions.tr,
         actions: [
           CustomIconButton(
-            onPressed: () {},
+            onPressed: () async {
+              DialogHelper.show(context: context, child: const ProgressCard());
+              await TransactionPdfService.generateAndOpenReport(
+                direction: PdfDirection.ltr,
+                appName: "Hisap",
+                appDescription: "Customer Transaction Report",
+                storeName: "متجر علي",
+                storeLocation: "صنعاء شارع الزراعة",
+                storeNumber: "774165500",
+                customerName: "احمد علي",
+                transactions: transactions,
+              );
+              Get.back();
+            },
             toolTip: LocaleKey.report.tr,
             icon: HugeIcons.strokeRoundedPdf01,
           ),
           CustomIconButton(
-            onPressed: () => Get.toNamed(AppRoutes.customerProfilePage),
+            onPressed: () =>
+                Get.toNamed(AppRoutes.customerProfilePage, arguments: customer),
             toolTip: LocaleKey.profile.tr,
             icon: HugeIcons.strokeRoundedUser,
           ),
@@ -56,8 +72,9 @@ class ViewTransactionPage extends GetView<TransactionController> {
                   ),
                 );
               } else {
-                final transactionList = snapshot.data as List<TransactionModel>;
-                if (transactionList.isEmpty) {
+                transactions = snapshot.data as List<TransactionModel>;
+
+                if (transactions.isEmpty) {
                   return Center(
                     child: Text(
                       LocaleKey.noTransaction.tr,
@@ -68,9 +85,9 @@ class ViewTransactionPage extends GetView<TransactionController> {
 
                 return ListView.builder(
                   padding: const EdgeInsets.all(Constants.spaceWith10x),
-                  itemCount: transactionList.length,
+                  itemCount: transactions.length,
                   itemBuilder: (context, index) {
-                    TransactionModel transaction = transactionList[index];
+                    TransactionModel transaction = transactions[index];
                     return TransactionItem(
                       customer: customer,
                       transaction: transaction,

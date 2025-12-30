@@ -3,9 +3,6 @@ import 'locale_key.dart';
 class LocaleEn {
   static const Map<String, String> en = {
     LocaleKey.name: 'Name',
-    LocaleKey.signup: 'Sign Up',
-    LocaleKey.login: 'Login',
-    LocaleKey.email: 'Email',
     LocaleKey.phone: 'Phone',
     LocaleKey.password: 'Password',
     LocaleKey.confirmPassword: 'Confirm password',
@@ -13,7 +10,6 @@ class LocaleEn {
     LocaleKey.createAccount: "Create a new account?",
     LocaleKey.fullName: 'Full name',
     LocaleKey.isRequired: 'is required.',
-    LocaleKey.enterValidEmail: 'Enter a valid email',
     LocaleKey.mustBeAtLeast: 'must be at least',
     LocaleKey.mustBeMoreThan: 'must be more than',
     LocaleKey.chars: 'chars',
@@ -62,5 +58,13 @@ class LocaleEn {
         'Are you sure to delete this customer?',
     LocaleKey.areYouSureToDeleteTransaction:
         'Are you sure to delete this transaction?',
+    LocaleKey.generatedOn: 'Generated on',
+    LocaleKey.page: 'Page',
+    LocaleKey.storeName: 'Store Name',
+    LocaleKey.storeAddress: 'Store Address',
+    LocaleKey.storeNumber: 'Store Number',
+    LocaleKey.balance: 'Balance',
+    LocaleKey.transactionReport: 'Transaction Report',
+    LocaleKey.reportFor: ' report for',
   };
 }

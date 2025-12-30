@@ -4,7 +4,7 @@ import 'package:hisab/core/localization/locale_key.dart';
 import 'package:hisab/shared/widgets/button/custom_icon_button.dart';
 import 'package:hugeicons/hugeicons.dart';
 
-import '../../core/constants/theme/custom_theme/custom_text_theme.dart';
+import '../../../core/constants/theme/custom_theme/custom_text_theme.dart';
 
 class CustomAppbar {
   static AppBar appBar({List<Widget>? actions, required String title}) {

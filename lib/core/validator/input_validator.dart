@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:hisab/core/localization/locale_key.dart';
-import 'package:hisab/core/validator/email_validator.dart';
 
 abstract class InputValidator {
   static validateInput({
@@ -15,12 +14,6 @@ abstract class InputValidator {
 
     if (val.isEmpty) {
       return '$fieldName ${LocaleKey.isRequired.tr}';
-    }
-
-    if (validateEmail) {
-      if (!EmailValidator.validateEmail(email: val)) {
-        return LocaleKey.enterValidEmail.tr;
-      }
     }
 
     if (min != null && length < min) {

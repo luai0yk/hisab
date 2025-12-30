@@ -1,17 +1,21 @@
 abstract class LocaleKey {
   static const name = 'name';
-  static const signup = 'signup';
-  static const login = 'login';
-  static const email = 'email';
   static const phone = 'phone';
   static const password = 'password';
   static const confirmPassword = 'confirm_password';
   static const haveAccount = "have_account";
   static const createAccount = "create_account";
   static const fullName = "full_name";
+  static const balance = "balance";
+  static const storeNumber = "store_number";
+  static const storeAddress = "store_address";
+  static const storeName = "store_name";
+  static const page = "page";
+  static const generatedOn = "generated_on";
+  static const transactionReport = "transaction_report";
+  static const reportFor = " report_for";
 
   static const isRequired = "is_required";
-  static const enterValidEmail = "enter_valid_email";
   static const mustBeAtLeast = "must_be_at_least";
   static const mustBeMoreThan = "must_be_more_than";
   static const chars = "chars";

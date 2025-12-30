@@ -29,7 +29,6 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   get: ^4.7.2
-  http: ^1.4.0
   shared_preferences: ^2.5.3
   sqflite: ^2.4.2
   hugeicons: ^0.0.11
@@ -38,6 +37,8 @@ dependencies:
   jiffy: ^6.4.3
   bottom_picker: ^4.1.1
   pdf: ^3.11.3
+  path_provider: ^2.1.5
+  open_filex: ^4.7.0
   #bottompbottom_picker: ^2.0.0
 
   flutter:
@@ -67,11 +68,25 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+  uses-material-design: true
+  assets:
+    - assets/app_icon.png
+    - assets/store_logo.png
+
+  fonts:
+    - family: BalooBhaijaan2
+      fonts:
+        - asset: assets/fonts/BalooBhaijaan2-Regular.ttf
+
+    - family: NotoSansArabic
+      fonts:
+        - asset: assets/fonts/NotoSansArabic-Regular.ttf
+
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
-  uses-material-design: true
+  # uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
   # assets:

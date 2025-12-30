@@ -1,6 +1,4 @@
 import 'package:get/get.dart';
-import 'package:hisab/features/auth/controllers/login_controller.dart';
-import 'package:hisab/features/auth/view/signup_page.dart';
 import 'package:hisab/features/customers/view/edit_customer_page.dart';
 import 'package:hisab/features/customers/view/view_customer_page.dart';
 import 'package:hisab/features/transactions/controller/transaction_controller.dart';
@@ -8,45 +6,17 @@ import 'package:hisab/features/transactions/view/add_transaction_page.dart';
 import 'package:hisab/features/transactions/view/edit_transaction_page.dart';
 import 'package:hisab/shared/controller/customer_data_controller.dart';
 
-import '../../features/auth/controllers/signup_controller.dart';
-import '../../features/auth/view/login_page.dart';
 import '../../features/customers/controllers/customer_controller.dart';
 import '../../features/customers/view/add_customer_page.dart';
 import '../../features/customers/view/customer_profile_page.dart';
 import '../../features/transactions/view/view_transaction_page.dart';
-import '../midleware/auth_middleware.dart';
 import 'app_routes.dart';
 
 abstract class AppPages {
   static final routes = [
     GetPage(
-      name: AppRoutes.signupPage,
-      page: () => SignupPage(),
-      binding: BindingsBuilder(
-        () {
-          Get.lazyPut(
-            () => SignupController(),
-          );
-        },
-      ),
-    ),
-    GetPage(
-      name: AppRoutes.loginPage,
-      page: () => LoginPage(),
-      middlewares: [
-        AuthMiddleware(),
-      ],
-      binding: BindingsBuilder(
-        () {
-          Get.lazyPut(
-            () => LoginController(),
-          );
-        },
-      ),
-    ),
-    GetPage(
       name: AppRoutes.viewCustomerPage,
-      page: () => ViewCustomerPage(),
+      page: () => const ViewCustomerPage(),
       binding: BindingsBuilder(
         () {
           Get.lazyPut(
@@ -79,7 +49,7 @@ abstract class AppPages {
     ),
     GetPage(
       name: AppRoutes.customerProfilePage,
-      page: () => const CustomerProfilePage(),
+      page: () => CustomerProfilePage(),
     ),
     GetPage(
       name: AppRoutes.editCustomerPage,

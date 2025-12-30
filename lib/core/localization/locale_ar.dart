@@ -3,9 +3,6 @@ import 'locale_key.dart';
 class LocaleAr {
   static const Map<String, String> ar = {
     LocaleKey.name: 'الاسم',
-    LocaleKey.signup: 'إنشاء حساب',
-    LocaleKey.login: 'تسجيل الدخول',
-    LocaleKey.email: 'البريد الإلكتروني',
     LocaleKey.phone: 'رقم الهاتف',
     LocaleKey.password: 'كلمة المرور',
     LocaleKey.confirmPassword: 'تأكيد كلمة المرور',
@@ -13,7 +10,6 @@ class LocaleAr {
     LocaleKey.createAccount: 'إنشاء حساب جديد؟',
     LocaleKey.fullName: 'الاسم الكامل',
     LocaleKey.isRequired: 'مطلوب.',
-    LocaleKey.enterValidEmail: 'أدخل بريدًا إلكترونيًا صالحًا',
     LocaleKey.mustBeAtLeast: 'يجب أن يكون على الأقل',
     LocaleKey.mustBeMoreThan: 'يجب أن يكون أكثر من',
     LocaleKey.chars: 'أحرف',

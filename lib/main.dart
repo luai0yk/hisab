@@ -1,9 +1,13 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
+import 'package:hisab/core/constants/storage_key.dart';
 import 'package:hisab/core/constants/theme/dark_theme.dart';
 import 'package:hisab/core/constants/theme/light_theme.dart';
 import 'package:hisab/core/route/app_pages.dart';
+import 'package:hisab/core/route/app_routes.dart';
 import 'package:jiffy/jiffy.dart';
 
 import 'core/localization/app_translation.dart';
@@ -23,6 +27,11 @@ Future<void> init() async {
     () async => await StorageService().init(),
   );
   await Jiffy.setLocale('en');
+
+  StorageService storage = Get.find<StorageService>();
+  if (storage.getInt(StorageKey.userID) == null) {
+    storage.setInt(StorageKey.userID, Random().nextInt(100000));
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -47,6 +56,7 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       getPages: AppPages.routes,
+      initialRoute: AppRoutes.viewCustomerPage,
     );
   }
 }
