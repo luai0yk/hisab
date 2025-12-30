@@ -38,10 +38,10 @@ class ViewTransactionPage extends GetView<TransactionController> {
                 direction: PdfDirection.ltr,
                 appName: "Hisap",
                 appDescription: "Customer Transaction Report",
-                storeName: "متجر علي",
-                storeLocation: "صنعاء شارع الزراعة",
+                storeName: "Haseb Luai",
+                storeLocation: "Sanaa, Alziraa",
                 storeNumber: "774165500",
-                customerName: "احمد علي",
+                customerName: customer.name!,
                 transactions: transactions,
               );
               Get.back();

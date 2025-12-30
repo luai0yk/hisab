@@ -64,7 +64,8 @@ class TransactionPdfService {
     final baseFont = pw.Font.ttf(fontData);
 
     final prefs = await SharedPreferences.getInstance();
-    final logoPath = prefs.getString('store_logo_path');
+    //path to assets
+    final logoPath = prefs.getString('../assets/app_icon.png');
     pw.ImageProvider? logo;
     if (logoPath != null && File(logoPath).existsSync()) {
       logo = pw.MemoryImage(File(logoPath).readAsBytesSync());
@@ -81,14 +82,14 @@ class TransactionPdfService {
         // Global direction is LTR as requested
         textDirection: pw.TextDirection.ltr,
         theme: pw.ThemeData.withFont(base: baseFont),
-        header: (context) => _buildHeader(
-          storeName: storeName,
-          storeLocation: storeLocation,
-          logo: logo,
-          isRtl: isRtl,
-        ),
         footer: (context) => _buildFooter(context, appName, appDescription),
         build: (context) => [
+          _buildHeader(
+            storeName: storeName,
+            storeLocation: storeLocation,
+            logo: logo,
+            isRtl: isRtl,
+          ),
           _buildCustomerSummary(
             customerName: customerName,
             gave: gave,
@@ -156,7 +157,6 @@ class TransactionPdfService {
                   color: primaryColor,
                 ),
               ),
-              pw.SizedBox(height: 5),
               _buildText(
                 storeName,
                 style: const pw.TextStyle(
@@ -164,7 +164,6 @@ class TransactionPdfService {
                   color: darkTextColor,
                 ),
               ),
-              pw.SizedBox(height: 2),
               _buildText(
                 storeLocation,
                 style: const pw.TextStyle(
@@ -223,11 +222,11 @@ class TransactionPdfService {
     final balanceColor = balance >= 0 ? gaveColor : gotColor;
 
     return pw.Container(
-      margin: const pw.EdgeInsets.only(top: 25),
-      padding: const pw.EdgeInsets.fromLTRB(15, 15, 15, 10),
+      margin: const pw.EdgeInsets.only(top: 15),
+      padding: const pw.EdgeInsets.symmetric(horizontal: 15, vertical: 5),
       decoration: pw.BoxDecoration(
         color: lightBgColor,
-        borderRadius: pw.BorderRadius.circular(8),
+        borderRadius: pw.BorderRadius.circular(10),
       ),
       child: pw.Column(
         crossAxisAlignment: pw.CrossAxisAlignment.stretch,
@@ -249,24 +248,21 @@ class TransactionPdfService {
               ),
             ],
           ),
-          pw.SizedBox(height: 8),
           pw.Divider(color: PdfColors.grey300),
-          pw.SizedBox(height: 8),
           _buildText(
             LocaleKey.balance.tr,
             textAlign: pw.TextAlign.center,
             style: const pw.TextStyle(fontSize: 14, color: greyColor),
           ),
-          pw.SizedBox(height: 4),
           pw.Text(
             balance.abs().toStringAsFixed(2),
             textAlign: pw.TextAlign.center,
             style: pw.TextStyle(
               color: balanceColor,
-              fontSize: 30,
+              fontSize: 25,
             ),
           ),
-          pw.SizedBox(height: 12),
+          pw.SizedBox(height: 6),
           pw.Row(
             mainAxisAlignment: pw.MainAxisAlignment.spaceAround,
             children: [
@@ -287,7 +283,7 @@ class TransactionPdfService {
                 children: [
                   _buildText(LocaleKey.got.tr,
                       style: const pw.TextStyle(color: greyColor)),
-                  pw.SizedBox(height: 4),
+                  pw.SizedBox(height: 2),
                   pw.Text(got.toStringAsFixed(2),
                       style: const pw.TextStyle(color: gotColor)),
                 ],
@@ -349,7 +345,10 @@ class TransactionPdfService {
       pw.Text(date, textAlign: pw.TextAlign.center),
       pw.Text(transaction.amount?.toStringAsFixed(2) ?? '0',
           textAlign: pw.TextAlign.center),
-      _buildText(transaction.type!,
+      _buildText(
+          transaction.type == LocaleKey.gave
+              ? LocaleKey.gave.tr
+              : LocaleKey.got.tr,
           textAlign: pw.TextAlign.center,
           style: pw.TextStyle(color: typeColor)),
       _buildText(transaction.description ?? '', textAlign: pw.TextAlign.center),
