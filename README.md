@@ -1,16 +1,77 @@
-# hisab
+Hisab
 
-Hisab is a simple yet powerful app to track debts and payments for customers.
+Hisab is a simple and powerful app for tracking customer debts and payments.
 
-## Getting Started
+It helps small businesses and shop owners manage balances, record transactions, and generate PDF payment histories in an easy and organized way.
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+---
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Features
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Manage customers and balances
+
+Record debit and credit transactions
+
+Track payments and remaining debts
+
+View customer transaction history
+
+Generate PDF payment reports
+
+Offline-first local storage
+
+Fast and simple interface
+
+
+
+---
+
+Tech Stack
+
+Flutter
+
+Dart
+
+SQLite
+
+
+
+---
+
+Getting Started
+
+# Clone the repository
+git clone https://github.com/luai0yk/hisab.git
+
+# Open the project
+cd hisab
+
+# Install dependencies
+flutter pub get
+
+# Run the app
+flutter run
+
+
+---
+
+PDF Reports
+
+Hisab allows you to export customer payment history as a PDF report including:
+
+Transactions
+
+Payments
+
+Remaining balance
+
+Customer details
+
+
+
+---
+
+License
+
+This project is licensed under the MIT License.
